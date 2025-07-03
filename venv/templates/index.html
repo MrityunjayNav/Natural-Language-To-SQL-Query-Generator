@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AI Buddy | Educational Assistant</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <script src="https://kit.fontawesome.com/3a0dbe610c.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+    th, td {
+      text-align: left;
+      padding: 8px;
+      border-bottom: 1px solid #ddd;
+    }
+    th {
+      background-color: #f3f4f6;
+    }
+  </style>
+</head>
+<body class="bg-[#F5F5F5] min-h-screen flex flex-col">
+
+  <!-- Top Bar -->
+  <div class="w-full h-16 bg-white flex items-center justify-between px-8 border-b border-gray-100 fixed top-0 z-10">
+    <div class="text-[#333] text-base font-medium flex items-center h-full">Assists you in database management</div>
+    <div class="flex items-center">
+      <div class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center text-gray-500 font-semibold text-lg shadow-sm">MB</div>
+    </div>
+  </div>
+
+  <div class="flex flex-1 min-h-0 mt-16">
+    <!-- Sidebar -->
+    <aside class="w-64 flex flex-col justify-between py-8 px-7 bg-[#F0F1F4] border-r border-gray-100 fixed left-0 top-16 bottom-0">
+      <div>
+        <div class="mb-8">
+          <div class="text-2xl font-bold text-[#243A5A] mb-1 select-none">edstart.ai</div>
+          <div class="text-sm text-gray-500 mb-6">Buddy Interactions
+            <span class="float-right"><i class="ph-pencil-simple text-gray-400 text-lg"></i></span>
+          </div>
+          <div class="text-[15px] text-gray-400 bg-white rounded-lg px-4 py-3 shadow-sm">No previous conversations found.</div>
+        </div>
+      </div>
+      <div>
+        <div class="flex space-x-4 text-xs text-gray-400 mb-4">
+          <a href="#" class="hover:text-[#3C82F6] transition">FAQ</a><span>•</span>
+          <a href="#" class="hover:text-[#3C82F6] transition">About</a><span>•</span>
+          <a href="#" class="hover:text-[#3C82F6] transition">Version</a>
+        </div>
+        <div class="flex items-center space-x-3">
+          <a href="#" aria-label="Instagram" class="hover:text-[#3C82F6] text-gray-400 text-lg"><i class="fab fa-instagram"></i></a>
+          <a href="#" aria-label="LinkedIn" class="hover:text-[#3C82F6] text-gray-400 text-lg"><i class="fab fa-linkedin"></i></a>
+          <a href="#" aria-label="YouTube" class="hover:text-[#3C82F6] text-gray-400 text-lg"><i class="fab fa-youtube"></i></a>
+          <a href="#" aria-label="Website" class="hover:text-[#3C82F6] text-gray-400 text-lg"><i class="fas fa-globe"></i></a>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Chat Area -->
+    <main class="flex-1 flex flex-col relative ml-64">
+      <div class="flex flex-col items-center mt-10 mb-6">
+        <div class="flex items-center space-x-3">
+          <span><i class="ph-magic-wand text-3xl text-[#FF6F3C]"></i></span>
+          <span class="text-5xl font-bold text-[#222] tracking-tight">AI Buddy</span>
+        </div>
+      </div>
+
+      <!-- Chat Display -->
+      <div id="chat-display" class="flex-1 overflow-y-auto px-8 flex flex-col pb-32"></div>
+
+      <!-- Bottom Input Bar -->
+      <div class="fixed bottom-0 left-64 right-0">
+        <div class="flex items-center bg-white rounded-t-2xl shadow-lg px-8 py-4 mx-4 mb-4">
+          <input id="user-input" type="text" class="flex-1 rounded-full bg-[#F5F5F5] px-5 py-3 text-base text-[#333] outline-none border border-transparent focus:border-[#3C82F6] transition" placeholder="Ask me about the database..."/>
+          <button id="send-button" class="ml-3 bg-[#FF6F3C] hover:bg-[#ff854f] transition text-white rounded-full w-12 h-12 flex items-center justify-center shadow-md">
+            <i class="ph-paper-plane-tilt text-2xl"></i>
+          </button>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- JavaScript -->
+  <script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const userInput = document.getElementById('user-input');
+    const sendButton = document.getElementById('send-button');
+    const chatDisplay = document.getElementById('chat-display');
+    
+    function renderTableFromArray(arrayData, customHeaders = null) {
+      if (!Array.isArray(arrayData) || arrayData.length === 0) return null;
+      const table = document.createElement('table');
+      table.classList.add('text-sm', 'text-gray-700', 'my-2', 'min-w-full', 'border', 'border-collapse');
+      const dataKeys = Object.keys(arrayData[0]);
+      const displayHeaders = customHeaders && customHeaders.length === dataKeys.length ? customHeaders : dataKeys;
+      // Create header
+      const thead = table.createTHead();
+      const headerRow = thead.insertRow();
+      displayHeaders.forEach(headerText => {
+        const th = document.createElement('th');
+        th.textContent = headerText;
+        th.classList.add('px-4', 'py-2', 'border', 'bg-gray-200', 'font-semibold', 'text-left');
+        headerRow.appendChild(th);
+      });
+
+    // Create body
+      const tbody = table.createTBody();
+      arrayData.forEach((rowData, index) => {
+        const row = tbody.insertRow();
+        if (index % 2 === 1) row.classList.add('bg-gray-50');
+
+      dataKeys.forEach(key => {
+        const td = row.insertCell();
+        const cellValue = rowData[key];
+        
+        // Handle different data types
+        if (cellValue === null || cellValue === undefined) {
+          td.textContent = '-';
+          td.classList.add('text-gray-400');
+        } else if (typeof cellValue === 'number') {
+          td.textContent = cellValue.toLocaleString();
+          td.classList.add('text-right');
+        } else if (typeof cellValue === 'boolean') {
+          td.textContent = cellValue ? 'Yes' : 'No';
+        } else {
+          td.textContent = cellValue.toString();
+        }
+        
+        td.classList.add('px-4', 'py-2', 'border');
+      });
+    });
+
+    return table;
+  }
+
+  function createCollapsibleSQLSection(sqlQuery) {
+    if (!sqlQuery) return null;
+
+    const sqlContainer = document.createElement('div');
+    sqlContainer.className = 'mt-3 border border-gray-300 rounded-md';
+
+    const sqlHeader = document.createElement('button');
+    sqlHeader.className = 'w-full text-left px-3 py-2 bg-gray-100 hover:bg-gray-200 flex justify-between items-center text-sm font-medium text-gray-700';
+    sqlHeader.innerHTML = `
+      <span>📝 Generated SQL Query</span>
+      <span class="toggle-icon">▼</span>
+    `;
+
+    const sqlContent = document.createElement('div');
+    sqlContent.className = 'px-3 py-2 bg-gray-50 border-t border-gray-300 hidden';
+    
+    const sqlCode = document.createElement('pre');
+    sqlCode.className = 'text-xs text-gray-800 overflow-x-auto whitespace-pre-wrap';
+    sqlCode.textContent = sqlQuery;
+    sqlContent.appendChild(sqlCode);
+
+    // Toggle functionality
+    sqlHeader.addEventListener('click', () => {
+      const isHidden = sqlContent.classList.contains('hidden');
+      sqlContent.classList.toggle('hidden');
+      const toggleIcon = sqlHeader.querySelector('.toggle-icon');
+      toggleIcon.textContent = isHidden ? '▲' : '▼';
+    });
+
+    sqlContainer.appendChild(sqlHeader);
+    sqlContainer.appendChild(sqlContent);
+
+    return sqlContainer;
+  }
+
+  function createSummarySection(message) {
+    if (!message) return null;
+
+    const summaryDiv = document.createElement('div');
+    summaryDiv.className = 'mb-4 p-3 bg-blue-50 border-l-4 border-blue-400 rounded-r-md';
+    
+    const summaryLabel = document.createElement('div');
+    summaryLabel.className = 'text-xs font-semibold text-blue-600 mb-1';
+    summaryLabel.textContent = '🤖 AI Summary';
+    
+    const summaryText = document.createElement('p');
+    summaryText.className = 'text-sm text-gray-700 leading-relaxed';
+    summaryText.textContent = message;
+
+    summaryDiv.appendChild(summaryLabel);
+    summaryDiv.appendChild(summaryText);
+
+    return summaryDiv;
+  }
+
+  function handleSuccessMessage(message) {
+    const messageDiv = document.createElement('div');
+    
+    // Determine message type based on content
+    if (message.includes('✅')) {
+      messageDiv.className = 'p-3 bg-green-50 border border-green-200 text-green-800 rounded-md';
+    } else if (message.includes('🛠️')) {
+      messageDiv.className = 'p-3 bg-blue-50 border border-blue-200 text-blue-800 rounded-md';
+    } else if (message.includes('🗑️')) {
+      messageDiv.className = 'p-3 bg-orange-50 border border-orange-200 text-orange-800 rounded-md';
+    } else if (message.includes('❌')) {
+      messageDiv.className = 'p-3 bg-red-50 border border-red-200 text-red-800 rounded-md';
+    } else {
+      messageDiv.className = 'p-3 bg-gray-50 border border-gray-200 text-gray-800 rounded-md';
+    }
+    
+    messageDiv.textContent = message;
+    return messageDiv;
+  }
+
+  function sendMessage() {
+    const userMessage = userInput.value.trim();
+    if (!userMessage) return;
+
+    // Add user message to chat
+    const userDiv = document.createElement('div');
+    userDiv.className = 'bg-blue-100 rounded-lg p-3 mb-4 max-w-[80%] self-end ml-auto';
+    userDiv.textContent = userMessage;
+    chatDisplay.appendChild(userDiv);
+    userInput.value = '';
+
+    // Add typing indicator
+    const typingDiv = document.createElement('div');
+    typingDiv.className = 'bg-gray-100 rounded-lg p-3 mb-4 max-w-[80%] self-start';
+    typingDiv.innerHTML = '<span class="animate-pulse">🤖 AI Buddy is thinking...</span>';
+    chatDisplay.appendChild(typingDiv);
+    chatDisplay.scrollTop = chatDisplay.scrollHeight;
+
+    // Disable input while processing
+    userInput.disabled = true;
+    sendButton.disabled = true;
+
+    fetch('/get', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: 'msg=' + encodeURIComponent(userMessage)
+    })
+      .then(response => {
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+        return response.json(); // Parse as JSON directly
+      })
+      .then(responseData => {
+        chatDisplay.removeChild(typingDiv);
+        
+        const botDiv = document.createElement('div');
+        botDiv.className = 'bg-gray-100 rounded-lg p-4 mb-4 max-w-[85%] self-start overflow-x-auto';
+
+        try {
+          // Extract data from the new response format
+          const { message, results, sql_query } = responseData;
+          const resultData = results?.data;
+
+          // Add AI summary if available
+          if (message) {
+            const summarySection = createSummarySection(message);
+            if (summarySection) {
+              botDiv.appendChild(summarySection);
+            }
+          }
+
+          // Handle different types of results
+          if (Array.isArray(resultData) && resultData.length > 0) {
+            // Table data - render table
+            const table = renderTableFromArray(resultData);
+            if (table) {
+              const tableContainer = document.createElement('div');
+              tableContainer.className = 'mt-3 overflow-x-auto';
+              tableContainer.appendChild(table);
+              botDiv.appendChild(tableContainer);
+
+              // Add record count
+              const countInfo = document.createElement('p');
+              countInfo.className = 'text-xs text-gray-600 mt-2';
+              countInfo.textContent = `📊 Showing ${resultData.length} record${resultData.length !== 1 ? 's' : ''}`;
+              botDiv.appendChild(countInfo);
+            }
+          } else if (typeof resultData === 'string') {
+            // Success/error message from non-SELECT operations
+            const messageElement = handleSuccessMessage(resultData);
+            botDiv.appendChild(messageElement);
+          } else if (Array.isArray(resultData) && resultData.length === 0) {
+            // Empty results
+            const noDataDiv = document.createElement('div');
+            noDataDiv.className = 'p-3 bg-yellow-50 border border-yellow-200 text-yellow-800 rounded-md mt-3';
+            noDataDiv.innerHTML = '<strong>No records found</strong> for your query.';
+            botDiv.appendChild(noDataDiv);
+          }
+
+          // Add collapsible SQL query section
+          if (sql_query) {
+            const sqlSection = createCollapsibleSQLSection(sql_query);
+            if (sqlSection) {
+              botDiv.appendChild(sqlSection);
+            }
+          }
+
+          // If no content was added, show fallback
+          if (botDiv.children.length === 0) {
+            botDiv.innerHTML = '<p class="text-gray-600">No data to display.</p>';
+          }
+
+        } catch (parseError) {
+          console.error('Error parsing response:', parseError);
+          botDiv.innerHTML = '<p class="text-red-600">Error processing response. Please try again.</p>';
+        }
+
+        chatDisplay.appendChild(botDiv);
+        chatDisplay.scrollTop = chatDisplay.scrollHeight;
+      })
+      .catch(error => {
+        if (typingDiv.parentNode) {
+          chatDisplay.removeChild(typingDiv);
+        }
+        
+        const errorDiv = document.createElement('div');
+        errorDiv.className = 'bg-red-100 border border-red-400 text-red-700 rounded-lg p-4 mb-4 max-w-[80%] self-start';
+        errorDiv.innerHTML = `
+          <div class="font-semibold mb-1">⚠️ Connection Error</div>
+          <div class="text-sm">Sorry, there was an error processing your request. Please check your connection and try again.</div>
+        `;
+        chatDisplay.appendChild(errorDiv);
+        console.error('Fetch error:', error);
+        chatDisplay.scrollTop = chatDisplay.scrollHeight;
+      })
+      .finally(() => {
+        // Re-enable input
+        userInput.disabled = false;
+        sendButton.disabled = false;
+        userInput.focus();
+      });
+  }
+
+  // Event listeners
+  sendButton.addEventListener('click', sendMessage);
+  userInput.addEventListener('keypress', function (e) {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      sendMessage();
+    }
+  });
+
+  // Focus input on load
+  userInput.focus();
+
+  // Add helpful placeholder text
+  userInput.placeholder = "Ask me about your database... (e.g., 'Show all patients', 'How many doctors are there?')";
+});
+</script>
+
+</body>
+</html>

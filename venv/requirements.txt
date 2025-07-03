@@ -1,0 +1,8 @@
+mysql-connector-python
+python-dotenv
+flask
+requests
+pandas
+sqlalchemy
+langchain-ollama
+langchain-core
