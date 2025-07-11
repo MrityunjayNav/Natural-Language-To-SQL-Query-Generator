@@ -1,0 +1,314 @@
+import mysql.connector
+import os
+from dotenv import load_dotenv
+from flask import Flask, request, jsonify, render_template
+from langchain_ollama import OllamaLLM
+from langchain_core.prompts import ChatPromptTemplate
+import pandas as pd
+from ydata_profiling import ProfileReport
+import tempfile
+import json
+import psycopg2
+
+app = Flask(__name__)
+load_dotenv()
+
+# --------------------- COLUMN DISPLAY MAPPING ---------------------
+
+COLUMN_MAPPINGS = {
+    'id': 'ID',
+    'name': 'Name',
+    'email': 'Email',
+    'message': 'Message',
+    'createdAt': 'Created At',
+    'documentId': 'Document ID',
+    'reminderDate': 'Reminder Date',
+    'sent': 'Sent',
+    'updatedAt': 'Updated At',
+    'checksum': 'Checksum',
+    'finished_at': 'Finished At',
+    'migration_name': 'Migration Name',
+    'logs': 'Logs',
+    'rolled_back_at': 'Rolled Back At',
+    'started_at': 'Started At',
+    'applied_steps_count': 'Applied Steps Count',
+    'filename': 'File Name',
+    'filepath': 'File Path',
+    'mimetype': 'Mime Type',
+    'size': 'Size',
+    'url': 'URL',
+    'uploaded_at': 'Uploaded At',
+    'folder': 'Folder',
+    'description': 'Description',
+    'owned_by': 'Owned By',
+    'maintained_by': 'Maintained By',
+    'start_date':'Start Date',
+    'expiration_date':'Expiration Date',
+    'uploaded_date':'Uploaded Date',
+    'updated_at':'Updated At',
+    'archived':'Archieved',
+    'maintained_by_email':'Maintained By Email',
+    'owned_by_email':'Owned By Email',
+    'document_id':'Revised Document ID',
+    'action_type':'Action Type',
+    'action_timestamp':'Action Time',
+    'user_id':'User ID',
+    'user_name':'User Name',
+    'old_data':'Old Data',
+    'new_data':'New Data',
+    'comments':'Comments'
+}
+
+class HeaderMapper:
+    def __init__(self, mappings=None):
+        self.mappings = mappings or COLUMN_MAPPINGS
+
+    def get_display_name(self, column_name):
+        return self.mappings.get(column_name, self._format_column_name(column_name))
+
+    def _format_column_name(self, column_name):
+        return ' '.join(word.capitalize() for word in column_name.split('_'))
+
+    def transform_data_result(self, data_list):
+        if not data_list:
+            return []
+        transformed_data = []
+        for row in data_list:
+            transformed_row = {
+                self.get_display_name(k): v for k, v in row.items()
+            }
+            transformed_data.append(transformed_row)
+        return transformed_data
+
+# Initialize the header mapper and LLMs
+header_mapper = HeaderMapper()
+
+# Initialize LLMs once to avoid recreating on every request
+try:
+    sql_llm = OllamaLLM(model="mistral:7b-instruct", temperature=0.01)
+except Exception as e:
+    print(f"Error initializing LLMs: {e}")
+    sql_llm = None
+
+# --------------------- LLM CONTEXT & HELPER ---------------------
+
+context = '''
+You are a SQL query generator for PostgreSQL database 'documents_management'.
+
+Tables:
+- Feedback: id, name, email, message, createdAt
+- Reminder: id, documentId, reminderDate, sent, createdAt, updatedAt
+- _prisma_migrations: id, checksum, finished_at, migration_name, logs, rolled_back_at, started_at, applied_steps_count
+- file_uploads: id, filename, filepath, mimetype, size, url, uploaded_at, folder, description, owned_by, maintained_by, start_date, expiration_date, uploaded_date, updated_at, archived, maintained_by_email, owned_by_email
+- revision_history: id, document_id, action_type, action_timestamp, user_id, user_name, old_data, new_data, comments
+
+CRITICAL SCHEMA RULES:
+1. All date comparisons must use BETWEEN or explicit >= and <= operators
+2. Currency values must be rounded to 2 decimal places using ROUND(value, 2)
+3. Status fields must match exactly: 'active', 'expired', 'pending', 'approved', 'rejected'
+
+
+STRICT RULES:
+1. For unique value queries → use SELECT DISTINCT
+2. For text searches → use ILIKE for case-insensitive matching
+3. For date ranges → use BETWEEN with explicit timestamps
+4. For contract values → always include currency in the result
+5. For status filters → use exact string matching, no wildcards
+6. For joining tables → always include contract_id relationships
+7. For aggregations → group by relevant dimensions (e.g., department, contract_type)
+8. For party queries → specify party_type ('client', 'vendor', 'partner')
+9. For approval flows → check latest approval status using subqueries
+10. For document versions → order by version number descending
+
+
+'''
+
+def get_assistant_response(question, context):
+    if not sql_llm:
+        raise Exception("SQL LLM not initialized")
+    
+    prompt = ChatPromptTemplate.from_template(
+        "{context}\n\nBased on the context above, write only the SQL query that answers the following question:\nQuestion: {question}\nSQL Query:"
+    )
+    chain = prompt | sql_llm
+    response = chain.invoke({"context": context, "question": question})
+    query = (
+        str(response)
+        .replace("SQL Query:", "")
+        .replace("```sql", "")
+        .replace("```", "")
+        .strip()
+        .strip('"')
+    )
+    return query
+
+
+# --------------------- Data Summary ---------------------
+def get_basic_data_summary(data):
+    """Generate basic data summary"""
+    summary_lines = []
+    summary_lines.append(f"The dataset has {data.shape[0]} rows and {data.shape[1]} columns.")
+    summary_lines.append(f"The dataset has the following columns: {', '.join(data.columns)}")
+    
+    missing = data.isnull().sum()
+    missing = missing[missing > 0]
+    if not missing.empty:
+        summary_lines.append("Missing values found:")
+        for col, count in missing.items():
+            summary_lines.append(f"  - {col}: {count} missing")
+
+    numeric = data.select_dtypes(include='number')
+    if not numeric.empty:
+        desc = numeric.describe().T
+        for col in desc.index:
+            summary_lines.append(
+                f"{col}: min={desc.loc[col, 'min']}, mean={desc.loc[col, 'mean']:.2f}, max={desc.loc[col, 'max']}"
+            )
+
+    return "\n".join(summary_lines)
+
+def get_profiling_summary(data):
+    """Get key insights from pandas profiling without generating full HTML"""
+    try:
+        profile = ProfileReport(data, minimal=True)
+        
+        # Extract key statistics
+        summary = {
+            "overview": {
+                "rows": data.shape[0],
+                "columns": data.shape[1],
+                "missing_cells": data.isnull().sum().sum(),
+                "missing_percentage": (data.isnull().sum().sum() / (data.shape[0] * data.shape[1])) * 100
+            },
+            "variables": {}
+        }
+        
+        # Add variable-specific insights
+        for col in data.columns:
+            col_info = {
+                "type": str(data[col].dtype),
+                "missing_count": data[col].isnull().sum(),
+                "unique_count": data[col].nunique()
+            }
+            
+            if data[col].dtype in ['int64', 'float64']:
+                col_info.update({
+                    "mean": data[col].mean(),
+                    "std": data[col].std(),
+                    "min": data[col].min(),
+                    "max": data[col].max()
+                })
+            
+            summary["variables"][col] = col_info
+            
+        return summary
+        
+    except Exception as e:
+        print(f"Error generating profiling summary: {e}")
+        return None
+
+# --------------------- SQL EXECUTION WITH MAPPING ---------------------
+
+def read_data_from_db(query):
+    try:
+        conn = psycopg2.connect(
+            host=os.getenv("DB_HOST"),
+            user=os.getenv("DB_USER"),
+            password=os.getenv("DB_PASSWORD"),
+            dbname=os.getenv("DB_NAME")
+            )
+        cursor = conn.cursor()
+        operation = query.strip().split()[0].upper()
+
+        if operation == "SELECT":
+            cursor.execute(query)
+            columns = [desc[0] for desc in cursor.description]
+            results = cursor.fetchall()
+            raw_data = [dict(zip(columns, row)) for row in results]
+            # Transform headers
+            transformed_data = header_mapper.transform_data_result(raw_data)
+            output = {"data": transformed_data, "type": "select"}
+        else:
+            cursor.execute(query)
+            conn.commit()
+            row_count = cursor.rowcount
+
+            if operation == "INSERT":
+                message = f"✅ Successfully inserted {row_count} record(s)."
+            elif operation == "UPDATE":
+                message = f"🛠️ Successfully updated {row_count} record(s)."
+            elif operation == "DELETE":
+                message = f"🗑️ Successfully deleted {row_count} record(s)."
+            elif operation == "ALTER":
+                message = f"✅ Table structure altered successfully."
+            else:
+                message = f"✅ Query executed. {row_count} row(s) affected."
+
+            output = {"data": message, "type": "non_select"}
+
+        cursor.close()
+        conn.close()
+
+    except Exception as e:
+        output = {"data": f"❌ Error executing query: {e}", "type": "error"}
+
+    return output
+
+# --------------------- FLASK ROUTES ---------------------
+
+@app.route('/')
+def index():
+    return render_template('index.html')
+
+@app.route('/get', methods=['POST'])
+def chatbot_response():
+    user_msg = request.form['msg']
+    query = ""
+    
+    try:
+        # Generate SQL query
+        query = get_assistant_response(user_msg, context)
+        
+        # Execute query
+        result = read_data_from_db(query)
+        
+        # Initialize response variables
+        basic_summary = ""
+        
+        # Process results based on type
+        if result.get("type") == "select" and isinstance(result.get("data"), list) and result["data"]:
+            # Create DataFrame for analysis
+            df = pd.DataFrame(result["data"])
+            
+            # Generate basic summary
+            basic_summary = get_basic_data_summary(df)
+            
+
+            
+        elif result.get("type") == "non_select":
+            basic_summary = result["data"]  # The success message
+        else:
+            basic_summary = result["data"]  # Error message
+        
+        # Consistent response structure
+        response_data = {
+            "message": basic_summary,
+            "results": result,
+            "query":query
+        }
+        
+        return jsonify(response_data)
+
+    except Exception as e:
+        return jsonify({
+            "message": f"Sorry, I encountered an error: {str(e)}",
+            "sql_query": query,
+            "results": {"data": f"Error: {str(e)}", "type": "error"},
+            "profiling_summary": None,
+            "profiling_report_path": None
+        })
+
+# --------------------- APP START ---------------------
+
+if __name__ == "__main__":
+    app.run(debug=True,port=5050)
