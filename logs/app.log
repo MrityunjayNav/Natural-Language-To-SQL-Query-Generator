@@ -1376,3 +1376,61 @@ LINE 3: Assumptions made:
 2025-07-17 20:27:37,341 - __main__ - INFO - Application running on http://localhost:5050
 2025-07-17 20:27:37,379 - werkzeug - WARNING -  * Debugger is active!
 2025-07-17 20:27:37,392 - werkzeug - INFO -  * Debugger PIN: 115-695-789
+2025-07-17 20:50:12,670 - __main__ - INFO - Application starting up...
+2025-07-17 20:50:12,671 - __main__ - INFO - DB_HOST: 127.0.0.1
+2025-07-17 20:50:12,671 - __main__ - INFO - DB_PORT: 5432
+2025-07-17 20:50:12,671 - __main__ - INFO - DB_USER: postgres
+2025-07-17 20:50:12,671 - __main__ - INFO - DB_NAME: documents_management
+2025-07-17 20:50:12,671 - __main__ - INFO - HeaderMapper initialized with mappings
+2025-07-17 20:50:12,671 - llm - INFO - Initializing Ollama LLM...
+2025-07-17 20:50:12,687 - llm - INFO - Ollama LLM initialized successfully
+2025-07-17 20:50:12,687 - __main__ - INFO - Starting Flask application...
+2025-07-17 20:50:12,687 - __main__ - INFO - Application running on http://localhost:5050
+2025-07-17 20:50:12,729 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5050
+2025-07-17 20:50:12,729 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-07-17 20:50:12,730 - werkzeug - INFO -  * Restarting with stat
+2025-07-17 20:50:14,948 - __main__ - INFO - Application starting up...
+2025-07-17 20:50:14,948 - __main__ - INFO - DB_HOST: 127.0.0.1
+2025-07-17 20:50:14,948 - __main__ - INFO - DB_PORT: 5432
+2025-07-17 20:50:14,948 - __main__ - INFO - DB_USER: postgres
+2025-07-17 20:50:14,948 - __main__ - INFO - DB_NAME: documents_management
+2025-07-17 20:50:14,949 - __main__ - INFO - HeaderMapper initialized with mappings
+2025-07-17 20:50:14,949 - llm - INFO - Initializing Ollama LLM...
+2025-07-17 20:50:14,963 - llm - INFO - Ollama LLM initialized successfully
+2025-07-17 20:50:14,963 - __main__ - INFO - Starting Flask application...
+2025-07-17 20:50:14,963 - __main__ - INFO - Application running on http://localhost:5050
+2025-07-17 20:50:14,994 - werkzeug - WARNING -  * Debugger is active!
+2025-07-17 20:50:15,004 - werkzeug - INFO -  * Debugger PIN: 115-695-789
+2025-07-17 20:50:19,017 - api - INFO - Serving index page
+2025-07-17 20:50:19,023 - werkzeug - INFO - 127.0.0.1 - - [17/Jul/2025 20:50:19] "GET / HTTP/1.1" 200 -
+2025-07-17 20:50:22,531 - api - INFO - Received chatbot request at 2025-07-17 20:50:22.531553
+2025-07-17 20:50:22,535 - api - INFO - User message: Change my CV files owned by to HR
+2025-07-17 20:50:22,535 - api - INFO - Processing chatbot request...
+2025-07-17 20:50:22,535 - api - INFO - Generating response from LLM...
+2025-07-17 20:50:22,536 - llm - INFO - Processing question: Change my CV files owned by to HR
+2025-07-17 20:50:22,536 - llm - INFO - Generating SQL query using LLM...
+2025-07-17 20:50:22,551 - llm - ERROR - Error generating SQL query: [Errno 61] Connection refused
+2025-07-17 20:50:22,551 - api - ERROR - Request failed after 0.02 seconds: [Errno 61] Connection refused
+2025-07-17 20:50:22,552 - werkzeug - INFO - 127.0.0.1 - - [17/Jul/2025 20:50:22] "POST /get HTTP/1.1" 200 -
+2025-07-17 20:50:42,901 - api - INFO - Received chatbot request at 2025-07-17 20:50:42.901071
+2025-07-17 20:50:42,902 - api - INFO - User message: Change my CV files owned by to HR[
+2025-07-17 20:50:42,902 - api - INFO - Processing chatbot request...
+2025-07-17 20:50:42,902 - api - INFO - Generating response from LLM...
+2025-07-17 20:50:42,903 - llm - INFO - Processing question: Change my CV files owned by to HR[
+2025-07-17 20:50:42,903 - llm - INFO - Generating SQL query using LLM...
+2025-07-17 20:51:02,894 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-07-17 20:51:07,585 - llm - INFO - Generated SQL query: UPDATE "file_uploads" SET owned_by = 'HR' WHERE LOWER("owned_by") LIKE '%cv%';
+2025-07-17 20:51:07,585 - api - INFO - Generated response: UPDATE "file_uploads" SET owned_by = 'HR' WHERE LOWER("owned_by") LIKE '%cv%';
+2025-07-17 20:51:07,585 - api - INFO - Executing database query...
+2025-07-17 20:51:07,585 - database - INFO - Executing database query: UPDATE "file_uploads" SET owned_by = 'HR' WHERE LOWER("owned_by") LIKE '%cv%';
+2025-07-17 20:51:07,585 - database - INFO - Establishing database connection...
+2025-07-17 20:51:07,665 - database - INFO - Database connection established successfully
+2025-07-17 20:51:07,665 - database - INFO - Executing UPDATE operation
+2025-07-17 20:51:07,665 - database - INFO - Executing UPDATE query...
+2025-07-17 20:51:07,674 - database - INFO - UPDATE query affected 0 rows
+2025-07-17 20:51:07,674 - database - INFO - Database connection closed
+2025-07-17 20:51:07,674 - api - INFO - Query result type: non_select
+2025-07-17 20:51:07,674 - api - INFO - Processing non-SELECT query results...
+2025-07-17 20:51:07,675 - api - INFO - Request processed successfully in 24.77 seconds
+2025-07-17 20:51:07,676 - werkzeug - INFO - 127.0.0.1 - - [17/Jul/2025 20:51:07] "POST /get HTTP/1.1" 200 -
