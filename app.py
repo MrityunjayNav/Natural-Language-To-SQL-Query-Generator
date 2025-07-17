@@ -13,7 +13,7 @@ from datetime import datetime
 
 load_dotenv()  # This must be BEFORE os.getenv()
 
-# --------------------- LOGGING CONFIGURATION ---------------------
+# --------------------- LOGGING CONFIGURATION --------------------
 
 def setup_logging():
     """Configure comprehensive logging for the application"""
