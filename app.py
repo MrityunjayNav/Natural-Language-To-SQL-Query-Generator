@@ -1,30 +1,78 @@
-from flask import Flask, request, jsonify, render_template
+from flask import Flask,request, jsonify, render_template
 from langchain_ollama import OllamaLLM
 from langchain_core.prompts import ChatPromptTemplate
 import pandas as pd
 from ydata_profiling import ProfileReport
 import psycopg2
-
 from dotenv import load_dotenv
 import os
+import logging
+from logging.handlers import RotatingFileHandler
+import sys
+from datetime import datetime
 
 load_dotenv()  # This must be BEFORE os.getenv()
+
+# --------------------- LOGGING CONFIGURATION ---------------------
+
+def setup_logging():
+    """Configure comprehensive logging for the application"""
+    
+    # Create logs directory if it doesn't exist
+    if not os.path.exists('logs'):
+        os.makedirs('logs')
+    
+    # Configure root logger
+    logging.basicConfig(
+        level=logging.INFO,
+        format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+        handlers=[
+            # Console handler
+            logging.StreamHandler(sys.stdout),
+            # File handler with rotation
+            RotatingFileHandler(
+                'logs/app.log',
+                maxBytes=10485760,  # 10MB
+                backupCount=5
+            )
+        ]
+    )
+    
+    # Create specific loggers for different components
+    db_logger = logging.getLogger('database')
+    llm_logger = logging.getLogger('llm')
+    api_logger = logging.getLogger('api')
+    
+    # Set log levels
+    db_logger.setLevel(logging.INFO)
+    llm_logger.setLevel(logging.INFO)
+    api_logger.setLevel(logging.INFO)
+    
+    return logging.getLogger(__name__)
+
+# Initialize logging
+logger = setup_logging()
+db_logger = logging.getLogger('database')
+llm_logger = logging.getLogger('llm')
+api_logger = logging.getLogger('api')
+
+logger.info("Application starting up...")
+
+# Log environment variables (without sensitive data)
+logger.info(f"DB_HOST: {os.getenv('DB_HOST')}")
+logger.info(f"DB_PORT: {os.getenv('DB_PORT')}")
+logger.info(f"DB_USER: {os.getenv('DB_USER')}")
+logger.info(f"DB_NAME: {os.getenv('DB_NAME')}")
+
 
 print("DB_HOST:", os.getenv("DB_HOST"))
 print("DB_PORT:", os.getenv("DB_PORT"))
 print("DB_USER:", os.getenv("DB_USER"))
 print("DB_PASSWORD:", os.getenv("DB_PASSWORD"))
 print("DB_NAME:", os.getenv("DB_NAME"))
-print("psycopg2 version:", psycopg2.__version__)
-import sys
-print("Python path:", sys.executable)
-
-
 
 
 app = Flask(__name__)
-
-
 
 # --------------------- COLUMN DISPLAY MAPPING ---------------------
 
@@ -75,22 +123,32 @@ COLUMN_MAPPINGS = {
 class HeaderMapper:
     def __init__(self, mappings=None):
         self.mappings = mappings or COLUMN_MAPPINGS
+        logger.info("HeaderMapper initialized with mappings")
 
     def get_display_name(self, column_name):
-        return self.mappings.get(column_name, self._format_column_name(column_name))
+        display_name = self.mappings.get(column_name, self._format_column_name(column_name))
+        logger.debug(f"Column mapping: {column_name} -> {display_name}")
+        return display_name
 
     def _format_column_name(self, column_name):
-        return ' '.join(word.capitalize() for word in column_name.split('_'))
+        formatted = ' '.join(word.capitalize() for word in column_name.split('_'))
+        logger.debug(f"Formatted column name: {column_name} -> {formatted}")
+        return formatted
 
     def transform_data_result(self, data_list):
         if not data_list:
+            logger.info("No data to transform")
             return []
+        
+        logger.info(f"Transforming {len(data_list)} rows of data")
         transformed_data = []
         for row in data_list:
             transformed_row = {
                 self.get_display_name(k): v for k, v in row.items()
             }
             transformed_data.append(transformed_row)
+        
+        logger.info(f"Successfully transformed {len(transformed_data)} rows")
         return transformed_data
 
 # Initialize the header mapper and LLMs
@@ -98,90 +156,155 @@ header_mapper = HeaderMapper()
 
 # Initialize LLMs once to avoid recreating on every request
 try:
-    sql_llm = OllamaLLM(model="mistral:7b-instruct", temperature=0.01)
+    llm_logger.info("Initializing Ollama LLM...")
+    sql_llm = OllamaLLM(
+    model="mistral:7b-instruct",
+    base_url="http://127.0.0.1:11434"
+)
+
+    llm_logger.info("Ollama LLM initialized successfully")
 except Exception as e:
+    llm_logger.error(f"Error initializing LLMs: {e}")
     print(f"Error initializing LLMs: {e}")
     sql_llm = None
 
 # --------------------- LLM CONTEXT & HELPER ---------------------
 
 context = '''
-You are a SQL query generator for PostgreSQL database 'documents_management'.
-
-Tables:
-- Feedback: id, name, email, message, createdAt
-- Reminder: id, documentId, reminderDate, sent, createdAt, updatedAt
-- _prisma_migrations: id, checksum, finished_at, migration_name, logs, rolled_back_at, started_at, applied_steps_count
-- file_uploads: id, filename, filepath, mimetype, size, url, uploaded_at, folder, description, owned_by, maintained_by, start_date, expiration_date, uploaded_date, updated_at, archived, maintained_by_email, owned_by_email
-- revision_history: id, document_id, action_type, action_timestamp, user_id, user_name, old_data, new_data, comments
-
-CRITICAL SCHEMA RULES:
-1. All date comparisons must use BETWEEN or explicit >= and <= operators
-2. Currency values must be rounded to 2 decimal places using ROUND(value, 2)
-3. Status fields must match exactly: 'active', 'expired', 'pending', 'approved', 'rejected'
 
 
-STRICT RULES:
-1. For unique value queries → use SELECT DISTINCT
-2. For text searches → use ILIKE for case-insensitive matching
-3. For date ranges → use BETWEEN with explicit timestamps
-4. For contract values → always include currency in the result
-5. For status filters → use exact string matching, no wildcards
-6. For joining tables → always include contract_id relationships
-7. For aggregations → group by relevant dimensions (e.g., department, contract_type)
-8. For party queries → specify party_type ('client', 'vendor', 'partner')
-9. For approval flows → check latest approval status using subqueries
-10. For document versions → order by version number descending
+You are an expert PostgreSQL query generator. Your task is to convert a user's question into a single, valid PostgreSQL query.
 
+---
+## Context and Rules
+
+1.  **Database Schema:** The database name is 'documents_management'. Here are the tables and their columns.
+    * **"Feedback"**: id (integer), name (text), email (text), message (text), "createdAt" (timestamp)
+    * **"Reminder"**: id (integer), "documentId" (integer), "reminderDate" (timestamp), sent (boolean), "createdAt" (timestamp), "updatedAt" (timestamp)
+    * **"_prisma_migrations"**: id (string), checksum (string), finished_at (timestamp), migration_name (string), logs (text), rolled_back_at (timestamp), started_at (timestamp), applied_steps_count (integer)
+    * **"file_uploads"**: id (integer), filename (text), filepath (text), mimetype (text), size (integer), url (text), "uploaded_at" (timestamp), folder (text), description (text), owned_by (text, The full name of the owner), maintained_by (text, The full name of the maintainer), start_date (date), expiration_date (date), uploaded_date (date), updated_at (timestamp), archived (boolean), maintained_by_email (text, The email of the maintainer), owned_by_email (text, The email of the owner)
+    * **"revision_history"**: id (integer), document_id (integer), action_type (text), action_timestamp (timestamp), user_id (text), user_name (text), old_data (jsonb), new_data (jsonb), comments (text)
+
+2.  **Foreign Key Relationships (for JOINs):**
+    * `"Reminder"."documentId"` refers to `"file_uploads"."id"`
+    * `"revision_history"."document_id"` refers to `"file_uploads"."id"`
+
+---
+## Strict Query Generation Rules
+
+1.  **Handle Greetings & Irrelevant Input (Highest Priority):** If the user's input is a simple greeting (like "hello", "hi", "how are you", "thanks"), a question about you ("who are you"), or is completely irrelevant gibberish ("jfsdkhf", "sdh"), do not generate a query or an error. Your ONLY response must be the single word: **`GREETING`**.
+
+2.  **Adhere to Schema:** You **MUST** use the exact table and column names provided in the schema above. Do not guess or alter names. For example, to query by the owner's email, you must use the column `owned_by_email`, not `owner_email`.
+
+3.  **MANDATORY Quoting:** You **MUST** use double quotes (`"`) around all table names and any column names that are camelCase or mixed-case.
+
+4.  **Dynamic Dates:** For any queries involving the current time or relative dates (like 'today', 'yesterday', 'next month'), you **MUST** use PostgreSQL's date functions. Use `NOW()` for the current timestamp, `CURRENT_DATE` for today's date, and `INTERVAL` for date arithmetic.
+
+5.  **Text Search:** For case-insensitive text searching, **ALWAYS** use the `ILIKE` operator.
+
+6.  **Joins:** When a query requires joining tables, use the relationships defined in the "Foreign Key Relationships" section to ensure the `JOIN` condition is correct.
+
+7.  **Generate Errors for Ambiguous Queries:** This rule applies **ONLY if the input is not a greeting**. If a user's request looks like a real query but is ambiguous or asks for a column that does not exist, return a single line of text starting with `ERROR:` that explains the problem.
+
+8.  **Safety:** Unless the user's request is explicitly about changing data (update, delete), you **MUST** generate a `SELECT` statement.
+
+---
+## Query Examples
+
+User Question: "hello"
+Your SQL Response: GREETING
+
+User Question: "tell me about the company employees"
+Your SQL Response: ERROR: The table 'employees' does not exist in the schema.
+
+User Question: "Show me all files that have been archived"
+Your SQL Response: SELECT * FROM "file_uploads" WHERE "archived" = true;
+
+User Question: "Count the number of documents owned by each person"
+Your SQL Response: SELECT owned_by_email, COUNT(id) FROM "file_uploads" GROUP BY owned_by_email;
+
+User Question: "Which documents are expiring next month?"
+Your SQL Response: SELECT filename, expiration_date FROM "file_uploads" WHERE expiration_date BETWEEN CURRENT_DATE AND CURRENT_DATE + INTERVAL '1 month';
+
+User Question: "Update the expiration date for document ID 25 to '2027-01-01'"
+Your SQL Response: UPDATE "file_uploads" SET "expiration_date" = '2027-01-01' WHERE "id" = 25;
+
+---
+## Output Format
+
+**CRITICAL:** Your entire response must be **ONLY the raw SQL query** (or the special words `GREETING` or `ERROR:` as defined in the rules). Do not include any explanations, markdown, or other text.
+"""
 
 '''
 
 def get_assistant_response(question, context):
+    llm_logger.info(f"Processing question: {question}")
+    
     if not sql_llm:
+        llm_logger.error("SQL LLM not initialized")
         raise Exception("SQL LLM not initialized")
     
-    prompt = ChatPromptTemplate.from_template(
-        "{context}\n\nBased on the context above, write only the SQL query that answers the following question:\nQuestion: {question}\nSQL Query:"
-    )
-    chain = prompt | sql_llm
-    response = chain.invoke({"context": context, "question": question})
-    query = (
-        str(response)
-        .replace("SQL Query:", "")
-        .replace("```sql", "")
-        .replace("```", "")
-        .strip()
-        .strip('"')
-    )
-    return query
-
+    try:
+        llm_logger.info("Generating SQL query using LLM...")
+        prompt = ChatPromptTemplate.from_template(
+            "{context}\n\nBased on the context above, write only the SQL query that answers the following question:\nQuestion: {question}\nSQL Query:"
+        )
+        chain = prompt | sql_llm
+        response = chain.invoke({"context": context, "question": question})
+        
+        query = (
+            str(response)
+            .replace("SQL Query:", "")
+            .replace("```sql", "")
+            .replace("```", "")
+            .strip()
+            .strip('"')
+        )
+        
+        llm_logger.info(f"Generated SQL query: {query}")
+        return query
+        
+    except Exception as e:
+        llm_logger.error(f"Error generating SQL query: {e}")
+        raise
 
 # --------------------- Data Summary ---------------------
 def get_basic_data_summary(data):
     """Generate basic data summary"""
-    summary_lines = []
-    summary_lines.append(f"The dataset has {data.shape[0]} rows and {data.shape[1]} columns.")
-    summary_lines.append(f"The dataset has the following columns: {', '.join(data.columns)}")
+    logger.info("Generating basic data summary...")
     
-    missing = data.isnull().sum()
-    missing = missing[missing > 0]
-    if not missing.empty:
-        summary_lines.append("Missing values found:")
-        for col, count in missing.items():
-            summary_lines.append(f"  - {col}: {count} missing")
+    try:
+        summary_lines = []
+        summary_lines.append(f"The dataset has {data.shape[0]} rows and {data.shape[1]} columns.")
+        summary_lines.append(f"The dataset has the following columns: {', '.join(data.columns)}")
+        
+        missing = data.isnull().sum()
+        missing = missing[missing > 0]
+        if not missing.empty:
+            summary_lines.append("Missing values found:")
+            for col, count in missing.items():
+                summary_lines.append(f"  - {col}: {count} missing")
 
-    numeric = data.select_dtypes(include='number')
-    if not numeric.empty:
-        desc = numeric.describe().T
-        for col in desc.index:
-            summary_lines.append(
-                f"{col}: min={desc.loc[col, 'min']}, mean={desc.loc[col, 'mean']:.2f}, max={desc.loc[col, 'max']}"
-            )
+        numeric = data.select_dtypes(include='number')
+        if not numeric.empty:
+            desc = numeric.describe().T
+            for col in desc.index:
+                summary_lines.append(
+                    f"{col}: min={desc.loc[col, 'min']}, mean={desc.loc[col, 'mean']:.2f}, max={desc.loc[col, 'max']}"
+                )
 
-    return "\n".join(summary_lines)
+        summary = "\n".join(summary_lines)
+        logger.info("Basic data summary generated successfully")
+        return summary
+        
+    except Exception as e:
+        logger.error(f"Error generating basic data summary: {e}")
+        return f"Error generating summary: {str(e)}"
 
 def get_profiling_summary(data):
     """Get key insights from pandas profiling without generating full HTML"""
+    logger.info("Generating profiling summary...")
+    
     try:
         profile = ProfileReport(data, minimal=True)
         
@@ -213,20 +336,24 @@ def get_profiling_summary(data):
                 })
             
             summary["variables"][col] = col_info
-            
+        
+        logger.info("Profiling summary generated successfully")
         return summary
         
     except Exception as e:
+        logger.error(f"Error generating profiling summary: {e}")
         print(f"Error generating profiling summary: {e}")
         return None
 
 # --------------------- SQL EXECUTION WITH MAPPING ---------------------
 
 def read_data_from_db(query):
-
+    db_logger.info(f"Executing database query: {query}")
+    
     try:
-        print("DB HOST:", os.getenv("DB_HOST"))  # Debug print
-
+        db_logger.info("Establishing database connection...")
+        db_logger.debug(f"Connecting to host: {os.getenv('DB_HOST')}")
+        
         conn = psycopg2.connect(
             host=os.getenv("DB_HOST"),
             port=os.getenv("DB_PORT"),
@@ -234,28 +361,41 @@ def read_data_from_db(query):
             password=os.getenv("DB_PASSWORD"),
             dbname=os.getenv("DB_NAME")
         )
-        print("Host:", os.getenv("DB_HOST"))
-        print("Port:", os.getenv("DB_PORT"))
-        print("User:", os.getenv("DB_USER"))
-        print("DB:", os.getenv("DB_NAME"))
-
-    
+        
+        db_logger.info("Database connection established successfully")
+        
 
         cursor = conn.cursor()
         operation = query.strip().split()[0].upper()
+        db_logger.info(f"Executing {operation} operation")
 
         if operation == "SELECT":
+            db_logger.info("Executing SELECT query...")
             cursor.execute(query)
-            columns = [desc[0] for desc in cursor.description]
-            results = cursor.fetchall()
-            raw_data = [dict(zip(columns, row)) for row in results]
-            # Transform headers
-            transformed_data = header_mapper.transform_data_result(raw_data)
-            output = {"data": transformed_data, "type": "select"}
+
+            if cursor.description is not None:
+                columns = [desc[0] for desc in cursor.description]
+                results = cursor.fetchall()
+                db_logger.info(f"Query returned {len(results)} rows with columns: {columns}")
+        
+                raw_data = [dict(zip(columns, row)) for row in results]
+                transformed_data = header_mapper.transform_data_result(raw_data)
+                output = {"data": transformed_data, "type": "select"}
+        
+                db_logger.info("SELECT query executed successfully")
+            else:
+                db_logger.warning("No columns returned in SELECT query.")
+                output = {"data": [], "type": "select", "message": "No data returned."}
+
+
+            
         else:
+            db_logger.info(f"Executing {operation} query...")
             cursor.execute(query)
             conn.commit()
             row_count = cursor.rowcount
+            
+            db_logger.info(f"{operation} query affected {row_count} rows")
 
             if operation == "INSERT":
                 message = f"✅ Successfully inserted {row_count} record(s)."
@@ -272,8 +412,10 @@ def read_data_from_db(query):
 
         cursor.close()
         conn.close()
+        db_logger.info("Database connection closed")
 
     except Exception as e:
+        db_logger.error(f"Database error: {e}")
         output = {"data": f"❌ Error executing query: {e}", "type": "error"}
 
     return output
@@ -282,57 +424,107 @@ def read_data_from_db(query):
 
 @app.route('/')
 def index():
+    api_logger.info("Serving index page")
     return render_template('index.html')
+
+
 
 @app.route('/get', methods=['POST'])
 def chatbot_response():
+    start_time = datetime.now()
+    api_logger.info(f"Received chatbot request at {start_time}")
+    
     user_msg = request.form['msg']
+    api_logger.info(f"User message: {user_msg}")
+    
     query = ""
     
     try:
-        # Generate SQL query
-        query = get_assistant_response(user_msg, context)
+        api_logger.info("Processing chatbot request...")
         
-        # Execute query
+        # Step 1: Get the raw response from the LLM
+        api_logger.info("Generating response from LLM...")
+        llm_response = get_assistant_response(user_msg, context)
+        api_logger.info(f"Generated response: {llm_response}")
+
+        # Step 2: Check for special keywords from the LLM before executing a query
+        response_upper = llm_response.strip().upper()
+
+        # Check for greetings
+        if response_upper == "GREETING":
+            api_logger.info("Identified as a greeting. Sending friendly response.")
+            return jsonify({
+                "message": "Hello! I'm a database assistant. How can I help you with your contract data today?",
+                "results": {"data": [], "type": "greeting"},
+                "query": "N/A"
+            })
+        
+        # Check for controlled errors from the LLM
+        elif response_upper.startswith("ERROR:"):
+            api_logger.warning(f"LLM returned a controlled error: {llm_response}")
+            return jsonify({
+                "message": llm_response, # Pass the LLM's error message directly to the user
+                "results": {"data": [], "type": "llm_error"},
+                "query": "N/A"
+            })
+
+        # Step 3: If no special keywords were found, it must be a query
+        query = llm_response
+        
+        # Execute the database query
+        api_logger.info("Executing database query...")
         result = read_data_from_db(query)
+        api_logger.info(f"Query result type: {result.get('type')}")
         
         # Initialize response variables
         basic_summary = ""
         
         # Process results based on type
         if result.get("type") == "select" and isinstance(result.get("data"), list) and result["data"]:
-            # Create DataFrame for analysis
+            api_logger.info("Processing SELECT query results...")
+            
             df = pd.DataFrame(result["data"])
+            api_logger.info(f"Created DataFrame with shape: {df.shape}")
             
-            # Generate basic summary
             basic_summary = get_basic_data_summary(df)
-            
-
+            api_logger.info("Basic summary generated")
             
         elif result.get("type") == "non_select":
-            basic_summary = result["data"]  # The success message
+            api_logger.info("Processing non-SELECT query results...")
+            basic_summary = result["data"]
         else:
-            basic_summary = result["data"]  # Error message
+            api_logger.warning("Processing error or empty results...")
+            basic_summary = result["data"]
         
         # Consistent response structure
         response_data = {
             "message": basic_summary,
             "results": result,
-            "query":query
+            "query": query
         }
+        
+        end_time = datetime.now()
+        processing_time = (end_time - start_time).total_seconds()
+        api_logger.info(f"Request processed successfully in {processing_time:.2f} seconds")
         
         return jsonify(response_data)
 
     except Exception as e:
+        end_time = datetime.now()
+        processing_time = (end_time - start_time).total_seconds()
+        api_logger.error(f"Request failed after {processing_time:.2f} seconds: {str(e)}")
+        
         return jsonify({
             "message": f"Sorry, I encountered an error: {str(e)}",
             "sql_query": query,
             "results": {"data": f"Error: {str(e)}", "type": "error"},
-            "profiling_summary": None,
-            "profiling_report_path": None
+            "profiling_summary": None
         })
+    
 
 # --------------------- APP START ---------------------
 
 if __name__ == "__main__":
-    app.run(debug=True,port=5050)
+    logger.info("Starting Flask application...")
+    logger.info("Application running on http://localhost:5050")
+    app.run(debug=True, port=5050)

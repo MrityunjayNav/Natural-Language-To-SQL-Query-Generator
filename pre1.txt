@@ -1,0 +1,93 @@
+project_root/
+│
+├── app.py                          # Main Flask application entry point
+├── config/
+│   ├── __init__.py
+│   ├── settings.py                 # Configuration settings
+│   └── logging_config.py           # Logging configuration
+│
+├── database/
+│   ├── __init__.py
+│   ├── connection.py               # Database connection management
+│   └── query_executor.py           # SQL query execution
+│
+├── llm/
+│   ├── __init__.py
+│   ├── ollama_client.py           # Ollama LLM client
+│   └── query_generator.py         # SQL query generation logic
+│
+├── utils/
+│   ├── __init__.py
+│   ├── header_mapper.py           # Column header mapping
+│   ├── data_analyzer.py           # Data analysis and summary
+│   └── validators.py              # Input validation
+│
+├── routes/
+│   ├── __init__.py
+│   ├── main_routes.py             # Main application routes
+│   └── api_routes.py              # API endpoints
+│
+├── services/
+│   ├── __init__.py
+│   ├── chatbot_service.py         # Main chatbot business logic
+│   └── data_service.py            # Data processing service
+│
+├── templates/
+│   └── index.html                 # HTML templates
+│
+├── static/                        # Static files (CSS, JS, images)
+│   ├── css/
+│   ├── js/
+│   └── images/
+│
+├── logs/                          # Log files directory
+│
+├── .env                           # Environment variables
+├── requirements.txt               # Python dependencies
+└── README.md                      # Project documentation
+
+
+
+
+
+
+
+Core Files:
+
+app.py - Flask app initialization and configuration
+config/settings.py - All configuration constants and environment variables
+config/logging_config.py - Logging setup and configuration
+
+Database Layer:
+
+database/connection.py - Database connection management
+database/query_executor.py - SQL query execution logic
+
+LLM Layer:
+
+llm/ollama_client.py - Ollama LLM client initialization
+llm/query_generator.py - SQL query generation using LLM
+
+Utilities:
+
+utils/header_mapper.py - Column mapping class
+utils/data_analyzer.py - Data analysis and summary functions
+utils/validators.py - Input validation utilities
+
+Routes:
+
+routes/main_routes.py - Main web routes
+routes/api_routes.py - API endpoints
+
+Services:
+
+services/chatbot_service.py - Main chatbot business logic
+services/data_service.py - Data processing service
+
+This modular structure will:
+
+Separate concerns (database, LLM, utilities, routes)
+Improve maintainability (each file has a single responsibility)
+Enable easy testing (mock individual components)
+Enhance reusability (components can be imported where needed)
+Better organization (logical grouping of related functionality)

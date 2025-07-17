@@ -1,0 +1,10 @@
+Flask
+python-dotenv
+pandas
+ydata-profiling
+psycopg2-binary
+langchain
+langchain-community
+langchain-core
+langchain-ollama
+requests
