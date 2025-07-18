@@ -2065,3 +2065,313 @@ LINE 1: ...ed_by = 'HR', owned_by_email = (SELECT email FROM "users" WH...
 2025-07-18 17:32:30,103 - api - INFO - Generated response: GREETING
 2025-07-18 17:32:30,103 - api - INFO - Identified as a greeting. Sending friendly response.
 2025-07-18 17:32:30,104 - werkzeug - INFO - 127.0.0.1 - - [18/Jul/2025 17:32:30] "POST /get HTTP/1.1" 200 -
+2025-07-18 18:04:40,697 - __main__ - INFO - Application starting up...
+2025-07-18 18:04:40,697 - __main__ - INFO - DB_HOST: 127.0.0.1
+2025-07-18 18:04:40,697 - __main__ - INFO - DB_PORT: 5432
+2025-07-18 18:04:40,697 - __main__ - INFO - DB_USER: postgres
+2025-07-18 18:04:40,697 - __main__ - INFO - DB_NAME: documents_management
+2025-07-18 18:04:40,698 - __main__ - INFO - HeaderMapper initialized with mappings
+2025-07-18 18:04:40,698 - llm - INFO - Initializing Ollama LLM...
+2025-07-18 18:04:40,714 - llm - INFO - Ollama LLM initialized successfully
+2025-07-18 18:04:40,714 - __main__ - INFO - Starting Flask application...
+2025-07-18 18:04:40,714 - __main__ - INFO - Application running on http://localhost:5050
+2025-07-18 18:04:40,753 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5050
+2025-07-18 18:04:40,754 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-07-18 18:04:40,755 - werkzeug - INFO -  * Restarting with stat
+2025-07-18 18:04:42,994 - __main__ - INFO - Application starting up...
+2025-07-18 18:04:42,994 - __main__ - INFO - DB_HOST: 127.0.0.1
+2025-07-18 18:04:42,994 - __main__ - INFO - DB_PORT: 5432
+2025-07-18 18:04:42,994 - __main__ - INFO - DB_USER: postgres
+2025-07-18 18:04:42,994 - __main__ - INFO - DB_NAME: documents_management
+2025-07-18 18:04:42,995 - __main__ - INFO - HeaderMapper initialized with mappings
+2025-07-18 18:04:42,995 - llm - INFO - Initializing Ollama LLM...
+2025-07-18 18:04:43,009 - llm - INFO - Ollama LLM initialized successfully
+2025-07-18 18:04:43,009 - __main__ - INFO - Starting Flask application...
+2025-07-18 18:04:43,009 - __main__ - INFO - Application running on http://localhost:5050
+2025-07-18 18:04:43,040 - werkzeug - WARNING -  * Debugger is active!
+2025-07-18 18:04:43,051 - werkzeug - INFO -  * Debugger PIN: 115-695-789
+2025-07-18 18:04:52,527 - api - INFO - Serving index page
+2025-07-18 18:04:52,533 - werkzeug - INFO - 127.0.0.1 - - [18/Jul/2025 18:04:52] "GET / HTTP/1.1" 200 -
+2025-07-18 18:04:57,140 - api - INFO - Received chatbot request at 2025-07-18 18:04:57.140868
+2025-07-18 18:04:57,144 - api - INFO - User message: Hello
+2025-07-18 18:04:57,144 - api - INFO - meri jjjjjjaaaaaaaaannnnnnnnn
+2025-07-18 18:04:57,144 - api - INFO - Processing chatbot request...
+2025-07-18 18:04:57,145 - api - INFO - Generating response from LLM...
+2025-07-18 18:04:57,145 - llm - INFO - Processing question: Hello
+2025-07-18 18:04:57,145 - llm - INFO - Generating SQL query using LLM...
+2025-07-18 18:04:57,160 - llm - ERROR - Error generating SQL query: [Errno 61] Connection refused
+2025-07-18 18:04:57,160 - api - INFO - Meri jaaan  bbhen ki lodi
+2025-07-18 18:04:57,161 - api - ERROR - Request failed after 0.02 seconds: [Errno 61] Connection refused
+2025-07-18 18:04:57,161 - werkzeug - INFO - 127.0.0.1 - - [18/Jul/2025 18:04:57] "POST /get HTTP/1.1" 200 -
+2025-07-18 18:05:11,730 - werkzeug - INFO - 127.0.0.1 - - [18/Jul/2025 18:05:11] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-07-18 18:05:14,740 - api - INFO - Serving index page
+2025-07-18 18:05:14,740 - werkzeug - INFO - 127.0.0.1 - - [18/Jul/2025 18:05:14] "GET / HTTP/1.1" 200 -
+2025-07-18 18:05:14,759 - werkzeug - INFO - 127.0.0.1 - - [18/Jul/2025 18:05:14] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-07-18 18:05:24,338 - api - INFO - Received chatbot request at 2025-07-18 18:05:24.338435
+2025-07-18 18:05:24,339 - api - INFO - User message: hello
+2025-07-18 18:05:24,339 - api - INFO - meri jjjjjjaaaaaaaaannnnnnnnn
+2025-07-18 18:05:24,340 - api - INFO - Processing chatbot request...
+2025-07-18 18:05:24,340 - api - INFO - Generating response from LLM...
+2025-07-18 18:05:24,340 - llm - INFO - Processing question: hello
+2025-07-18 18:05:24,340 - llm - INFO - Generating SQL query using LLM...
+2025-07-18 18:05:24,343 - llm - ERROR - Error generating SQL query: [Errno 61] Connection refused
+2025-07-18 18:05:24,344 - api - INFO - Meri jaaan  bbhen ki lodi
+2025-07-18 18:05:24,345 - api - ERROR - Request failed after 0.01 seconds: [Errno 61] Connection refused
+2025-07-18 18:05:24,346 - werkzeug - INFO - 127.0.0.1 - - [18/Jul/2025 18:05:24] "POST /get HTTP/1.1" 200 -
+2025-07-18 18:16:11,889 - api - INFO - Serving index page
+2025-07-18 18:16:11,893 - werkzeug - INFO - 127.0.0.1 - - [18/Jul/2025 18:16:11] "GET / HTTP/1.1" 200 -
+2025-07-18 18:16:11,929 - werkzeug - INFO - 127.0.0.1 - - [18/Jul/2025 18:16:11] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-07-18 18:16:15,526 - api - INFO - Received chatbot request at 2025-07-18 18:16:15.526321
+2025-07-18 18:16:15,526 - api - INFO - User message: hello
+2025-07-18 18:16:15,526 - api - INFO - meri jjjjjjaaaaaaaaannnnnnnnn
+2025-07-18 18:16:15,526 - api - INFO - Processing chatbot request...
+2025-07-18 18:16:15,526 - api - INFO - Generating response from LLM...
+2025-07-18 18:16:15,526 - llm - INFO - Processing question: hello
+2025-07-18 18:16:15,527 - llm - INFO - Generating SQL query using LLM...
+2025-07-18 18:16:15,529 - llm - ERROR - Error generating SQL query: [Errno 61] Connection refused
+2025-07-18 18:16:15,529 - api - INFO - Meri jaaan  bbhen ki lodi
+2025-07-18 18:16:15,529 - api - ERROR - Request failed after 0.00 seconds: [Errno 61] Connection refused
+2025-07-18 18:16:15,529 - werkzeug - INFO - 127.0.0.1 - - [18/Jul/2025 18:16:15] "POST /get HTTP/1.1" 200 -
+2025-07-18 18:19:48,054 - werkzeug - INFO -  * Detected change in '/Users/mrityunjay/Desktop/project/app.py', reloading
+2025-07-18 18:19:48,387 - werkzeug - INFO -  * Restarting with stat
+2025-07-18 18:19:51,416 - __main__ - INFO - Application starting up...
+2025-07-18 18:19:51,416 - __main__ - INFO - DB_HOST: 127.0.0.1
+2025-07-18 18:19:51,416 - __main__ - INFO - DB_PORT: 5432
+2025-07-18 18:19:51,416 - __main__ - INFO - DB_USER: postgres
+2025-07-18 18:19:51,416 - __main__ - INFO - DB_NAME: documents_management
+2025-07-18 18:19:51,417 - __main__ - INFO - HeaderMapper initialized with mappings
+2025-07-18 18:19:51,417 - llm - INFO - Initializing Ollama LLM...
+2025-07-18 18:19:51,433 - llm - INFO - Ollama LLM initialized successfully
+2025-07-18 18:19:51,434 - __main__ - INFO - Starting Flask application...
+2025-07-18 18:19:51,434 - __main__ - INFO - Application running on http://localhost:5050
+2025-07-18 18:19:51,469 - werkzeug - WARNING -  * Debugger is active!
+2025-07-18 18:19:51,480 - werkzeug - INFO -  * Debugger PIN: 115-695-789
+2025-07-18 18:20:42,053 - werkzeug - INFO -  * Detected change in '/Users/mrityunjay/Desktop/project/app.py', reloading
+2025-07-18 18:20:42,382 - werkzeug - INFO -  * Restarting with stat
+2025-07-18 18:20:44,728 - __main__ - INFO - Application starting up...
+2025-07-18 18:20:44,729 - __main__ - INFO - DB_HOST: 127.0.0.1
+2025-07-18 18:20:44,729 - __main__ - INFO - DB_PORT: 5432
+2025-07-18 18:20:44,729 - __main__ - INFO - DB_USER: postgres
+2025-07-18 18:20:44,729 - __main__ - INFO - DB_NAME: documents_management
+2025-07-18 18:20:44,730 - __main__ - INFO - HeaderMapper initialized with mappings
+2025-07-18 18:20:44,730 - llm - INFO - Initializing Ollama LLM...
+2025-07-18 18:20:44,745 - llm - INFO - Ollama LLM initialized successfully
+2025-07-18 18:20:44,745 - __main__ - INFO - Starting Flask application...
+2025-07-18 18:20:44,745 - __main__ - INFO - Application running on http://localhost:5050
+2025-07-18 18:20:44,779 - werkzeug - WARNING -  * Debugger is active!
+2025-07-18 18:20:44,788 - werkzeug - INFO -  * Debugger PIN: 115-695-789
+2025-07-18 18:20:49,841 - werkzeug - INFO -  * Detected change in '/Users/mrityunjay/Desktop/project/app.py', reloading
+2025-07-18 18:20:50,150 - werkzeug - INFO -  * Restarting with stat
+2025-07-18 18:20:52,628 - __main__ - INFO - Application starting up...
+2025-07-18 18:20:52,628 - __main__ - INFO - DB_HOST: 127.0.0.1
+2025-07-18 18:20:52,628 - __main__ - INFO - DB_PORT: 5432
+2025-07-18 18:20:52,628 - __main__ - INFO - DB_USER: postgres
+2025-07-18 18:20:52,628 - __main__ - INFO - DB_NAME: documents_management
+2025-07-18 18:20:52,629 - __main__ - INFO - HeaderMapper initialized with mappings
+2025-07-18 18:20:52,629 - llm - INFO - Initializing Ollama LLM...
+2025-07-18 18:20:52,644 - llm - INFO - Ollama LLM initialized successfully
+2025-07-18 18:20:52,646 - __main__ - INFO - Starting Flask application...
+2025-07-18 18:20:52,646 - __main__ - INFO - Application running on http://localhost:5050
+2025-07-18 18:20:52,682 - werkzeug - WARNING -  * Debugger is active!
+2025-07-18 18:20:52,691 - werkzeug - INFO -  * Debugger PIN: 115-695-789
+2025-07-18 18:20:57,736 - werkzeug - INFO -  * Detected change in '/Users/mrityunjay/Desktop/project/app.py', reloading
+2025-07-18 18:20:58,133 - werkzeug - INFO -  * Restarting with stat
+2025-07-18 18:21:00,518 - __main__ - INFO - Application starting up...
+2025-07-18 18:21:00,518 - __main__ - INFO - DB_HOST: 127.0.0.1
+2025-07-18 18:21:00,518 - __main__ - INFO - DB_PORT: 5432
+2025-07-18 18:21:00,518 - __main__ - INFO - DB_USER: postgres
+2025-07-18 18:21:00,519 - __main__ - INFO - DB_NAME: documents_management
+2025-07-18 18:21:00,519 - __main__ - INFO - HeaderMapper initialized with mappings
+2025-07-18 18:21:00,519 - llm - INFO - Initializing Ollama LLM...
+2025-07-18 18:21:00,533 - llm - INFO - Ollama LLM initialized successfully
+2025-07-18 18:21:00,534 - __main__ - INFO - Starting Flask application...
+2025-07-18 18:21:00,534 - __main__ - INFO - Application running on http://localhost:5050
+2025-07-18 18:21:00,566 - werkzeug - WARNING -  * Debugger is active!
+2025-07-18 18:21:00,574 - werkzeug - INFO -  * Debugger PIN: 115-695-789
+2025-07-18 18:21:05,633 - werkzeug - INFO -  * Detected change in '/Users/mrityunjay/Desktop/project/app.py', reloading
+2025-07-18 18:21:05,934 - werkzeug - INFO -  * Restarting with stat
+2025-07-18 18:21:08,454 - __main__ - INFO - Application starting up...
+2025-07-18 18:21:08,454 - __main__ - INFO - DB_HOST: 127.0.0.1
+2025-07-18 18:21:08,454 - __main__ - INFO - DB_PORT: 5432
+2025-07-18 18:21:08,454 - __main__ - INFO - DB_USER: postgres
+2025-07-18 18:21:08,454 - __main__ - INFO - DB_NAME: documents_management
+2025-07-18 18:21:08,455 - __main__ - INFO - HeaderMapper initialized with mappings
+2025-07-18 18:21:08,455 - llm - INFO - Initializing Ollama LLM...
+2025-07-18 18:21:08,469 - llm - INFO - Ollama LLM initialized successfully
+2025-07-18 18:21:08,470 - __main__ - INFO - Starting Flask application...
+2025-07-18 18:21:08,470 - __main__ - INFO - Application running on http://localhost:5050
+2025-07-18 18:21:08,502 - werkzeug - WARNING -  * Debugger is active!
+2025-07-18 18:21:08,513 - werkzeug - INFO -  * Debugger PIN: 115-695-789
+2025-07-18 18:21:10,540 - werkzeug - INFO -  * Detected change in '/Users/mrityunjay/Desktop/project/app.py', reloading
+2025-07-18 18:21:10,843 - werkzeug - INFO -  * Restarting with stat
+2025-07-18 18:21:13,328 - __main__ - INFO - Application starting up...
+2025-07-18 18:21:13,328 - __main__ - INFO - DB_HOST: 127.0.0.1
+2025-07-18 18:21:13,328 - __main__ - INFO - DB_PORT: 5432
+2025-07-18 18:21:13,328 - __main__ - INFO - DB_USER: postgres
+2025-07-18 18:21:13,328 - __main__ - INFO - DB_NAME: documents_management
+2025-07-18 18:21:13,329 - __main__ - INFO - HeaderMapper initialized with mappings
+2025-07-18 18:21:13,329 - llm - INFO - Initializing Ollama LLM...
+2025-07-18 18:21:13,346 - llm - INFO - Ollama LLM initialized successfully
+2025-07-18 18:21:13,347 - __main__ - INFO - Starting Flask application...
+2025-07-18 18:21:13,347 - __main__ - INFO - Application running on http://localhost:5050
+2025-07-18 18:21:13,387 - werkzeug - WARNING -  * Debugger is active!
+2025-07-18 18:21:13,400 - werkzeug - INFO -  * Debugger PIN: 115-695-789
+2025-07-18 18:21:15,432 - werkzeug - INFO -  * Detected change in '/Users/mrityunjay/Desktop/project/app.py', reloading
+2025-07-18 18:21:15,732 - werkzeug - INFO -  * Restarting with stat
+2025-07-18 18:21:18,084 - __main__ - INFO - Application starting up...
+2025-07-18 18:21:18,085 - __main__ - INFO - DB_HOST: 127.0.0.1
+2025-07-18 18:21:18,085 - __main__ - INFO - DB_PORT: 5432
+2025-07-18 18:21:18,085 - __main__ - INFO - DB_USER: postgres
+2025-07-18 18:21:18,085 - __main__ - INFO - DB_NAME: documents_management
+2025-07-18 18:21:18,085 - __main__ - INFO - HeaderMapper initialized with mappings
+2025-07-18 18:21:18,085 - llm - INFO - Initializing Ollama LLM...
+2025-07-18 18:21:18,099 - llm - INFO - Ollama LLM initialized successfully
+2025-07-18 18:21:18,100 - __main__ - INFO - Starting Flask application...
+2025-07-18 18:21:18,100 - __main__ - INFO - Application running on http://localhost:5050
+2025-07-18 18:21:18,132 - werkzeug - WARNING -  * Debugger is active!
+2025-07-18 18:21:18,141 - werkzeug - INFO -  * Debugger PIN: 115-695-789
+2025-07-18 18:21:25,485 - api - INFO - Serving index page
+2025-07-18 18:21:25,493 - werkzeug - INFO - 127.0.0.1 - - [18/Jul/2025 18:21:25] "GET / HTTP/1.1" 200 -
+2025-07-18 18:21:28,272 - api - INFO - Received chatbot request at 2025-07-18 18:21:28.272112
+2025-07-18 18:21:28,274 - api - INFO - User message: hello
+2025-07-18 18:21:28,274 - api - INFO - meri jjjjjjaaaaaaaaannnnnnnnn
+2025-07-18 18:21:28,274 - api - INFO - Processing chatbot request...
+2025-07-18 18:21:28,274 - api - INFO - Generating response from LLM...
+2025-07-18 18:21:28,274 - llm - INFO - Processing question: hello
+2025-07-18 18:21:28,274 - llm - INFO - Generating SQL query using LLM...
+2025-07-18 18:21:28,287 - llm - ERROR - Error generating SQL query: [Errno 61] Connection refused
+2025-07-18 18:21:28,287 - api - INFO - Meri jaaan  bbhen ki lodi
+2025-07-18 18:21:28,287 - api - ERROR - Request failed after 0.02 seconds: [Errno 61] Connection refused
+2025-07-18 18:21:28,288 - werkzeug - INFO - 127.0.0.1 - - [18/Jul/2025 18:21:28] "POST /get HTTP/1.1" 200 -
+2025-07-18 18:23:34,396 - __main__ - INFO - Application starting up...
+2025-07-18 18:23:34,396 - __main__ - INFO - DB_HOST: 127.0.0.1
+2025-07-18 18:23:34,397 - __main__ - INFO - DB_PORT: 5432
+2025-07-18 18:23:34,397 - __main__ - INFO - DB_USER: postgres
+2025-07-18 18:23:34,397 - __main__ - INFO - DB_NAME: documents_management
+2025-07-18 18:23:34,397 - __main__ - INFO - HeaderMapper initialized with mappings
+2025-07-18 18:23:34,397 - llm - INFO - Initializing Ollama LLM...
+2025-07-18 18:23:34,428 - llm - INFO - Ollama LLM initialized successfully
+2025-07-18 18:23:34,429 - __main__ - INFO - Starting Flask application...
+2025-07-18 18:23:34,429 - __main__ - INFO - Application running on http://localhost:5050
+2025-07-18 18:23:34,471 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5050
+2025-07-18 18:23:34,471 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-07-18 18:23:34,472 - werkzeug - INFO -  * Restarting with stat
+2025-07-18 18:23:36,730 - __main__ - INFO - Application starting up...
+2025-07-18 18:23:36,731 - __main__ - INFO - DB_HOST: 127.0.0.1
+2025-07-18 18:23:36,731 - __main__ - INFO - DB_PORT: 5432
+2025-07-18 18:23:36,731 - __main__ - INFO - DB_USER: postgres
+2025-07-18 18:23:36,731 - __main__ - INFO - DB_NAME: documents_management
+2025-07-18 18:23:36,731 - __main__ - INFO - HeaderMapper initialized with mappings
+2025-07-18 18:23:36,731 - llm - INFO - Initializing Ollama LLM...
+2025-07-18 18:23:36,745 - llm - INFO - Ollama LLM initialized successfully
+2025-07-18 18:23:36,746 - __main__ - INFO - Starting Flask application...
+2025-07-18 18:23:36,746 - __main__ - INFO - Application running on http://localhost:5050
+2025-07-18 18:23:36,777 - werkzeug - WARNING -  * Debugger is active!
+2025-07-18 18:23:36,786 - werkzeug - INFO -  * Debugger PIN: 115-695-789
+2025-07-18 18:23:36,794 - api - INFO - Serving index page
+2025-07-18 18:23:36,799 - werkzeug - INFO - 127.0.0.1 - - [18/Jul/2025 18:23:36] "GET / HTTP/1.1" 200 -
+2025-07-18 18:23:40,084 - api - INFO - Received chatbot request at 2025-07-18 18:23:40.084419
+2025-07-18 18:23:40,086 - api - INFO - User message: hello
+2025-07-18 18:23:40,087 - api - INFO - meri jjjjjjaaaaaaaaannnnnnnnn
+2025-07-18 18:23:40,087 - api - INFO - Processing chatbot request...
+2025-07-18 18:23:40,087 - api - INFO - Generating response from LLM...
+2025-07-18 18:23:40,088 - llm - INFO - Processing question: hello
+2025-07-18 18:23:40,088 - llm - INFO - Generating SQL query using LLM...
+2025-07-18 18:23:59,429 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-07-18 18:24:00,097 - llm - INFO - Generated SQL query: GREETING
+2025-07-18 18:24:00,097 - api - INFO - this is response message: GREETING
+2025-07-18 18:24:00,098 - api - INFO - Generated response: GREETING
+2025-07-18 18:24:00,098 - api - INFO - Identified as a greeting. Sending friendly response.
+2025-07-18 18:24:00,098 - werkzeug - INFO - 127.0.0.1 - - [18/Jul/2025 18:24:00] "POST /get HTTP/1.1" 200 -
+2025-07-18 18:24:55,623 - werkzeug - INFO -  * Detected change in '/Users/mrityunjay/Desktop/project/app.py', reloading
+2025-07-18 18:24:56,041 - werkzeug - INFO -  * Restarting with stat
+2025-07-18 18:24:59,029 - __main__ - INFO - Application starting up...
+2025-07-18 18:24:59,029 - __main__ - INFO - DB_HOST: 127.0.0.1
+2025-07-18 18:24:59,029 - __main__ - INFO - DB_PORT: 5432
+2025-07-18 18:24:59,029 - __main__ - INFO - DB_USER: postgres
+2025-07-18 18:24:59,029 - __main__ - INFO - DB_NAME: documents_management
+2025-07-18 18:24:59,030 - __main__ - INFO - HeaderMapper initialized with mappings
+2025-07-18 18:24:59,030 - llm - INFO - Initializing Ollama LLM...
+2025-07-18 18:24:59,046 - llm - INFO - Ollama LLM initialized successfully
+2025-07-18 18:24:59,046 - __main__ - INFO - Starting Flask application...
+2025-07-18 18:24:59,046 - __main__ - INFO - Application running on http://localhost:5050
+2025-07-18 18:24:59,084 - werkzeug - WARNING -  * Debugger is active!
+2025-07-18 18:24:59,095 - werkzeug - INFO -  * Debugger PIN: 115-695-789
+2025-07-18 18:27:56,475 - werkzeug - INFO - 127.0.0.1 - - [18/Jul/2025 18:27:56] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-07-18 18:28:07,211 - api - INFO - Serving index page
+2025-07-18 18:28:07,217 - werkzeug - INFO - 127.0.0.1 - - [18/Jul/2025 18:28:07] "GET / HTTP/1.1" 200 -
+2025-07-18 18:28:07,236 - werkzeug - INFO - 127.0.0.1 - - [18/Jul/2025 18:28:07] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-07-18 18:28:10,568 - api - INFO - Received chatbot request at 2025-07-18 18:28:10.568623
+2025-07-18 18:28:10,572 - api - INFO - User message: hello
+2025-07-18 18:28:10,572 - api - INFO - meri jjjjjjaaaaaaaaannnnnnnnn
+2025-07-18 18:28:10,573 - api - INFO - Processing chatbot request...
+2025-07-18 18:28:10,573 - api - INFO - Generating response from LLM...
+2025-07-18 18:28:10,573 - llm - INFO - Processing question: hello
+2025-07-18 18:28:10,574 - llm - INFO - Generating SQL query using LLM...
+2025-07-18 18:28:12,330 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-07-18 18:28:12,735 - llm - INFO - Generated SQL query: GREETING
+2025-07-18 18:28:12,736 - api - INFO - Generated response: GREETING
+2025-07-18 18:28:12,736 - api - INFO - Identified as a greeting. Sending friendly response.
+2025-07-18 18:28:12,745 - werkzeug - INFO - 127.0.0.1 - - [18/Jul/2025 18:28:12] "POST /get HTTP/1.1" 200 -
+2025-07-18 18:28:12,766 - api - INFO - Serving index page
+2025-07-18 18:28:12,767 - werkzeug - INFO - 127.0.0.1 - - [18/Jul/2025 18:28:12] "GET / HTTP/1.1" 200 -
+2025-07-18 18:28:12,841 - werkzeug - INFO - 127.0.0.1 - - [18/Jul/2025 18:28:12] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-07-18 18:28:18,027 - api - INFO - Received chatbot request at 2025-07-18 18:28:18.027230
+2025-07-18 18:28:18,029 - api - INFO - User message: hello
+2025-07-18 18:28:18,030 - api - INFO - meri jjjjjjaaaaaaaaannnnnnnnn
+2025-07-18 18:28:18,030 - api - INFO - Processing chatbot request...
+2025-07-18 18:28:18,030 - api - INFO - Generating response from LLM...
+2025-07-18 18:28:18,030 - llm - INFO - Processing question: hello
+2025-07-18 18:28:18,031 - llm - INFO - Generating SQL query using LLM...
+2025-07-18 18:28:18,290 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-07-18 18:28:19,017 - llm - INFO - Generated SQL query: GREETING
+2025-07-18 18:28:19,018 - api - INFO - Generated response: GREETING
+2025-07-18 18:28:19,018 - api - INFO - Identified as a greeting. Sending friendly response.
+2025-07-18 18:28:19,018 - werkzeug - INFO - 127.0.0.1 - - [18/Jul/2025 18:28:19] "POST /get HTTP/1.1" 200 -
+2025-07-18 18:35:49,845 - api - INFO - Serving index page
+2025-07-18 18:35:49,851 - werkzeug - INFO - 127.0.0.1 - - [18/Jul/2025 18:35:49] "GET / HTTP/1.1" 200 -
+2025-07-18 18:35:49,879 - werkzeug - INFO - 127.0.0.1 - - [18/Jul/2025 18:35:49] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-07-18 18:35:54,794 - api - INFO - Received chatbot request at 2025-07-18 18:35:54.794327
+2025-07-18 18:35:54,795 - api - INFO - User message: hello
+2025-07-18 18:35:54,795 - api - INFO - meri jjjjjjaaaaaaaaannnnnnnnn
+2025-07-18 18:35:54,795 - api - INFO - Processing chatbot request...
+2025-07-18 18:35:54,795 - api - INFO - Generating response from LLM...
+2025-07-18 18:35:54,795 - llm - INFO - Processing question: hello
+2025-07-18 18:35:54,795 - llm - INFO - Generating SQL query using LLM...
+2025-07-18 18:36:13,444 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-07-18 18:36:14,022 - llm - INFO - Generated SQL query: GREETING
+2025-07-18 18:36:14,022 - api - INFO - Generated response: GREETING
+2025-07-18 18:36:14,022 - api - INFO - Identified as a greeting. Sending friendly response.
+2025-07-18 18:36:14,023 - werkzeug - INFO - 127.0.0.1 - - [18/Jul/2025 18:36:14] "POST /get HTTP/1.1" 200 -
+2025-07-18 18:38:56,707 - api - INFO - Serving index page
+2025-07-18 18:38:56,712 - werkzeug - INFO - 127.0.0.1 - - [18/Jul/2025 18:38:56] "GET / HTTP/1.1" 200 -
+2025-07-18 18:38:56,735 - werkzeug - INFO - 127.0.0.1 - - [18/Jul/2025 18:38:56] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-07-18 18:39:01,474 - api - INFO - Received chatbot request at 2025-07-18 18:39:01.474608
+2025-07-18 18:39:01,476 - api - INFO - User message: hello
+2025-07-18 18:39:01,476 - api - INFO - meri jjjjjjaaaaaaaaannnnnnnnn
+2025-07-18 18:39:01,477 - api - INFO - Processing chatbot request...
+2025-07-18 18:39:01,478 - api - INFO - Generating response from LLM...
+2025-07-18 18:39:01,478 - llm - INFO - Processing question: hello
+2025-07-18 18:39:01,478 - llm - INFO - Generating SQL query using LLM...
+2025-07-18 18:39:02,852 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-07-18 18:39:03,694 - llm - INFO - Generated SQL query: GREETING
+2025-07-18 18:39:03,695 - api - INFO - Generated response: GREETING
+2025-07-18 18:39:03,695 - api - INFO - Identified as a greeting. Sending friendly response.
+2025-07-18 18:39:03,697 - werkzeug - INFO - 127.0.0.1 - - [18/Jul/2025 18:39:03] "POST /get HTTP/1.1" 200 -
+2025-07-18 18:40:30,733 - api - INFO - Serving index page
+2025-07-18 18:40:30,739 - werkzeug - INFO - 127.0.0.1 - - [18/Jul/2025 18:40:30] "GET / HTTP/1.1" 200 -
+2025-07-18 18:40:30,757 - werkzeug - INFO - 127.0.0.1 - - [18/Jul/2025 18:40:30] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-07-18 18:40:35,313 - api - INFO - Received chatbot request at 2025-07-18 18:40:35.313843
+2025-07-18 18:40:35,315 - api - INFO - User message: hello
+2025-07-18 18:40:35,315 - api - INFO - meri jjjjjjaaaaaaaaannnnnnnnn
+2025-07-18 18:40:35,315 - api - INFO - Processing chatbot request...
+2025-07-18 18:40:35,315 - api - INFO - Generating response from LLM...
+2025-07-18 18:40:35,316 - llm - INFO - Processing question: hello
+2025-07-18 18:40:35,316 - llm - INFO - Generating SQL query using LLM...
+2025-07-18 18:40:36,642 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-07-18 18:40:37,010 - llm - INFO - Generated SQL query: GREETING
+2025-07-18 18:40:37,010 - api - INFO - Generated response: GREETING
+2025-07-18 18:40:37,010 - api - INFO - Identified as a greeting. Sending friendly response.
+2025-07-18 18:40:37,012 - werkzeug - INFO - 127.0.0.1 - - [18/Jul/2025 18:40:37] "POST /get HTTP/1.1" 200 -

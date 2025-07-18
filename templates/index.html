@@ -244,9 +244,10 @@
       //  if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
       //  return response.json(); // Parse as JSON directly
       //})
+      .then(res => res.json())
       .then(responseData => {
         console.log("ye raha");
-        console.log(JSON.parse(responseData));
+        console.log(responseData);
         console.log("mil gya?");
         
         chatDisplay.removeChild(typingDiv);
@@ -256,15 +257,19 @@
 
         try {
           // Extract data from the new response format
-          const { message, results, sql_query } = responseData;
+          const { message, results, query } = responseData;
           const resultData = results?.data;
 
           // Add AI summary if available
           if (message) {
             const summarySection = createSummarySection(message);
+            console.log("Ye raha summarysection"+summarySection);
             if (summarySection) {
               botDiv.appendChild(summarySection);
             }
+          }
+          if (message && botDiv.children.length === 0) {
+            botDiv.innerHTML = `<p class="text-gray-700">${message}</p>`;
           }
 
           // Handle different types of results
@@ -296,8 +301,8 @@
           }
 
           // Add collapsible SQL query section
-          if (sql_query) {
-            const sqlSection = createCollapsibleSQLSection(sql_query);
+          if (query) {
+            const sqlSection = createCollapsibleSQLSection(query);
             if (sqlSection) {
               botDiv.appendChild(sqlSection);
             }
