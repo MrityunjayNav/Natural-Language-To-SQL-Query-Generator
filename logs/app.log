@@ -1434,3 +1434,634 @@ LINE 3: Assumptions made:
 2025-07-17 20:51:07,674 - api - INFO - Processing non-SELECT query results...
 2025-07-17 20:51:07,675 - api - INFO - Request processed successfully in 24.77 seconds
 2025-07-17 20:51:07,676 - werkzeug - INFO - 127.0.0.1 - - [17/Jul/2025 20:51:07] "POST /get HTTP/1.1" 200 -
+2025-07-18 13:13:00,332 - __main__ - INFO - Application starting up...
+2025-07-18 13:13:00,333 - __main__ - INFO - DB_HOST: 127.0.0.1
+2025-07-18 13:13:00,333 - __main__ - INFO - DB_PORT: 5432
+2025-07-18 13:13:00,333 - __main__ - INFO - DB_USER: postgres
+2025-07-18 13:13:00,333 - __main__ - INFO - DB_NAME: documents_management
+2025-07-18 13:13:00,333 - __main__ - INFO - HeaderMapper initialized with mappings
+2025-07-18 13:13:00,333 - llm - INFO - Initializing Ollama LLM...
+2025-07-18 13:13:00,350 - llm - INFO - Ollama LLM initialized successfully
+2025-07-18 13:13:00,350 - __main__ - INFO - Starting Flask application...
+2025-07-18 13:13:00,350 - __main__ - INFO - Application running on http://localhost:5050
+2025-07-18 13:13:00,406 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5050
+2025-07-18 13:13:00,407 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-07-18 13:13:00,408 - werkzeug - INFO -  * Restarting with stat
+2025-07-18 13:13:02,660 - __main__ - INFO - Application starting up...
+2025-07-18 13:13:02,660 - __main__ - INFO - DB_HOST: 127.0.0.1
+2025-07-18 13:13:02,661 - __main__ - INFO - DB_PORT: 5432
+2025-07-18 13:13:02,661 - __main__ - INFO - DB_USER: postgres
+2025-07-18 13:13:02,661 - __main__ - INFO - DB_NAME: documents_management
+2025-07-18 13:13:02,661 - __main__ - INFO - HeaderMapper initialized with mappings
+2025-07-18 13:13:02,661 - llm - INFO - Initializing Ollama LLM...
+2025-07-18 13:13:02,677 - llm - INFO - Ollama LLM initialized successfully
+2025-07-18 13:13:02,679 - __main__ - INFO - Starting Flask application...
+2025-07-18 13:13:02,679 - __main__ - INFO - Application running on http://localhost:5050
+2025-07-18 13:13:02,711 - werkzeug - WARNING -  * Debugger is active!
+2025-07-18 13:13:02,722 - werkzeug - INFO -  * Debugger PIN: 115-695-789
+2025-07-18 13:13:57,649 - api - INFO - Serving index page
+2025-07-18 13:13:57,658 - werkzeug - INFO - 127.0.0.1 - - [18/Jul/2025 13:13:57] "GET / HTTP/1.1" 200 -
+2025-07-18 13:13:59,559 - werkzeug - INFO - 127.0.0.1 - - [18/Jul/2025 13:13:59] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-07-18 13:16:47,460 - api - INFO - Received chatbot request at 2025-07-18 13:16:47.460584
+2025-07-18 13:16:47,464 - api - INFO - User message: Change the owner by name of CV pdf to HR
+2025-07-18 13:16:47,465 - api - INFO - Processing chatbot request...
+2025-07-18 13:16:47,465 - api - INFO - Generating response from LLM...
+2025-07-18 13:16:47,465 - llm - INFO - Processing question: Change the owner by name of CV pdf to HR
+2025-07-18 13:16:47,465 - llm - INFO - Generating SQL query using LLM...
+2025-07-18 13:17:09,994 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-07-18 13:17:17,535 - llm - INFO - Generated SQL query: UPDATE "file_uploads" SET owned_by = 'HR', owned_by_email = (SELECT email FROM "users" WHERE name = 'HR') WHERE filename = 'CV.pdf';
+2025-07-18 13:17:17,535 - api - INFO - Generated response: UPDATE "file_uploads" SET owned_by = 'HR', owned_by_email = (SELECT email FROM "users" WHERE name = 'HR') WHERE filename = 'CV.pdf';
+2025-07-18 13:17:17,535 - api - INFO - Executing database query...
+2025-07-18 13:17:17,535 - database - INFO - Executing database query: UPDATE "file_uploads" SET owned_by = 'HR', owned_by_email = (SELECT email FROM "users" WHERE name = 'HR') WHERE filename = 'CV.pdf';
+2025-07-18 13:17:17,535 - database - INFO - Establishing database connection...
+2025-07-18 13:17:17,730 - database - INFO - Database connection established successfully
+2025-07-18 13:17:17,731 - database - INFO - Executing UPDATE operation
+2025-07-18 13:17:17,731 - database - INFO - Executing UPDATE query...
+2025-07-18 13:17:17,740 - database - ERROR - Database error: relation "users" does not exist
+LINE 1: ...ed_by = 'HR', owned_by_email = (SELECT email FROM "users" WH...
+                                                             ^
+
+2025-07-18 13:17:17,740 - api - INFO - Query result type: error
+2025-07-18 13:17:17,740 - api - WARNING - Processing error or empty results...
+2025-07-18 13:17:17,741 - api - INFO - Request processed successfully in 30.28 seconds
+2025-07-18 13:17:17,742 - werkzeug - INFO - 127.0.0.1 - - [18/Jul/2025 13:17:17] "POST /get HTTP/1.1" 200 -
+2025-07-18 13:19:37,276 - werkzeug - INFO -  * Detected change in '/Users/mrityunjay/Desktop/project/app.py', reloading
+2025-07-18 13:19:37,702 - werkzeug - INFO -  * Restarting with stat
+2025-07-18 13:19:40,758 - __main__ - INFO - Application starting up...
+2025-07-18 13:19:40,758 - __main__ - INFO - DB_HOST: 127.0.0.1
+2025-07-18 13:19:40,758 - __main__ - INFO - DB_PORT: 5432
+2025-07-18 13:19:40,758 - __main__ - INFO - DB_USER: postgres
+2025-07-18 13:19:40,758 - __main__ - INFO - DB_NAME: documents_management
+2025-07-18 13:19:40,759 - __main__ - INFO - HeaderMapper initialized with mappings
+2025-07-18 13:19:40,759 - llm - INFO - Initializing Ollama LLM...
+2025-07-18 13:19:40,775 - llm - INFO - Ollama LLM initialized successfully
+2025-07-18 13:19:40,775 - __main__ - INFO - Starting Flask application...
+2025-07-18 13:19:40,775 - __main__ - INFO - Application running on http://localhost:5050
+2025-07-18 13:19:40,813 - werkzeug - WARNING -  * Debugger is active!
+2025-07-18 13:19:40,824 - werkzeug - INFO -  * Debugger PIN: 115-695-789
+2025-07-18 13:19:56,906 - api - INFO - Received chatbot request at 2025-07-18 13:19:56.906433
+2025-07-18 13:19:56,909 - api - INFO - User message: Change the owner by name of CV pdf to HR
+2025-07-18 13:19:56,909 - api - INFO - Processing chatbot request...
+2025-07-18 13:19:56,909 - api - INFO - Generating response from LLM...
+2025-07-18 13:19:56,909 - llm - INFO - Processing question: Change the owner by name of CV pdf to HR
+2025-07-18 13:19:56,909 - llm - INFO - Generating SQL query using LLM...
+2025-07-18 13:20:13,084 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-07-18 13:20:17,218 - llm - INFO - Generated SQL query: UPDATE "file_uploads" SET owned_by = 'HR' WHERE filename ILIKE '%CV%pdf';
+2025-07-18 13:20:17,218 - api - INFO - Generated response: UPDATE "file_uploads" SET owned_by = 'HR' WHERE filename ILIKE '%CV%pdf';
+2025-07-18 13:20:17,218 - api - INFO - Executing database query...
+2025-07-18 13:20:17,218 - database - INFO - Executing database query: UPDATE "file_uploads" SET owned_by = 'HR' WHERE filename ILIKE '%CV%pdf';
+2025-07-18 13:20:17,218 - database - INFO - Establishing database connection...
+2025-07-18 13:20:17,266 - database - INFO - Database connection established successfully
+2025-07-18 13:20:17,266 - database - INFO - Executing UPDATE operation
+2025-07-18 13:20:17,266 - database - INFO - Executing UPDATE query...
+2025-07-18 13:20:17,279 - database - INFO - UPDATE query affected 1 rows
+2025-07-18 13:20:17,280 - database - INFO - Database connection closed
+2025-07-18 13:20:17,280 - api - INFO - Query result type: non_select
+2025-07-18 13:20:17,280 - api - INFO - Processing non-SELECT query results...
+2025-07-18 13:20:17,280 - api - INFO - Request processed successfully in 20.37 seconds
+2025-07-18 13:20:17,280 - werkzeug - INFO - 127.0.0.1 - - [18/Jul/2025 13:20:17] "POST /get HTTP/1.1" 200 -
+2025-07-18 13:22:10,540 - api - INFO - Received chatbot request at 2025-07-18 13:22:10.540254
+2025-07-18 13:22:10,542 - api - INFO - User message: Update the expiration date of 06672822-462c-474a-9e1b-df66f10c991f to 10/01/2027
+2025-07-18 13:22:10,542 - api - INFO - Processing chatbot request...
+2025-07-18 13:22:10,543 - api - INFO - Generating response from LLM...
+2025-07-18 13:22:10,543 - llm - INFO - Processing question: Update the expiration date of 06672822-462c-474a-9e1b-df66f10c991f to 10/01/2027
+2025-07-18 13:22:10,543 - llm - INFO - Generating SQL query using LLM...
+2025-07-18 13:22:12,529 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-07-18 13:22:23,554 - llm - INFO - Generated SQL query: UPDATE "file_uploads" SET "expiration_date" = '2027-10-01' WHERE "id" = '06672822-462c-474a-9e1b-df66f10c991f';
+2025-07-18 13:22:23,555 - api - INFO - Generated response: UPDATE "file_uploads" SET "expiration_date" = '2027-10-01' WHERE "id" = '06672822-462c-474a-9e1b-df66f10c991f';
+2025-07-18 13:22:23,555 - api - INFO - Executing database query...
+2025-07-18 13:22:23,555 - database - INFO - Executing database query: UPDATE "file_uploads" SET "expiration_date" = '2027-10-01' WHERE "id" = '06672822-462c-474a-9e1b-df66f10c991f';
+2025-07-18 13:22:23,555 - database - INFO - Establishing database connection...
+2025-07-18 13:22:23,568 - database - INFO - Database connection established successfully
+2025-07-18 13:22:23,569 - database - INFO - Executing UPDATE operation
+2025-07-18 13:22:23,569 - database - INFO - Executing UPDATE query...
+2025-07-18 13:22:23,574 - database - INFO - UPDATE query affected 1 rows
+2025-07-18 13:22:23,574 - database - INFO - Database connection closed
+2025-07-18 13:22:23,574 - api - INFO - Query result type: non_select
+2025-07-18 13:22:23,574 - api - INFO - Processing non-SELECT query results...
+2025-07-18 13:22:23,575 - api - INFO - Request processed successfully in 13.03 seconds
+2025-07-18 13:22:23,575 - werkzeug - INFO - 127.0.0.1 - - [18/Jul/2025 13:22:23] "POST /get HTTP/1.1" 200 -
+2025-07-18 13:24:24,291 - __main__ - INFO - Application starting up...
+2025-07-18 13:24:24,291 - __main__ - INFO - DB_HOST: 127.0.0.1
+2025-07-18 13:24:24,291 - __main__ - INFO - DB_PORT: 5432
+2025-07-18 13:24:24,291 - __main__ - INFO - DB_USER: postgres
+2025-07-18 13:24:24,291 - __main__ - INFO - DB_NAME: documents_management
+2025-07-18 13:24:24,292 - __main__ - INFO - HeaderMapper initialized with mappings
+2025-07-18 13:24:24,292 - llm - INFO - Initializing Ollama LLM...
+2025-07-18 13:24:24,307 - llm - INFO - Ollama LLM initialized successfully
+2025-07-18 13:24:24,308 - __main__ - INFO - Starting Flask application...
+2025-07-18 13:24:24,308 - __main__ - INFO - Application running on http://localhost:5050
+2025-07-18 13:24:24,349 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5050
+2025-07-18 13:24:24,349 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-07-18 13:24:24,350 - werkzeug - INFO -  * Restarting with stat
+2025-07-18 13:24:26,620 - __main__ - INFO - Application starting up...
+2025-07-18 13:24:26,620 - __main__ - INFO - DB_HOST: 127.0.0.1
+2025-07-18 13:24:26,620 - __main__ - INFO - DB_PORT: 5432
+2025-07-18 13:24:26,620 - __main__ - INFO - DB_USER: postgres
+2025-07-18 13:24:26,620 - __main__ - INFO - DB_NAME: documents_management
+2025-07-18 13:24:26,621 - __main__ - INFO - HeaderMapper initialized with mappings
+2025-07-18 13:24:26,621 - llm - INFO - Initializing Ollama LLM...
+2025-07-18 13:24:26,634 - llm - INFO - Ollama LLM initialized successfully
+2025-07-18 13:24:26,635 - __main__ - INFO - Starting Flask application...
+2025-07-18 13:24:26,635 - __main__ - INFO - Application running on http://localhost:5050
+2025-07-18 13:24:26,666 - werkzeug - WARNING -  * Debugger is active!
+2025-07-18 13:24:26,678 - werkzeug - INFO -  * Debugger PIN: 115-695-789
+2025-07-18 13:24:32,389 - api - INFO - Serving index page
+2025-07-18 13:24:32,397 - werkzeug - INFO - 127.0.0.1 - - [18/Jul/2025 13:24:32] "GET / HTTP/1.1" 200 -
+2025-07-18 13:24:36,539 - api - INFO - Received chatbot request at 2025-07-18 13:24:36.539361
+2025-07-18 13:24:36,542 - api - INFO - User message: Change the owner by name of CV pdf to HR
+2025-07-18 13:24:36,543 - api - INFO - Processing chatbot request...
+2025-07-18 13:24:36,543 - api - INFO - Generating response from LLM...
+2025-07-18 13:24:36,544 - llm - INFO - Processing question: Change the owner by name of CV pdf to HR
+2025-07-18 13:24:36,544 - llm - INFO - Generating SQL query using LLM...
+2025-07-18 13:24:37,780 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-07-18 13:24:43,180 - llm - INFO - Generated SQL query: UPDATE "file_uploads" SET owned_by = 'HR' WHERE filename ILIKE '%CV%pdf%' AND owned_by = current_user;
+2025-07-18 13:24:43,180 - api - INFO - Generated response: UPDATE "file_uploads" SET owned_by = 'HR' WHERE filename ILIKE '%CV%pdf%' AND owned_by = current_user;
+2025-07-18 13:24:43,180 - api - INFO - Executing database query...
+2025-07-18 13:24:43,180 - database - INFO - Executing database query: UPDATE "file_uploads" SET owned_by = 'HR' WHERE filename ILIKE '%CV%pdf%' AND owned_by = current_user;
+2025-07-18 13:24:43,180 - database - INFO - Establishing database connection...
+2025-07-18 13:24:43,243 - database - INFO - Database connection established successfully
+2025-07-18 13:24:43,243 - database - INFO - Executing UPDATE operation
+2025-07-18 13:24:43,243 - database - INFO - Executing UPDATE query...
+2025-07-18 13:24:43,248 - database - INFO - UPDATE query affected 0 rows
+2025-07-18 13:24:43,248 - database - INFO - Database connection closed
+2025-07-18 13:24:43,248 - api - INFO - Query result type: non_select
+2025-07-18 13:24:43,248 - api - INFO - Processing non-SELECT query results...
+2025-07-18 13:24:43,248 - api - INFO - Request processed successfully in 6.71 seconds
+2025-07-18 13:24:43,249 - werkzeug - INFO - 127.0.0.1 - - [18/Jul/2025 13:24:43] "POST /get HTTP/1.1" 200 -
+2025-07-18 13:32:39,456 - werkzeug - INFO -  * Detected change in '/Users/mrityunjay/Desktop/project/app.py', reloading
+2025-07-18 13:32:39,794 - werkzeug - INFO -  * Restarting with stat
+2025-07-18 13:32:42,724 - __main__ - INFO - Application starting up...
+2025-07-18 13:32:42,724 - __main__ - INFO - DB_HOST: 127.0.0.1
+2025-07-18 13:32:42,724 - __main__ - INFO - DB_PORT: 5432
+2025-07-18 13:32:42,724 - __main__ - INFO - DB_USER: postgres
+2025-07-18 13:32:42,724 - __main__ - INFO - DB_NAME: documents_management
+2025-07-18 13:32:42,725 - __main__ - INFO - HeaderMapper initialized with mappings
+2025-07-18 13:32:42,725 - llm - INFO - Initializing Ollama LLM...
+2025-07-18 13:32:42,741 - llm - INFO - Ollama LLM initialized successfully
+2025-07-18 13:32:42,741 - __main__ - INFO - Starting Flask application...
+2025-07-18 13:32:42,741 - __main__ - INFO - Application running on http://localhost:5050
+2025-07-18 13:32:42,776 - werkzeug - WARNING -  * Debugger is active!
+2025-07-18 13:32:42,788 - werkzeug - INFO -  * Debugger PIN: 115-695-789
+2025-07-18 13:32:43,808 - werkzeug - INFO -  * Detected change in '/Users/mrityunjay/Desktop/project/app.py', reloading
+2025-07-18 13:32:44,134 - werkzeug - INFO -  * Restarting with stat
+2025-07-18 13:32:46,641 - __main__ - INFO - Application starting up...
+2025-07-18 13:32:46,641 - __main__ - INFO - DB_HOST: 127.0.0.1
+2025-07-18 13:32:46,641 - __main__ - INFO - DB_PORT: 5432
+2025-07-18 13:32:46,641 - __main__ - INFO - DB_USER: postgres
+2025-07-18 13:32:46,641 - __main__ - INFO - DB_NAME: documents_management
+2025-07-18 13:32:46,642 - __main__ - INFO - HeaderMapper initialized with mappings
+2025-07-18 13:32:46,642 - llm - INFO - Initializing Ollama LLM...
+2025-07-18 13:32:46,656 - llm - INFO - Ollama LLM initialized successfully
+2025-07-18 13:32:46,656 - __main__ - INFO - Starting Flask application...
+2025-07-18 13:32:46,656 - __main__ - INFO - Application running on http://localhost:5050
+2025-07-18 13:32:46,689 - werkzeug - WARNING -  * Debugger is active!
+2025-07-18 13:32:46,697 - werkzeug - INFO -  * Debugger PIN: 115-695-789
+2025-07-18 13:32:48,734 - werkzeug - INFO -  * Detected change in '/Users/mrityunjay/Desktop/project/app.py', reloading
+2025-07-18 13:32:49,080 - werkzeug - INFO -  * Restarting with stat
+2025-07-18 13:32:51,543 - __main__ - INFO - Application starting up...
+2025-07-18 13:32:51,543 - __main__ - INFO - DB_HOST: 127.0.0.1
+2025-07-18 13:32:51,543 - __main__ - INFO - DB_PORT: 5432
+2025-07-18 13:32:51,543 - __main__ - INFO - DB_USER: postgres
+2025-07-18 13:32:51,544 - __main__ - INFO - DB_NAME: documents_management
+2025-07-18 13:32:51,544 - __main__ - INFO - HeaderMapper initialized with mappings
+2025-07-18 13:32:51,544 - llm - INFO - Initializing Ollama LLM...
+2025-07-18 13:32:51,559 - llm - INFO - Ollama LLM initialized successfully
+2025-07-18 13:32:51,559 - __main__ - INFO - Starting Flask application...
+2025-07-18 13:32:51,560 - __main__ - INFO - Application running on http://localhost:5050
+2025-07-18 13:32:51,592 - werkzeug - WARNING -  * Debugger is active!
+2025-07-18 13:32:51,602 - werkzeug - INFO -  * Debugger PIN: 115-695-789
+2025-07-18 13:32:52,623 - werkzeug - INFO -  * Detected change in '/Users/mrityunjay/Desktop/project/app.py', reloading
+2025-07-18 13:32:52,947 - werkzeug - INFO -  * Restarting with stat
+2025-07-18 13:32:55,356 - __main__ - INFO - Application starting up...
+2025-07-18 13:32:55,356 - __main__ - INFO - DB_HOST: 127.0.0.1
+2025-07-18 13:32:55,356 - __main__ - INFO - DB_PORT: 5432
+2025-07-18 13:32:55,356 - __main__ - INFO - DB_USER: postgres
+2025-07-18 13:32:55,356 - __main__ - INFO - DB_NAME: documents_management
+2025-07-18 13:32:55,357 - __main__ - INFO - HeaderMapper initialized with mappings
+2025-07-18 13:32:55,357 - llm - INFO - Initializing Ollama LLM...
+2025-07-18 13:32:55,392 - llm - INFO - Ollama LLM initialized successfully
+2025-07-18 13:32:55,396 - __main__ - INFO - Starting Flask application...
+2025-07-18 13:32:55,396 - __main__ - INFO - Application running on http://localhost:5050
+2025-07-18 13:32:55,429 - werkzeug - WARNING -  * Debugger is active!
+2025-07-18 13:32:55,437 - werkzeug - INFO -  * Debugger PIN: 115-695-789
+2025-07-18 13:32:56,456 - werkzeug - INFO -  * Detected change in '/Users/mrityunjay/Desktop/project/app.py', reloading
+2025-07-18 13:32:56,774 - werkzeug - INFO -  * Restarting with stat
+2025-07-18 13:32:59,070 - __main__ - INFO - Application starting up...
+2025-07-18 13:32:59,070 - __main__ - INFO - DB_HOST: 127.0.0.1
+2025-07-18 13:32:59,070 - __main__ - INFO - DB_PORT: 5432
+2025-07-18 13:32:59,070 - __main__ - INFO - DB_USER: postgres
+2025-07-18 13:32:59,070 - __main__ - INFO - DB_NAME: documents_management
+2025-07-18 13:32:59,070 - __main__ - INFO - HeaderMapper initialized with mappings
+2025-07-18 13:32:59,071 - llm - INFO - Initializing Ollama LLM...
+2025-07-18 13:32:59,085 - llm - INFO - Ollama LLM initialized successfully
+2025-07-18 13:32:59,085 - __main__ - INFO - Starting Flask application...
+2025-07-18 13:32:59,085 - __main__ - INFO - Application running on http://localhost:5050
+2025-07-18 13:32:59,117 - werkzeug - WARNING -  * Debugger is active!
+2025-07-18 13:32:59,125 - werkzeug - INFO -  * Debugger PIN: 115-695-789
+2025-07-18 13:33:04,195 - werkzeug - INFO -  * Detected change in '/Users/mrityunjay/Desktop/project/app.py', reloading
+2025-07-18 13:33:04,489 - werkzeug - INFO -  * Restarting with stat
+2025-07-18 13:33:06,895 - __main__ - INFO - Application starting up...
+2025-07-18 13:33:06,895 - __main__ - INFO - DB_HOST: 127.0.0.1
+2025-07-18 13:33:06,896 - __main__ - INFO - DB_PORT: 5432
+2025-07-18 13:33:06,896 - __main__ - INFO - DB_USER: postgres
+2025-07-18 13:33:06,896 - __main__ - INFO - DB_NAME: documents_management
+2025-07-18 13:33:06,896 - __main__ - INFO - HeaderMapper initialized with mappings
+2025-07-18 13:33:06,896 - llm - INFO - Initializing Ollama LLM...
+2025-07-18 13:33:06,910 - llm - INFO - Ollama LLM initialized successfully
+2025-07-18 13:33:06,911 - __main__ - INFO - Starting Flask application...
+2025-07-18 13:33:06,911 - __main__ - INFO - Application running on http://localhost:5050
+2025-07-18 13:33:06,944 - werkzeug - WARNING -  * Debugger is active!
+2025-07-18 13:33:06,953 - werkzeug - INFO -  * Debugger PIN: 115-695-789
+2025-07-18 13:33:13,039 - werkzeug - INFO -  * Detected change in '/Users/mrityunjay/Desktop/project/app.py', reloading
+2025-07-18 13:33:13,336 - werkzeug - INFO -  * Restarting with stat
+2025-07-18 13:33:15,624 - __main__ - INFO - Application starting up...
+2025-07-18 13:33:15,624 - __main__ - INFO - DB_HOST: 127.0.0.1
+2025-07-18 13:33:15,624 - __main__ - INFO - DB_PORT: 5432
+2025-07-18 13:33:15,624 - __main__ - INFO - DB_USER: postgres
+2025-07-18 13:33:15,624 - __main__ - INFO - DB_NAME: documents_management
+2025-07-18 13:33:15,625 - __main__ - INFO - HeaderMapper initialized with mappings
+2025-07-18 13:33:15,625 - llm - INFO - Initializing Ollama LLM...
+2025-07-18 13:33:15,639 - llm - INFO - Ollama LLM initialized successfully
+2025-07-18 13:33:15,640 - __main__ - INFO - Starting Flask application...
+2025-07-18 13:33:15,640 - __main__ - INFO - Application running on http://localhost:5050
+2025-07-18 13:33:15,673 - werkzeug - WARNING -  * Debugger is active!
+2025-07-18 13:33:15,681 - werkzeug - INFO -  * Debugger PIN: 115-695-789
+2025-07-18 13:33:27,495 - api - INFO - Received chatbot request at 2025-07-18 13:33:27.495294
+2025-07-18 13:33:27,496 - api - INFO - User message: Hello
+2025-07-18 13:33:27,497 - api - INFO - Processing chatbot request...
+2025-07-18 13:33:27,497 - api - INFO - Generating response from LLM...
+2025-07-18 13:33:27,497 - llm - INFO - Processing question: Hello
+2025-07-18 13:33:27,497 - llm - INFO - Generating SQL query using LLM...
+2025-07-18 13:33:46,400 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-07-18 13:33:46,945 - llm - INFO - Generated SQL query: GREETING
+2025-07-18 13:33:46,945 - api - INFO - Generated response: GREETING
+2025-07-18 13:33:46,945 - api - INFO - Identified as a greeting. Sending friendly response.
+2025-07-18 13:33:46,946 - werkzeug - INFO - 127.0.0.1 - - [18/Jul/2025 13:33:46] "POST /get HTTP/1.1" 200 -
+2025-07-18 13:38:45,494 - werkzeug - INFO -  * Detected change in '/Users/mrityunjay/Desktop/project/app.py', reloading
+2025-07-18 13:38:45,865 - werkzeug - INFO -  * Restarting with stat
+2025-07-18 13:38:48,843 - __main__ - INFO - Application starting up...
+2025-07-18 13:38:48,843 - __main__ - INFO - DB_HOST: 127.0.0.1
+2025-07-18 13:38:48,843 - __main__ - INFO - DB_PORT: 5432
+2025-07-18 13:38:48,843 - __main__ - INFO - DB_USER: postgres
+2025-07-18 13:38:48,843 - __main__ - INFO - DB_NAME: documents_management
+2025-07-18 13:38:48,844 - __main__ - INFO - HeaderMapper initialized with mappings
+2025-07-18 13:38:48,844 - llm - INFO - Initializing Ollama LLM...
+2025-07-18 13:38:48,859 - llm - INFO - Ollama LLM initialized successfully
+2025-07-18 13:38:48,860 - __main__ - INFO - Starting Flask application...
+2025-07-18 13:38:48,860 - __main__ - INFO - Application running on http://localhost:5050
+2025-07-18 13:38:48,896 - werkzeug - WARNING -  * Debugger is active!
+2025-07-18 13:38:48,909 - werkzeug - INFO -  * Debugger PIN: 115-695-789
+2025-07-18 13:38:50,944 - werkzeug - INFO -  * Detected change in '/Users/mrityunjay/Desktop/project/app.py', reloading
+2025-07-18 13:38:51,252 - werkzeug - INFO -  * Restarting with stat
+2025-07-18 13:38:53,596 - __main__ - INFO - Application starting up...
+2025-07-18 13:38:53,596 - __main__ - INFO - DB_HOST: 127.0.0.1
+2025-07-18 13:38:53,596 - __main__ - INFO - DB_PORT: 5432
+2025-07-18 13:38:53,597 - __main__ - INFO - DB_USER: postgres
+2025-07-18 13:38:53,597 - __main__ - INFO - DB_NAME: documents_management
+2025-07-18 13:38:53,597 - __main__ - INFO - HeaderMapper initialized with mappings
+2025-07-18 13:38:53,597 - llm - INFO - Initializing Ollama LLM...
+2025-07-18 13:38:53,612 - llm - INFO - Ollama LLM initialized successfully
+2025-07-18 13:38:53,612 - __main__ - INFO - Starting Flask application...
+2025-07-18 13:38:53,612 - __main__ - INFO - Application running on http://localhost:5050
+2025-07-18 13:38:53,645 - werkzeug - WARNING -  * Debugger is active!
+2025-07-18 13:38:53,653 - werkzeug - INFO -  * Debugger PIN: 115-695-789
+2025-07-18 13:38:57,705 - werkzeug - INFO -  * Detected change in '/Users/mrityunjay/Desktop/project/app.py', reloading
+2025-07-18 13:38:58,002 - werkzeug - INFO -  * Restarting with stat
+2025-07-18 13:39:00,386 - __main__ - INFO - Application starting up...
+2025-07-18 13:39:00,386 - __main__ - INFO - DB_HOST: 127.0.0.1
+2025-07-18 13:39:00,386 - __main__ - INFO - DB_PORT: 5432
+2025-07-18 13:39:00,386 - __main__ - INFO - DB_USER: postgres
+2025-07-18 13:39:00,386 - __main__ - INFO - DB_NAME: documents_management
+2025-07-18 13:39:00,387 - __main__ - INFO - HeaderMapper initialized with mappings
+2025-07-18 13:39:00,387 - llm - INFO - Initializing Ollama LLM...
+2025-07-18 13:39:00,401 - llm - INFO - Ollama LLM initialized successfully
+2025-07-18 13:39:00,402 - __main__ - INFO - Starting Flask application...
+2025-07-18 13:39:00,402 - __main__ - INFO - Application running on http://localhost:5050
+2025-07-18 13:39:00,434 - werkzeug - WARNING -  * Debugger is active!
+2025-07-18 13:39:00,442 - werkzeug - INFO -  * Debugger PIN: 115-695-789
+2025-07-18 13:39:07,520 - werkzeug - INFO -  * Detected change in '/Users/mrityunjay/Desktop/project/app.py', reloading
+2025-07-18 13:39:07,823 - werkzeug - INFO -  * Restarting with stat
+2025-07-18 13:39:10,235 - __main__ - INFO - Application starting up...
+2025-07-18 13:39:10,236 - __main__ - INFO - DB_HOST: 127.0.0.1
+2025-07-18 13:39:10,236 - __main__ - INFO - DB_PORT: 5432
+2025-07-18 13:39:10,236 - __main__ - INFO - DB_USER: postgres
+2025-07-18 13:39:10,236 - __main__ - INFO - DB_NAME: documents_management
+2025-07-18 13:39:10,237 - __main__ - INFO - HeaderMapper initialized with mappings
+2025-07-18 13:39:10,237 - llm - INFO - Initializing Ollama LLM...
+2025-07-18 13:39:10,252 - llm - INFO - Ollama LLM initialized successfully
+2025-07-18 13:39:10,252 - __main__ - INFO - Starting Flask application...
+2025-07-18 13:39:10,253 - __main__ - INFO - Application running on http://localhost:5050
+2025-07-18 13:39:10,285 - werkzeug - WARNING -  * Debugger is active!
+2025-07-18 13:39:10,293 - werkzeug - INFO -  * Debugger PIN: 115-695-789
+2025-07-18 13:39:16,359 - werkzeug - INFO -  * Detected change in '/Users/mrityunjay/Desktop/project/app.py', reloading
+2025-07-18 13:39:16,681 - werkzeug - INFO -  * Restarting with stat
+2025-07-18 13:39:19,046 - __main__ - INFO - Application starting up...
+2025-07-18 13:39:19,047 - __main__ - INFO - DB_HOST: 127.0.0.1
+2025-07-18 13:39:19,047 - __main__ - INFO - DB_PORT: 5432
+2025-07-18 13:39:19,047 - __main__ - INFO - DB_USER: postgres
+2025-07-18 13:39:19,047 - __main__ - INFO - DB_NAME: documents_management
+2025-07-18 13:39:19,048 - __main__ - INFO - HeaderMapper initialized with mappings
+2025-07-18 13:39:19,048 - llm - INFO - Initializing Ollama LLM...
+2025-07-18 13:39:19,062 - llm - INFO - Ollama LLM initialized successfully
+2025-07-18 13:39:19,063 - __main__ - INFO - Starting Flask application...
+2025-07-18 13:39:19,063 - __main__ - INFO - Application running on http://localhost:5050
+2025-07-18 13:39:19,095 - werkzeug - WARNING -  * Debugger is active!
+2025-07-18 13:39:19,105 - werkzeug - INFO -  * Debugger PIN: 115-695-789
+2025-07-18 13:39:22,144 - werkzeug - INFO -  * Detected change in '/Users/mrityunjay/Desktop/project/app.py', reloading
+2025-07-18 13:39:22,462 - werkzeug - INFO -  * Restarting with stat
+2025-07-18 13:39:24,799 - __main__ - INFO - Application starting up...
+2025-07-18 13:39:24,799 - __main__ - INFO - DB_HOST: 127.0.0.1
+2025-07-18 13:39:24,799 - __main__ - INFO - DB_PORT: 5432
+2025-07-18 13:39:24,799 - __main__ - INFO - DB_USER: postgres
+2025-07-18 13:39:24,799 - __main__ - INFO - DB_NAME: documents_management
+2025-07-18 13:39:24,800 - __main__ - INFO - HeaderMapper initialized with mappings
+2025-07-18 13:39:24,800 - llm - INFO - Initializing Ollama LLM...
+2025-07-18 13:39:24,814 - llm - INFO - Ollama LLM initialized successfully
+2025-07-18 13:39:24,815 - __main__ - INFO - Starting Flask application...
+2025-07-18 13:39:24,815 - __main__ - INFO - Application running on http://localhost:5050
+2025-07-18 13:39:24,848 - werkzeug - WARNING -  * Debugger is active!
+2025-07-18 13:39:24,855 - werkzeug - INFO -  * Debugger PIN: 115-695-789
+2025-07-18 13:39:31,940 - werkzeug - INFO -  * Detected change in '/Users/mrityunjay/Desktop/project/app.py', reloading
+2025-07-18 13:39:32,255 - werkzeug - INFO -  * Restarting with stat
+2025-07-18 13:39:34,608 - __main__ - INFO - Application starting up...
+2025-07-18 13:39:34,608 - __main__ - INFO - DB_HOST: 127.0.0.1
+2025-07-18 13:39:34,608 - __main__ - INFO - DB_PORT: 5432
+2025-07-18 13:39:34,608 - __main__ - INFO - DB_USER: postgres
+2025-07-18 13:39:34,608 - __main__ - INFO - DB_NAME: documents_management
+2025-07-18 13:39:34,609 - __main__ - INFO - HeaderMapper initialized with mappings
+2025-07-18 13:39:34,609 - llm - INFO - Initializing Ollama LLM...
+2025-07-18 13:39:34,623 - llm - INFO - Ollama LLM initialized successfully
+2025-07-18 13:39:34,624 - __main__ - INFO - Starting Flask application...
+2025-07-18 13:39:34,624 - __main__ - INFO - Application running on http://localhost:5050
+2025-07-18 13:39:34,657 - werkzeug - WARNING -  * Debugger is active!
+2025-07-18 13:39:34,665 - werkzeug - INFO -  * Debugger PIN: 115-695-789
+2025-07-18 13:39:36,693 - werkzeug - INFO -  * Detected change in '/Users/mrityunjay/Desktop/project/app.py', reloading
+2025-07-18 13:39:37,000 - werkzeug - INFO -  * Restarting with stat
+2025-07-18 13:39:39,377 - __main__ - INFO - Application starting up...
+2025-07-18 13:39:39,377 - __main__ - INFO - DB_HOST: 127.0.0.1
+2025-07-18 13:39:39,377 - __main__ - INFO - DB_PORT: 5432
+2025-07-18 13:39:39,377 - __main__ - INFO - DB_USER: postgres
+2025-07-18 13:39:39,378 - __main__ - INFO - DB_NAME: documents_management
+2025-07-18 13:39:39,378 - __main__ - INFO - HeaderMapper initialized with mappings
+2025-07-18 13:39:39,378 - llm - INFO - Initializing Ollama LLM...
+2025-07-18 13:39:39,392 - llm - INFO - Ollama LLM initialized successfully
+2025-07-18 13:39:39,393 - __main__ - INFO - Starting Flask application...
+2025-07-18 13:39:39,393 - __main__ - INFO - Application running on http://localhost:5050
+2025-07-18 13:39:39,425 - werkzeug - WARNING -  * Debugger is active!
+2025-07-18 13:39:39,434 - werkzeug - INFO -  * Debugger PIN: 115-695-789
+2025-07-18 13:39:44,060 - api - INFO - Received chatbot request at 2025-07-18 13:39:44.059957
+2025-07-18 13:39:44,063 - api - INFO - User message: Hello
+2025-07-18 13:39:44,063 - api - INFO - Processing chatbot request...
+2025-07-18 13:39:44,063 - api - INFO - Generating response from LLM...
+2025-07-18 13:39:44,063 - llm - INFO - Processing question: Hello
+2025-07-18 13:39:44,063 - llm - INFO - Generating SQL query using LLM...
+2025-07-18 13:40:02,337 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-07-18 13:40:02,904 - llm - INFO - Generated SQL query: GREETING
+2025-07-18 13:40:02,904 - api - INFO - Generated response: GREETING
+2025-07-18 13:40:02,904 - api - INFO - Identified as a greeting. Sending friendly response.
+2025-07-18 13:40:02,905 - werkzeug - INFO - 127.0.0.1 - - [18/Jul/2025 13:40:02] "POST /get HTTP/1.1" 200 -
+2025-07-18 17:00:27,280 - __main__ - INFO - Application starting up...
+2025-07-18 17:00:27,280 - __main__ - INFO - DB_HOST: 127.0.0.1
+2025-07-18 17:00:27,280 - __main__ - INFO - DB_PORT: 5432
+2025-07-18 17:00:27,280 - __main__ - INFO - DB_USER: postgres
+2025-07-18 17:00:27,280 - __main__ - INFO - DB_NAME: documents_management
+2025-07-18 17:00:27,281 - __main__ - INFO - HeaderMapper initialized with mappings
+2025-07-18 17:00:27,281 - llm - INFO - Initializing Ollama LLM...
+2025-07-18 17:00:27,296 - llm - INFO - Ollama LLM initialized successfully
+2025-07-18 17:00:27,297 - __main__ - INFO - Starting Flask application...
+2025-07-18 17:00:27,297 - __main__ - INFO - Application running on http://localhost:5050
+2025-07-18 17:00:27,348 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5050
+2025-07-18 17:00:27,348 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-07-18 17:00:27,349 - werkzeug - INFO -  * Restarting with stat
+2025-07-18 17:00:29,600 - __main__ - INFO - Application starting up...
+2025-07-18 17:00:29,600 - __main__ - INFO - DB_HOST: 127.0.0.1
+2025-07-18 17:00:29,600 - __main__ - INFO - DB_PORT: 5432
+2025-07-18 17:00:29,600 - __main__ - INFO - DB_USER: postgres
+2025-07-18 17:00:29,600 - __main__ - INFO - DB_NAME: documents_management
+2025-07-18 17:00:29,600 - __main__ - INFO - HeaderMapper initialized with mappings
+2025-07-18 17:00:29,600 - llm - INFO - Initializing Ollama LLM...
+2025-07-18 17:00:29,614 - llm - INFO - Ollama LLM initialized successfully
+2025-07-18 17:00:29,615 - __main__ - INFO - Starting Flask application...
+2025-07-18 17:00:29,615 - __main__ - INFO - Application running on http://localhost:5050
+2025-07-18 17:00:29,646 - werkzeug - WARNING -  * Debugger is active!
+2025-07-18 17:00:29,657 - werkzeug - INFO -  * Debugger PIN: 115-695-789
+2025-07-18 17:01:07,187 - api - INFO - Serving index page
+2025-07-18 17:01:07,192 - werkzeug - INFO - 127.0.0.1 - - [18/Jul/2025 17:01:07] "GET / HTTP/1.1" 200 -
+2025-07-18 17:03:48,619 - api - INFO - Received chatbot request at 2025-07-18 17:03:48.619870
+2025-07-18 17:03:48,622 - api - INFO - User message: Hello
+2025-07-18 17:03:48,622 - api - INFO - Processing chatbot request...
+2025-07-18 17:03:48,622 - api - INFO - Generating response from LLM...
+2025-07-18 17:03:48,622 - llm - INFO - Processing question: Hello
+2025-07-18 17:03:48,622 - llm - INFO - Generating SQL query using LLM...
+2025-07-18 17:04:08,941 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-07-18 17:04:09,572 - llm - INFO - Generated SQL query: GREETING
+2025-07-18 17:04:09,573 - api - INFO - Generated response: GREETING
+2025-07-18 17:04:09,573 - api - INFO - Identified as a greeting. Sending friendly response.
+2025-07-18 17:04:09,574 - werkzeug - INFO - 127.0.0.1 - - [18/Jul/2025 17:04:09] "POST /get HTTP/1.1" 200 -
+2025-07-18 17:09:26,222 - api - INFO - Serving index page
+2025-07-18 17:09:26,227 - werkzeug - INFO - 127.0.0.1 - - [18/Jul/2025 17:09:26] "GET / HTTP/1.1" 200 -
+2025-07-18 17:09:29,369 - api - INFO - Received chatbot request at 2025-07-18 17:09:29.369239
+2025-07-18 17:09:29,370 - api - INFO - User message: hello
+2025-07-18 17:09:29,370 - api - INFO - Processing chatbot request...
+2025-07-18 17:09:29,370 - api - INFO - Generating response from LLM...
+2025-07-18 17:09:29,371 - llm - INFO - Processing question: hello
+2025-07-18 17:09:29,371 - llm - INFO - Generating SQL query using LLM...
+2025-07-18 17:09:48,019 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-07-18 17:09:48,710 - llm - INFO - Generated SQL query: GREETING
+2025-07-18 17:09:48,711 - api - INFO - Generated response: GREETING
+2025-07-18 17:09:48,711 - api - INFO - Identified as a greeting. Sending friendly response.
+2025-07-18 17:09:48,713 - werkzeug - INFO - 127.0.0.1 - - [18/Jul/2025 17:09:48] "POST /get HTTP/1.1" 200 -
+2025-07-18 17:13:11,559 - werkzeug - INFO - 127.0.0.1 - - [18/Jul/2025 17:13:11] "[31m[1mGET /get HTTP/1.1[0m" 405 -
+2025-07-18 17:15:40,613 - werkzeug - INFO - 127.0.0.1 - - [18/Jul/2025 17:15:40] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-07-18 17:15:54,699 - werkzeug - INFO - 127.0.0.1 - - [18/Jul/2025 17:15:54] "[31m[1mGET /get HTTP/1.1[0m" 405 -
+2025-07-18 17:15:54,716 - werkzeug - INFO - 127.0.0.1 - - [18/Jul/2025 17:15:54] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-07-18 17:16:22,242 - werkzeug - INFO - 127.0.0.1 - - [18/Jul/2025 17:16:22] "[31m[1mGET /get HTTP/1.1[0m" 405 -
+2025-07-18 17:17:33,087 - werkzeug - INFO - 127.0.0.1 - - [18/Jul/2025 17:17:33] "[31m[1mGET /get HTTP/1.1[0m" 405 -
+2025-07-18 17:23:27,661 - werkzeug - INFO -  * Detected change in '/Users/mrityunjay/Desktop/project/app.py', reloading
+2025-07-18 17:23:28,057 - werkzeug - INFO -  * Restarting with stat
+2025-07-18 17:23:31,341 - __main__ - INFO - Application starting up...
+2025-07-18 17:23:31,341 - __main__ - INFO - DB_HOST: 127.0.0.1
+2025-07-18 17:23:31,341 - __main__ - INFO - DB_PORT: 5432
+2025-07-18 17:23:31,341 - __main__ - INFO - DB_USER: postgres
+2025-07-18 17:23:31,341 - __main__ - INFO - DB_NAME: documents_management
+2025-07-18 17:23:31,342 - __main__ - INFO - HeaderMapper initialized with mappings
+2025-07-18 17:23:31,342 - llm - INFO - Initializing Ollama LLM...
+2025-07-18 17:23:31,359 - llm - INFO - Ollama LLM initialized successfully
+2025-07-18 17:23:31,359 - __main__ - INFO - Starting Flask application...
+2025-07-18 17:23:31,360 - __main__ - INFO - Application running on http://localhost:5050
+2025-07-18 17:23:31,401 - werkzeug - WARNING -  * Debugger is active!
+2025-07-18 17:23:31,416 - werkzeug - INFO -  * Debugger PIN: 115-695-789
+2025-07-18 17:23:33,450 - werkzeug - INFO -  * Detected change in '/Users/mrityunjay/Desktop/project/app.py', reloading
+2025-07-18 17:23:33,879 - werkzeug - INFO -  * Restarting with stat
+2025-07-18 17:23:36,267 - __main__ - INFO - Application starting up...
+2025-07-18 17:23:36,267 - __main__ - INFO - DB_HOST: 127.0.0.1
+2025-07-18 17:23:36,268 - __main__ - INFO - DB_PORT: 5432
+2025-07-18 17:23:36,268 - __main__ - INFO - DB_USER: postgres
+2025-07-18 17:23:36,268 - __main__ - INFO - DB_NAME: documents_management
+2025-07-18 17:23:36,268 - __main__ - INFO - HeaderMapper initialized with mappings
+2025-07-18 17:23:36,268 - llm - INFO - Initializing Ollama LLM...
+2025-07-18 17:23:36,283 - llm - INFO - Ollama LLM initialized successfully
+2025-07-18 17:23:36,284 - __main__ - INFO - Starting Flask application...
+2025-07-18 17:23:36,284 - __main__ - INFO - Application running on http://localhost:5050
+2025-07-18 17:23:36,318 - werkzeug - WARNING -  * Debugger is active!
+2025-07-18 17:23:36,328 - werkzeug - INFO -  * Debugger PIN: 115-695-789
+2025-07-18 17:23:37,351 - werkzeug - INFO -  * Detected change in '/Users/mrityunjay/Desktop/project/app.py', reloading
+2025-07-18 17:23:37,647 - werkzeug - INFO -  * Restarting with stat
+2025-07-18 17:23:40,180 - __main__ - INFO - Application starting up...
+2025-07-18 17:23:40,180 - __main__ - INFO - DB_HOST: 127.0.0.1
+2025-07-18 17:23:40,180 - __main__ - INFO - DB_PORT: 5432
+2025-07-18 17:23:40,180 - __main__ - INFO - DB_USER: postgres
+2025-07-18 17:23:40,180 - __main__ - INFO - DB_NAME: documents_management
+2025-07-18 17:23:40,181 - __main__ - INFO - HeaderMapper initialized with mappings
+2025-07-18 17:23:40,181 - llm - INFO - Initializing Ollama LLM...
+2025-07-18 17:23:40,196 - llm - INFO - Ollama LLM initialized successfully
+2025-07-18 17:23:40,197 - __main__ - INFO - Starting Flask application...
+2025-07-18 17:23:40,197 - __main__ - INFO - Application running on http://localhost:5050
+2025-07-18 17:23:40,234 - werkzeug - WARNING -  * Debugger is active!
+2025-07-18 17:23:40,244 - werkzeug - INFO -  * Debugger PIN: 115-695-789
+2025-07-18 17:23:49,337 - werkzeug - INFO -  * Detected change in '/Users/mrityunjay/Desktop/project/app.py', reloading
+2025-07-18 17:23:49,668 - werkzeug - INFO -  * Restarting with stat
+2025-07-18 17:23:52,058 - __main__ - INFO - Application starting up...
+2025-07-18 17:23:52,058 - __main__ - INFO - DB_HOST: 127.0.0.1
+2025-07-18 17:23:52,058 - __main__ - INFO - DB_PORT: 5432
+2025-07-18 17:23:52,058 - __main__ - INFO - DB_USER: postgres
+2025-07-18 17:23:52,058 - __main__ - INFO - DB_NAME: documents_management
+2025-07-18 17:23:52,059 - __main__ - INFO - HeaderMapper initialized with mappings
+2025-07-18 17:23:52,059 - llm - INFO - Initializing Ollama LLM...
+2025-07-18 17:23:52,074 - llm - INFO - Ollama LLM initialized successfully
+2025-07-18 17:23:52,075 - __main__ - INFO - Starting Flask application...
+2025-07-18 17:23:52,075 - __main__ - INFO - Application running on http://localhost:5050
+2025-07-18 17:23:52,107 - werkzeug - WARNING -  * Debugger is active!
+2025-07-18 17:23:52,116 - werkzeug - INFO -  * Debugger PIN: 115-695-789
+2025-07-18 17:24:03,242 - werkzeug - INFO -  * Detected change in '/Users/mrityunjay/Desktop/project/app.py', reloading
+2025-07-18 17:24:03,621 - werkzeug - INFO -  * Restarting with stat
+2025-07-18 17:24:06,064 - __main__ - INFO - Application starting up...
+2025-07-18 17:24:06,065 - __main__ - INFO - DB_HOST: 127.0.0.1
+2025-07-18 17:24:06,065 - __main__ - INFO - DB_PORT: 5432
+2025-07-18 17:24:06,065 - __main__ - INFO - DB_USER: postgres
+2025-07-18 17:24:06,065 - __main__ - INFO - DB_NAME: documents_management
+2025-07-18 17:24:06,065 - __main__ - INFO - HeaderMapper initialized with mappings
+2025-07-18 17:24:06,065 - llm - INFO - Initializing Ollama LLM...
+2025-07-18 17:24:06,079 - llm - INFO - Ollama LLM initialized successfully
+2025-07-18 17:24:06,080 - __main__ - INFO - Starting Flask application...
+2025-07-18 17:24:06,080 - __main__ - INFO - Application running on http://localhost:5050
+2025-07-18 17:24:06,113 - werkzeug - WARNING -  * Debugger is active!
+2025-07-18 17:24:06,121 - werkzeug - INFO -  * Debugger PIN: 115-695-789
+2025-07-18 17:24:09,159 - werkzeug - INFO -  * Detected change in '/Users/mrityunjay/Desktop/project/app.py', reloading
+2025-07-18 17:24:09,476 - werkzeug - INFO -  * Restarting with stat
+2025-07-18 17:24:11,924 - __main__ - INFO - Application starting up...
+2025-07-18 17:24:11,925 - __main__ - INFO - DB_HOST: 127.0.0.1
+2025-07-18 17:24:11,925 - __main__ - INFO - DB_PORT: 5432
+2025-07-18 17:24:11,925 - __main__ - INFO - DB_USER: postgres
+2025-07-18 17:24:11,925 - __main__ - INFO - DB_NAME: documents_management
+2025-07-18 17:24:11,925 - __main__ - INFO - HeaderMapper initialized with mappings
+2025-07-18 17:24:11,925 - llm - INFO - Initializing Ollama LLM...
+2025-07-18 17:24:11,940 - llm - INFO - Ollama LLM initialized successfully
+2025-07-18 17:24:11,940 - __main__ - INFO - Starting Flask application...
+2025-07-18 17:24:11,940 - __main__ - INFO - Application running on http://localhost:5050
+2025-07-18 17:24:11,972 - werkzeug - WARNING -  * Debugger is active!
+2025-07-18 17:24:11,981 - werkzeug - INFO -  * Debugger PIN: 115-695-789
+2025-07-18 17:24:16,023 - werkzeug - INFO -  * Detected change in '/Users/mrityunjay/Desktop/project/app.py', reloading
+2025-07-18 17:24:16,327 - werkzeug - INFO -  * Restarting with stat
+2025-07-18 17:24:18,657 - __main__ - INFO - Application starting up...
+2025-07-18 17:24:18,657 - __main__ - INFO - DB_HOST: 127.0.0.1
+2025-07-18 17:24:18,657 - __main__ - INFO - DB_PORT: 5432
+2025-07-18 17:24:18,657 - __main__ - INFO - DB_USER: postgres
+2025-07-18 17:24:18,657 - __main__ - INFO - DB_NAME: documents_management
+2025-07-18 17:24:18,658 - __main__ - INFO - HeaderMapper initialized with mappings
+2025-07-18 17:24:18,658 - llm - INFO - Initializing Ollama LLM...
+2025-07-18 17:24:18,672 - llm - INFO - Ollama LLM initialized successfully
+2025-07-18 17:24:18,673 - __main__ - INFO - Starting Flask application...
+2025-07-18 17:24:18,673 - __main__ - INFO - Application running on http://localhost:5050
+2025-07-18 17:24:18,704 - werkzeug - WARNING -  * Debugger is active!
+2025-07-18 17:24:18,711 - werkzeug - INFO -  * Debugger PIN: 115-695-789
+2025-07-18 17:24:34,074 - api - INFO - Serving index page
+2025-07-18 17:24:34,082 - werkzeug - INFO - 127.0.0.1 - - [18/Jul/2025 17:24:34] "GET / HTTP/1.1" 200 -
+2025-07-18 17:24:41,182 - api - INFO - Received chatbot request at 2025-07-18 17:24:41.182015
+2025-07-18 17:24:41,185 - api - INFO - User message: hello
+2025-07-18 17:24:41,185 - api - INFO - meri jjjjjjaaaaaaaaannnnnnnnn
+2025-07-18 17:24:41,185 - api - INFO - Processing chatbot request...
+2025-07-18 17:24:41,185 - api - INFO - Generating response from LLM...
+2025-07-18 17:24:41,185 - llm - INFO - Processing question: hello
+2025-07-18 17:24:41,185 - llm - INFO - Generating SQL query using LLM...
+2025-07-18 17:25:02,074 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-07-18 17:25:02,728 - llm - INFO - Generated SQL query: GREETING
+2025-07-18 17:25:02,728 - api - INFO - Generated response: GREETING
+2025-07-18 17:25:02,728 - api - INFO - Identified as a greeting. Sending friendly response.
+2025-07-18 17:25:02,728 - werkzeug - INFO - 127.0.0.1 - - [18/Jul/2025 17:25:02] "POST /get HTTP/1.1" 200 -
+2025-07-18 17:25:58,819 - werkzeug - INFO -  * Detected change in '/Users/mrityunjay/Desktop/project/app.py', reloading
+2025-07-18 17:25:59,177 - werkzeug - INFO -  * Restarting with stat
+2025-07-18 17:26:02,113 - __main__ - INFO - Application starting up...
+2025-07-18 17:26:02,113 - __main__ - INFO - DB_HOST: 127.0.0.1
+2025-07-18 17:26:02,113 - __main__ - INFO - DB_PORT: 5432
+2025-07-18 17:26:02,113 - __main__ - INFO - DB_USER: postgres
+2025-07-18 17:26:02,114 - __main__ - INFO - DB_NAME: documents_management
+2025-07-18 17:26:02,114 - __main__ - INFO - HeaderMapper initialized with mappings
+2025-07-18 17:26:02,114 - llm - INFO - Initializing Ollama LLM...
+2025-07-18 17:26:02,131 - llm - INFO - Ollama LLM initialized successfully
+2025-07-18 17:26:02,132 - __main__ - INFO - Starting Flask application...
+2025-07-18 17:26:02,132 - __main__ - INFO - Application running on http://localhost:5050
+2025-07-18 17:26:02,193 - werkzeug - WARNING -  * Debugger is active!
+2025-07-18 17:26:02,205 - werkzeug - INFO -  * Debugger PIN: 115-695-789
+2025-07-18 17:26:03,230 - werkzeug - INFO -  * Detected change in '/Users/mrityunjay/Desktop/project/app.py', reloading
+2025-07-18 17:26:03,526 - werkzeug - INFO -  * Restarting with stat
+2025-07-18 17:26:05,953 - __main__ - INFO - Application starting up...
+2025-07-18 17:26:05,953 - __main__ - INFO - DB_HOST: 127.0.0.1
+2025-07-18 17:26:05,953 - __main__ - INFO - DB_PORT: 5432
+2025-07-18 17:26:05,953 - __main__ - INFO - DB_USER: postgres
+2025-07-18 17:26:05,953 - __main__ - INFO - DB_NAME: documents_management
+2025-07-18 17:26:05,954 - __main__ - INFO - HeaderMapper initialized with mappings
+2025-07-18 17:26:05,954 - llm - INFO - Initializing Ollama LLM...
+2025-07-18 17:26:05,969 - llm - INFO - Ollama LLM initialized successfully
+2025-07-18 17:26:05,969 - __main__ - INFO - Starting Flask application...
+2025-07-18 17:26:05,970 - __main__ - INFO - Application running on http://localhost:5050
+2025-07-18 17:26:06,001 - werkzeug - WARNING -  * Debugger is active!
+2025-07-18 17:26:06,010 - werkzeug - INFO -  * Debugger PIN: 115-695-789
+2025-07-18 17:26:54,575 - werkzeug - INFO -  * Detected change in '/Users/mrityunjay/Desktop/project/app.py', reloading
+2025-07-18 17:26:54,873 - werkzeug - INFO -  * Restarting with stat
+2025-07-18 17:26:57,518 - __main__ - INFO - Application starting up...
+2025-07-18 17:26:57,518 - __main__ - INFO - DB_HOST: 127.0.0.1
+2025-07-18 17:26:57,518 - __main__ - INFO - DB_PORT: 5432
+2025-07-18 17:26:57,518 - __main__ - INFO - DB_USER: postgres
+2025-07-18 17:26:57,518 - __main__ - INFO - DB_NAME: documents_management
+2025-07-18 17:26:57,519 - __main__ - INFO - HeaderMapper initialized with mappings
+2025-07-18 17:26:57,519 - llm - INFO - Initializing Ollama LLM...
+2025-07-18 17:26:57,534 - llm - INFO - Ollama LLM initialized successfully
+2025-07-18 17:26:57,535 - __main__ - INFO - Starting Flask application...
+2025-07-18 17:26:57,535 - __main__ - INFO - Application running on http://localhost:5050
+2025-07-18 17:26:57,570 - werkzeug - WARNING -  * Debugger is active!
+2025-07-18 17:26:57,582 - werkzeug - INFO -  * Debugger PIN: 115-695-789
+2025-07-18 17:27:02,643 - werkzeug - INFO -  * Detected change in '/Users/mrityunjay/Desktop/project/app.py', reloading
+2025-07-18 17:27:02,931 - werkzeug - INFO -  * Restarting with stat
+2025-07-18 17:27:05,278 - __main__ - INFO - Application starting up...
+2025-07-18 17:27:05,278 - __main__ - INFO - DB_HOST: 127.0.0.1
+2025-07-18 17:27:05,278 - __main__ - INFO - DB_PORT: 5432
+2025-07-18 17:27:05,278 - __main__ - INFO - DB_USER: postgres
+2025-07-18 17:27:05,278 - __main__ - INFO - DB_NAME: documents_management
+2025-07-18 17:27:05,279 - __main__ - INFO - HeaderMapper initialized with mappings
+2025-07-18 17:27:05,279 - llm - INFO - Initializing Ollama LLM...
+2025-07-18 17:27:05,293 - llm - INFO - Ollama LLM initialized successfully
+2025-07-18 17:27:05,293 - __main__ - INFO - Starting Flask application...
+2025-07-18 17:27:05,294 - __main__ - INFO - Application running on http://localhost:5050
+2025-07-18 17:27:05,324 - werkzeug - WARNING -  * Debugger is active!
+2025-07-18 17:27:05,332 - werkzeug - INFO -  * Debugger PIN: 115-695-789
+2025-07-18 17:30:46,217 - werkzeug - INFO - 127.0.0.1 - - [18/Jul/2025 17:30:46] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-07-18 17:30:47,497 - api - INFO - Serving index page
+2025-07-18 17:30:47,505 - werkzeug - INFO - 127.0.0.1 - - [18/Jul/2025 17:30:47] "GET / HTTP/1.1" 200 -
+2025-07-18 17:30:47,579 - werkzeug - INFO - 127.0.0.1 - - [18/Jul/2025 17:30:47] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-07-18 17:32:09,636 - api - INFO - Received chatbot request at 2025-07-18 17:32:09.636816
+2025-07-18 17:32:09,640 - api - INFO - User message: hello
+2025-07-18 17:32:09,640 - api - INFO - meri jjjjjjaaaaaaaaannnnnnnnn
+2025-07-18 17:32:09,640 - api - INFO - Processing chatbot request...
+2025-07-18 17:32:09,640 - api - INFO - Generating response from LLM...
+2025-07-18 17:32:09,641 - llm - INFO - Processing question: hello
+2025-07-18 17:32:09,641 - llm - INFO - Generating SQL query using LLM...
+2025-07-18 17:32:29,549 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-07-18 17:32:30,103 - llm - INFO - Generated SQL query: GREETING
+2025-07-18 17:32:30,103 - api - INFO - Generated response: GREETING
+2025-07-18 17:32:30,103 - api - INFO - Identified as a greeting. Sending friendly response.
+2025-07-18 17:32:30,104 - werkzeug - INFO - 127.0.0.1 - - [18/Jul/2025 17:32:30] "POST /get HTTP/1.1" 200 -

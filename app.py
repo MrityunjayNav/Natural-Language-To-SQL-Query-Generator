@@ -1,5 +1,6 @@
 from flask import Flask,request, jsonify, render_template
 from langchain_ollama import OllamaLLM
+from flask_cors import CORS
 from langchain_core.prompts import ChatPromptTemplate
 import pandas as pd
 from ydata_profiling import ProfileReport
@@ -73,6 +74,7 @@ print("DB_NAME:", os.getenv("DB_NAME"))
 
 
 app = Flask(__name__)
+CORS(app)
 
 # --------------------- COLUMN DISPLAY MAPPING ---------------------
 
@@ -175,6 +177,8 @@ context = '''
 
 You are an expert PostgreSQL query generator. Your task is to convert a user's question into a single, valid PostgreSQL query.
 
+You are an expert PostgreSQL query generator. Your task is to convert a user's question into a single, valid PostgreSQL query.
+
 ---
 ## Context and Rules
 
@@ -194,7 +198,7 @@ You are an expert PostgreSQL query generator. Your task is to convert a user's q
 
 1.  **Handle Greetings & Irrelevant Input (Highest Priority):** If the user's input is a simple greeting (like "hello", "hi", "how are you", "thanks"), a question about you ("who are you"), or is completely irrelevant gibberish ("jfsdkhf", "sdh"), do not generate a query or an error. Your ONLY response must be the single word: **`GREETING`**.
 
-2.  **Adhere to Schema:** You **MUST** use the exact table and column names provided in the schema above. Do not guess or alter names. For example, to query by the owner's email, you must use the column `owned_by_email`, not `owner_email`.
+2.  **Adhere to Schema:** You **MUST** use the exact table and column names provided in the schema above. **Do not query any tables that are not explicitly listed in the 'Database Schema' section (for example, do not invent a 'users' table).** If a query requires a value that isn't provided (like an email for a name), return an ERROR asking for the missing information.
 
 3.  **MANDATORY Quoting:** You **MUST** use double quotes (`"`) around all table names and any column names that are camelCase or mixed-case.
 
@@ -440,6 +444,7 @@ def chatbot_response():
     query = ""
     
     try:
+        api_logger.info("meri jjjjjjaaaaaaaaannnnnnnnn")
         api_logger.info("Processing chatbot request...")
         
         # Step 1: Get the raw response from the LLM
@@ -498,10 +503,13 @@ def chatbot_response():
         
         # Consistent response structure
         response_data = {
+            "success": True,
             "message": basic_summary,
             "results": result,
-            "query": query
-        }
+            "query": query,
+            "sql_query": query   # Add this line
+            }
+
         
         end_time = datetime.now()
         processing_time = (end_time - start_time).total_seconds()
@@ -510,6 +518,7 @@ def chatbot_response():
         return jsonify(response_data)
 
     except Exception as e:
+        api_logger.info("Meri jaaan  bbhen ki lodi")
         end_time = datetime.now()
         processing_time = (end_time - start_time).total_seconds()
         api_logger.error(f"Request failed after {processing_time:.2f} seconds: {str(e)}")

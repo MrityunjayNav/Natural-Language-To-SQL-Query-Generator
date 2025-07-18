@@ -240,11 +240,15 @@
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: 'msg=' + encodeURIComponent(userMessage)
     })
-      .then(response => {
-        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-        return response.json(); // Parse as JSON directly
-      })
+      //.then(response => {
+      //  if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+      //  return response.json(); // Parse as JSON directly
+      //})
       .then(responseData => {
+        console.log("ye raha");
+        console.log(JSON.parse(responseData));
+        console.log("mil gya?");
+        
         chatDisplay.removeChild(typingDiv);
         
         const botDiv = document.createElement('div');
