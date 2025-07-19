@@ -172,11 +172,8 @@ except Exception as e:
 
 # --------------------- LLM CONTEXT & HELPER ---------------------
 
-context = '''
-
-
-You are an expert PostgreSQL query generator. Your task is to convert a user's question into a single, valid PostgreSQL query.
-
+# The final, corrected version of the context variable with all fixes
+context = """
 You are an expert PostgreSQL query generator. Your task is to convert a user's question into a single, valid PostgreSQL query.
 
 ---
@@ -186,7 +183,7 @@ You are an expert PostgreSQL query generator. Your task is to convert a user's q
     * **"Feedback"**: id (integer), name (text), email (text), message (text), "createdAt" (timestamp)
     * **"Reminder"**: id (integer), "documentId" (integer), "reminderDate" (timestamp), sent (boolean), "createdAt" (timestamp), "updatedAt" (timestamp)
     * **"_prisma_migrations"**: id (string), checksum (string), finished_at (timestamp), migration_name (string), logs (text), rolled_back_at (timestamp), started_at (timestamp), applied_steps_count (integer)
-    * **"file_uploads"**: id (integer), filename (text), filepath (text), mimetype (text), size (integer), url (text), "uploaded_at" (timestamp), folder (text), description (text), owned_by (text, The full name of the owner), maintained_by (text, The full name of the maintainer), start_date (date), expiration_date (date), uploaded_date (date), updated_at (timestamp), archived (boolean), maintained_by_email (text, The email of the maintainer), owned_by_email (text, The email of the owner)
+    * **"file_uploads"**: id (integer), filename (text), filepath (text), mimetype (text), size (integer), url (text), "uploaded_at" (timestamp), **folder (text, The category or 'Type' of the document, e.g., 'Contracts')**, description (text), owned_by (text, The full name of the owner), maintained_by (text, The full name of the maintainer), start_date (date), expiration_date (date), uploaded_date (date), updated_at (timestamp), archived (boolean), maintained_by_email (text, The email of the maintainer), owned_by_email (text, The email of the owner)
     * **"revision_history"**: id (integer), document_id (integer), action_type (text), action_timestamp (timestamp), user_id (text), user_name (text), old_data (jsonb), new_data (jsonb), comments (text)
 
 2.  **Foreign Key Relationships (for JOINs):**
@@ -198,7 +195,7 @@ You are an expert PostgreSQL query generator. Your task is to convert a user's q
 
 1.  **Handle Greetings & Irrelevant Input (Highest Priority):** If the user's input is a simple greeting (like "hello", "hi", "how are you", "thanks"), a question about you ("who are you"), or is completely irrelevant gibberish ("jfsdkhf", "sdh"), do not generate a query or an error. Your ONLY response must be the single word: **`GREETING`**.
 
-2.  **Adhere to Schema:** You **MUST** use the exact table and column names provided in the schema above. **Do not query any tables that are not explicitly listed in the 'Database Schema' section (for example, do not invent a 'users' table).** If a query requires a value that isn't provided (like an email for a name), return an ERROR asking for the missing information.
+2.  **Adhere to Schema:** You **MUST** use the exact table and column names provided in the schema above. Do not query any tables that are not explicitly listed in the 'Database Schema' section (for example, do not invent a 'users' table). If a query requires a value that isn't provided (like an email for a name), return an ERROR asking for the missing information.
 
 3.  **MANDATORY Quoting:** You **MUST** use double quotes (`"`) around all table names and any column names that are camelCase or mixed-case.
 
@@ -208,7 +205,7 @@ You are an expert PostgreSQL query generator. Your task is to convert a user's q
 
 6.  **Joins:** When a query requires joining tables, use the relationships defined in the "Foreign Key Relationships" section to ensure the `JOIN` condition is correct.
 
-7.  **Generate Errors for Ambiguous Queries:** This rule applies **ONLY if the input is not a greeting**. If a user's request looks like a real query but is ambiguous or asks for a column that does not exist, return a single line of text starting with `ERROR:` that explains the problem.
+7.  **Generate Errors for Ambiguous Queries:** This rule applies **ONLY if the input is not a greeting**. If a user's request looks like a real query but is ambiguous or asks for a column that does not exist, return a single line of text starting with `ERROR:` that explains the problem. If an UPDATE request is ambiguous about which column to change (e.g., "change the file to 'Agreements'"), return an ERROR asking the user to specify the column, like 'ERROR: Please specify which field to change (e.g., title, type, description)'.
 
 8.  **Safety:** Unless the user's request is explicitly about changing data (update, delete), you **MUST** generate a `SELECT` statement.
 
@@ -238,8 +235,6 @@ Your SQL Response: UPDATE "file_uploads" SET "expiration_date" = '2027-01-01' WH
 
 **CRITICAL:** Your entire response must be **ONLY the raw SQL query** (or the special words `GREETING` or `ERROR:` as defined in the rules). Do not include any explanations, markdown, or other text.
 """
-
-'''
 
 def get_assistant_response(question, context):
     llm_logger.info(f"Processing question: {question}")
@@ -461,7 +456,7 @@ def chatbot_response():
             return jsonify({
                 "message": "Hello! I'm a database assistant. How can I help you with your contract data today?",
                 "results": {"data": [], "type": "greeting"},
-                "query": "N/A"
+                
             })
         
         # Check for controlled errors from the LLM
@@ -470,7 +465,7 @@ def chatbot_response():
             return jsonify({
                 "message": llm_response, # Pass the LLM's error message directly to the user
                 "results": {"data": [], "type": "llm_error"},
-                "query": "N/A"
+                
             })
 
         # Step 3: If no special keywords were found, it must be a query
@@ -505,9 +500,8 @@ def chatbot_response():
         response_data = {
             "success": True,
             "message": basic_summary,
-            "results": result,
-            "query": query,
-            "sql_query": query   # Add this line
+            "results": result
+               # Add this line
             }
 
         

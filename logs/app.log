@@ -2375,3 +2375,636 @@ LINE 1: ...ed_by = 'HR', owned_by_email = (SELECT email FROM "users" WH...
 2025-07-18 18:40:37,010 - api - INFO - Generated response: GREETING
 2025-07-18 18:40:37,010 - api - INFO - Identified as a greeting. Sending friendly response.
 2025-07-18 18:40:37,012 - werkzeug - INFO - 127.0.0.1 - - [18/Jul/2025 18:40:37] "POST /get HTTP/1.1" 200 -
+2025-07-18 18:42:48,116 - api - INFO - Received chatbot request at 2025-07-18 18:42:48.116511
+2025-07-18 18:42:48,117 - api - INFO - User message: Update the expiration date of 06672822-462c-474a-9e1b-df66f10c991f to 10/01/2027
+2025-07-18 18:42:48,118 - api - INFO - meri jjjjjjaaaaaaaaannnnnnnnn
+2025-07-18 18:42:48,118 - api - INFO - Processing chatbot request...
+2025-07-18 18:42:48,118 - api - INFO - Generating response from LLM...
+2025-07-18 18:42:48,118 - llm - INFO - Processing question: Update the expiration date of 06672822-462c-474a-9e1b-df66f10c991f to 10/01/2027
+2025-07-18 18:42:48,118 - llm - INFO - Generating SQL query using LLM...
+2025-07-18 18:42:49,725 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-07-18 18:43:00,305 - llm - INFO - Generated SQL query: UPDATE "file_uploads" SET "expiration_date" = '2027-10-01' WHERE "id" = '06672822-462c-474a-9e1b-df66f10c991f';
+2025-07-18 18:43:00,306 - api - INFO - Generated response: UPDATE "file_uploads" SET "expiration_date" = '2027-10-01' WHERE "id" = '06672822-462c-474a-9e1b-df66f10c991f';
+2025-07-18 18:43:00,306 - api - INFO - Executing database query...
+2025-07-18 18:43:00,306 - database - INFO - Executing database query: UPDATE "file_uploads" SET "expiration_date" = '2027-10-01' WHERE "id" = '06672822-462c-474a-9e1b-df66f10c991f';
+2025-07-18 18:43:00,306 - database - INFO - Establishing database connection...
+2025-07-18 18:43:00,517 - database - INFO - Database connection established successfully
+2025-07-18 18:43:00,517 - database - INFO - Executing UPDATE operation
+2025-07-18 18:43:00,517 - database - INFO - Executing UPDATE query...
+2025-07-18 18:43:00,525 - database - INFO - UPDATE query affected 1 rows
+2025-07-18 18:43:00,525 - database - INFO - Database connection closed
+2025-07-18 18:43:00,525 - api - INFO - Query result type: non_select
+2025-07-18 18:43:00,525 - api - INFO - Processing non-SELECT query results...
+2025-07-18 18:43:00,526 - api - INFO - Request processed successfully in 12.41 seconds
+2025-07-18 18:43:00,527 - werkzeug - INFO - 127.0.0.1 - - [18/Jul/2025 18:43:00] "POST /get HTTP/1.1" 200 -
+2025-07-18 18:45:19,432 - api - INFO - Received chatbot request at 2025-07-18 18:45:19.432801
+2025-07-18 18:45:19,434 - api - INFO - User message: hi
+2025-07-18 18:45:19,434 - api - INFO - meri jjjjjjaaaaaaaaannnnnnnnn
+2025-07-18 18:45:19,434 - api - INFO - Processing chatbot request...
+2025-07-18 18:45:19,434 - api - INFO - Generating response from LLM...
+2025-07-18 18:45:19,435 - llm - INFO - Processing question: hi
+2025-07-18 18:45:19,435 - llm - INFO - Generating SQL query using LLM...
+2025-07-18 18:45:21,415 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-07-18 18:45:22,038 - llm - INFO - Generated SQL query: GREETING
+2025-07-18 18:45:22,038 - api - INFO - Generated response: GREETING
+2025-07-18 18:45:22,038 - api - INFO - Identified as a greeting. Sending friendly response.
+2025-07-18 18:45:22,039 - werkzeug - INFO - 127.0.0.1 - - [18/Jul/2025 18:45:22] "POST /get HTTP/1.1" 200 -
+2025-07-18 18:45:51,654 - api - INFO - Received chatbot request at 2025-07-18 18:45:51.654120
+2025-07-18 18:45:51,656 - api - INFO - User message: nothing
+2025-07-18 18:45:51,656 - api - INFO - meri jjjjjjaaaaaaaaannnnnnnnn
+2025-07-18 18:45:51,656 - api - INFO - Processing chatbot request...
+2025-07-18 18:45:51,656 - api - INFO - Generating response from LLM...
+2025-07-18 18:45:51,656 - llm - INFO - Processing question: nothing
+2025-07-18 18:45:51,657 - llm - INFO - Generating SQL query using LLM...
+2025-07-18 18:45:52,490 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-07-18 18:45:53,199 - llm - INFO - Generated SQL query: GREETING
+2025-07-18 18:45:53,200 - api - INFO - Generated response: GREETING
+2025-07-18 18:45:53,200 - api - INFO - Identified as a greeting. Sending friendly response.
+2025-07-18 18:45:53,200 - werkzeug - INFO - 127.0.0.1 - - [18/Jul/2025 18:45:53] "POST /get HTTP/1.1" 200 -
+2025-07-18 19:03:25,855 - werkzeug - INFO -  * Detected change in '/Users/mrityunjay/Desktop/project/app.py', reloading
+2025-07-18 19:03:26,253 - werkzeug - INFO -  * Restarting with stat
+2025-07-18 19:03:29,188 - __main__ - INFO - Application starting up...
+2025-07-18 19:03:29,188 - __main__ - INFO - DB_HOST: 127.0.0.1
+2025-07-18 19:03:29,188 - __main__ - INFO - DB_PORT: 5432
+2025-07-18 19:03:29,188 - __main__ - INFO - DB_USER: postgres
+2025-07-18 19:03:29,188 - __main__ - INFO - DB_NAME: documents_management
+2025-07-18 19:03:29,189 - __main__ - INFO - HeaderMapper initialized with mappings
+2025-07-18 19:03:29,189 - llm - INFO - Initializing Ollama LLM...
+2025-07-18 19:03:29,204 - llm - INFO - Ollama LLM initialized successfully
+2025-07-18 19:03:29,205 - __main__ - INFO - Starting Flask application...
+2025-07-18 19:03:29,205 - __main__ - INFO - Application running on http://localhost:5050
+2025-07-18 19:03:29,241 - werkzeug - WARNING -  * Debugger is active!
+2025-07-18 19:03:29,252 - werkzeug - INFO -  * Debugger PIN: 115-695-789
+2025-07-18 19:03:31,279 - werkzeug - INFO -  * Detected change in '/Users/mrityunjay/Desktop/project/app.py', reloading
+2025-07-18 19:03:31,614 - werkzeug - INFO -  * Restarting with stat
+2025-07-18 19:03:34,029 - __main__ - INFO - Application starting up...
+2025-07-18 19:03:34,029 - __main__ - INFO - DB_HOST: 127.0.0.1
+2025-07-18 19:03:34,029 - __main__ - INFO - DB_PORT: 5432
+2025-07-18 19:03:34,029 - __main__ - INFO - DB_USER: postgres
+2025-07-18 19:03:34,029 - __main__ - INFO - DB_NAME: documents_management
+2025-07-18 19:03:34,030 - __main__ - INFO - HeaderMapper initialized with mappings
+2025-07-18 19:03:34,030 - llm - INFO - Initializing Ollama LLM...
+2025-07-18 19:03:34,043 - llm - INFO - Ollama LLM initialized successfully
+2025-07-18 19:03:34,044 - __main__ - INFO - Starting Flask application...
+2025-07-18 19:03:34,044 - __main__ - INFO - Application running on http://localhost:5050
+2025-07-18 19:03:34,075 - werkzeug - WARNING -  * Debugger is active!
+2025-07-18 19:03:34,083 - werkzeug - INFO -  * Debugger PIN: 115-695-789
+2025-07-18 19:03:36,114 - werkzeug - INFO -  * Detected change in '/Users/mrityunjay/Desktop/project/app.py', reloading
+2025-07-18 19:03:36,405 - werkzeug - INFO -  * Restarting with stat
+2025-07-18 19:03:38,688 - __main__ - INFO - Application starting up...
+2025-07-18 19:03:38,689 - __main__ - INFO - DB_HOST: 127.0.0.1
+2025-07-18 19:03:38,689 - __main__ - INFO - DB_PORT: 5432
+2025-07-18 19:03:38,689 - __main__ - INFO - DB_USER: postgres
+2025-07-18 19:03:38,689 - __main__ - INFO - DB_NAME: documents_management
+2025-07-18 19:03:38,689 - __main__ - INFO - HeaderMapper initialized with mappings
+2025-07-18 19:03:38,689 - llm - INFO - Initializing Ollama LLM...
+2025-07-18 19:03:38,703 - llm - INFO - Ollama LLM initialized successfully
+2025-07-18 19:03:38,704 - __main__ - INFO - Starting Flask application...
+2025-07-18 19:03:38,704 - __main__ - INFO - Application running on http://localhost:5050
+2025-07-18 19:03:38,736 - werkzeug - WARNING -  * Debugger is active!
+2025-07-18 19:03:38,744 - werkzeug - INFO -  * Debugger PIN: 115-695-789
+2025-07-18 19:04:09,640 - __main__ - INFO - Application starting up...
+2025-07-18 19:04:09,641 - __main__ - INFO - DB_HOST: 127.0.0.1
+2025-07-18 19:04:09,641 - __main__ - INFO - DB_PORT: 5432
+2025-07-18 19:04:09,641 - __main__ - INFO - DB_USER: postgres
+2025-07-18 19:04:09,641 - __main__ - INFO - DB_NAME: documents_management
+2025-07-18 19:04:09,641 - __main__ - INFO - HeaderMapper initialized with mappings
+2025-07-18 19:04:09,641 - llm - INFO - Initializing Ollama LLM...
+2025-07-18 19:04:09,658 - llm - INFO - Ollama LLM initialized successfully
+2025-07-18 19:04:09,658 - __main__ - INFO - Starting Flask application...
+2025-07-18 19:04:09,658 - __main__ - INFO - Application running on http://localhost:5050
+2025-07-18 19:04:35,348 - api - INFO - Serving index page
+2025-07-18 19:04:35,356 - werkzeug - INFO - 127.0.0.1 - - [18/Jul/2025 19:04:35] "GET / HTTP/1.1" 200 -
+2025-07-18 19:04:39,140 - api - INFO - Received chatbot request at 2025-07-18 19:04:39.140145
+2025-07-18 19:04:39,143 - api - INFO - User message: hello
+2025-07-18 19:04:39,143 - api - INFO - meri jjjjjjaaaaaaaaannnnnnnnn
+2025-07-18 19:04:39,143 - api - INFO - Processing chatbot request...
+2025-07-18 19:04:39,144 - api - INFO - Generating response from LLM...
+2025-07-18 19:04:39,146 - llm - INFO - Processing question: hello
+2025-07-18 19:04:39,146 - llm - INFO - Generating SQL query using LLM...
+2025-07-18 19:04:41,577 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-07-18 19:04:42,119 - llm - INFO - Generated SQL query: GREETING
+2025-07-18 19:04:42,119 - api - INFO - Generated response: GREETING
+2025-07-18 19:04:42,119 - api - INFO - Identified as a greeting. Sending friendly response.
+2025-07-18 19:04:42,119 - werkzeug - INFO - 127.0.0.1 - - [18/Jul/2025 19:04:42] "POST /get HTTP/1.1" 200 -
+2025-07-19 11:17:33,376 - __main__ - INFO - Application starting up...
+2025-07-19 11:17:33,376 - __main__ - INFO - DB_HOST: 127.0.0.1
+2025-07-19 11:17:33,376 - __main__ - INFO - DB_PORT: 5432
+2025-07-19 11:17:33,376 - __main__ - INFO - DB_USER: postgres
+2025-07-19 11:17:33,376 - __main__ - INFO - DB_NAME: documents_management
+2025-07-19 11:17:33,377 - __main__ - INFO - HeaderMapper initialized with mappings
+2025-07-19 11:17:33,377 - llm - INFO - Initializing Ollama LLM...
+2025-07-19 11:17:33,392 - llm - INFO - Ollama LLM initialized successfully
+2025-07-19 11:17:33,393 - __main__ - INFO - Starting Flask application...
+2025-07-19 11:17:33,393 - __main__ - INFO - Application running on http://localhost:5050
+2025-07-19 11:21:24,793 - __main__ - INFO - Application starting up...
+2025-07-19 11:21:24,793 - __main__ - INFO - DB_HOST: 127.0.0.1
+2025-07-19 11:21:24,793 - __main__ - INFO - DB_PORT: 5432
+2025-07-19 11:21:24,794 - __main__ - INFO - DB_USER: postgres
+2025-07-19 11:21:24,794 - __main__ - INFO - DB_NAME: documents_management
+2025-07-19 11:21:24,794 - __main__ - INFO - HeaderMapper initialized with mappings
+2025-07-19 11:21:24,794 - llm - INFO - Initializing Ollama LLM...
+2025-07-19 11:21:24,809 - llm - INFO - Ollama LLM initialized successfully
+2025-07-19 11:21:24,810 - __main__ - INFO - Starting Flask application...
+2025-07-19 11:21:24,810 - __main__ - INFO - Application running on http://localhost:5050
+2025-07-19 11:21:24,847 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5050
+2025-07-19 11:21:24,847 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-07-19 11:21:24,848 - werkzeug - INFO -  * Restarting with stat
+2025-07-19 11:21:27,090 - __main__ - INFO - Application starting up...
+2025-07-19 11:21:27,091 - __main__ - INFO - DB_HOST: 127.0.0.1
+2025-07-19 11:21:27,091 - __main__ - INFO - DB_PORT: 5432
+2025-07-19 11:21:27,091 - __main__ - INFO - DB_USER: postgres
+2025-07-19 11:21:27,091 - __main__ - INFO - DB_NAME: documents_management
+2025-07-19 11:21:27,091 - __main__ - INFO - HeaderMapper initialized with mappings
+2025-07-19 11:21:27,092 - llm - INFO - Initializing Ollama LLM...
+2025-07-19 11:21:27,106 - llm - INFO - Ollama LLM initialized successfully
+2025-07-19 11:21:27,106 - __main__ - INFO - Starting Flask application...
+2025-07-19 11:21:27,106 - __main__ - INFO - Application running on http://localhost:5050
+2025-07-19 11:21:27,139 - werkzeug - WARNING -  * Debugger is active!
+2025-07-19 11:21:27,150 - werkzeug - INFO -  * Debugger PIN: 115-695-789
+2025-07-19 11:22:15,430 - api - INFO - Serving index page
+2025-07-19 11:22:15,436 - werkzeug - INFO - 127.0.0.1 - - [19/Jul/2025 11:22:15] "GET / HTTP/1.1" 200 -
+2025-07-19 11:22:18,777 - api - INFO - Received chatbot request at 2025-07-19 11:22:18.777319
+2025-07-19 11:22:18,780 - api - INFO - User message: hello
+2025-07-19 11:22:18,781 - api - INFO - meri jjjjjjaaaaaaaaannnnnnnnn
+2025-07-19 11:22:18,781 - api - INFO - Processing chatbot request...
+2025-07-19 11:22:18,782 - api - INFO - Generating response from LLM...
+2025-07-19 11:22:18,782 - llm - INFO - Processing question: hello
+2025-07-19 11:22:18,783 - llm - INFO - Generating SQL query using LLM...
+2025-07-19 11:22:40,546 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-07-19 11:22:41,150 - llm - INFO - Generated SQL query: GREETING
+2025-07-19 11:22:41,151 - api - INFO - Generated response: GREETING
+2025-07-19 11:22:41,151 - api - INFO - Identified as a greeting. Sending friendly response.
+2025-07-19 11:22:41,152 - werkzeug - INFO - 127.0.0.1 - - [19/Jul/2025 11:22:41] "POST /get HTTP/1.1" 200 -
+2025-07-19 11:24:07,206 - api - INFO - Received chatbot request at 2025-07-19 11:24:07.206254
+2025-07-19 11:24:07,207 - api - INFO - User message: Hello
+2025-07-19 11:24:07,207 - api - INFO - meri jjjjjjaaaaaaaaannnnnnnnn
+2025-07-19 11:24:07,207 - api - INFO - Processing chatbot request...
+2025-07-19 11:24:07,207 - api - INFO - Generating response from LLM...
+2025-07-19 11:24:07,208 - llm - INFO - Processing question: Hello
+2025-07-19 11:24:07,208 - llm - INFO - Generating SQL query using LLM...
+2025-07-19 11:24:09,027 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-07-19 11:24:09,594 - llm - INFO - Generated SQL query: GREETING
+2025-07-19 11:24:09,594 - api - INFO - Generated response: GREETING
+2025-07-19 11:24:09,594 - api - INFO - Identified as a greeting. Sending friendly response.
+2025-07-19 11:24:09,595 - werkzeug - INFO - 127.0.0.1 - - [19/Jul/2025 11:24:09] "POST /get HTTP/1.1" 200 -
+2025-07-19 11:25:13,221 - api - INFO - Received chatbot request at 2025-07-19 11:25:13.221424
+2025-07-19 11:25:13,226 - api - INFO - User message: Change the CV pdf file to Agreements
+2025-07-19 11:25:13,226 - api - INFO - meri jjjjjjaaaaaaaaannnnnnnnn
+2025-07-19 11:25:13,226 - api - INFO - Processing chatbot request...
+2025-07-19 11:25:13,226 - api - INFO - Generating response from LLM...
+2025-07-19 11:25:13,226 - llm - INFO - Processing question: Change the CV pdf file to Agreements
+2025-07-19 11:25:13,226 - llm - INFO - Generating SQL query using LLM...
+2025-07-19 11:25:14,124 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-07-19 11:25:18,129 - llm - INFO - Generated SQL query: UPDATE "file_uploads" SET filename = 'Agreements' WHERE filename = 'CV.pdf';
+2025-07-19 11:25:18,129 - api - INFO - Generated response: UPDATE "file_uploads" SET filename = 'Agreements' WHERE filename = 'CV.pdf';
+2025-07-19 11:25:18,130 - api - INFO - Executing database query...
+2025-07-19 11:25:18,130 - database - INFO - Executing database query: UPDATE "file_uploads" SET filename = 'Agreements' WHERE filename = 'CV.pdf';
+2025-07-19 11:25:18,130 - database - INFO - Establishing database connection...
+2025-07-19 11:25:18,295 - database - INFO - Database connection established successfully
+2025-07-19 11:25:18,296 - database - INFO - Executing UPDATE operation
+2025-07-19 11:25:18,296 - database - INFO - Executing UPDATE query...
+2025-07-19 11:25:18,303 - database - INFO - UPDATE query affected 1 rows
+2025-07-19 11:25:18,303 - database - INFO - Database connection closed
+2025-07-19 11:25:18,303 - api - INFO - Query result type: non_select
+2025-07-19 11:25:18,303 - api - INFO - Processing non-SELECT query results...
+2025-07-19 11:25:18,303 - api - INFO - Request processed successfully in 5.08 seconds
+2025-07-19 11:25:18,304 - werkzeug - INFO - 127.0.0.1 - - [19/Jul/2025 11:25:18] "POST /get HTTP/1.1" 200 -
+2025-07-19 11:28:34,234 - werkzeug - INFO -  * Detected change in '/Users/mrityunjay/Desktop/project/app.py', reloading
+2025-07-19 11:28:34,578 - werkzeug - INFO -  * Restarting with stat
+2025-07-19 11:28:37,412 - __main__ - INFO - Application starting up...
+2025-07-19 11:28:37,412 - __main__ - INFO - DB_HOST: 127.0.0.1
+2025-07-19 11:28:37,412 - __main__ - INFO - DB_PORT: 5432
+2025-07-19 11:28:37,412 - __main__ - INFO - DB_USER: postgres
+2025-07-19 11:28:37,412 - __main__ - INFO - DB_NAME: documents_management
+2025-07-19 11:28:37,413 - __main__ - INFO - HeaderMapper initialized with mappings
+2025-07-19 11:28:37,413 - llm - INFO - Initializing Ollama LLM...
+2025-07-19 11:28:37,428 - llm - INFO - Ollama LLM initialized successfully
+2025-07-19 11:28:37,429 - __main__ - INFO - Starting Flask application...
+2025-07-19 11:28:37,429 - __main__ - INFO - Application running on http://localhost:5050
+2025-07-19 11:28:37,463 - werkzeug - WARNING -  * Debugger is active!
+2025-07-19 11:28:37,473 - werkzeug - INFO -  * Debugger PIN: 115-695-789
+2025-07-19 11:28:40,509 - werkzeug - INFO -  * Detected change in '/Users/mrityunjay/Desktop/project/app.py', reloading
+2025-07-19 11:28:40,847 - werkzeug - INFO -  * Restarting with stat
+2025-07-19 11:28:43,241 - __main__ - INFO - Application starting up...
+2025-07-19 11:28:43,241 - __main__ - INFO - DB_HOST: 127.0.0.1
+2025-07-19 11:28:43,241 - __main__ - INFO - DB_PORT: 5432
+2025-07-19 11:28:43,241 - __main__ - INFO - DB_USER: postgres
+2025-07-19 11:28:43,241 - __main__ - INFO - DB_NAME: documents_management
+2025-07-19 11:28:43,242 - __main__ - INFO - HeaderMapper initialized with mappings
+2025-07-19 11:28:43,242 - llm - INFO - Initializing Ollama LLM...
+2025-07-19 11:28:43,256 - llm - INFO - Ollama LLM initialized successfully
+2025-07-19 11:28:43,257 - __main__ - INFO - Starting Flask application...
+2025-07-19 11:28:43,257 - __main__ - INFO - Application running on http://localhost:5050
+2025-07-19 11:28:43,288 - werkzeug - WARNING -  * Debugger is active!
+2025-07-19 11:28:43,296 - werkzeug - INFO -  * Debugger PIN: 115-695-789
+2025-07-19 11:29:02,545 - api - INFO - Serving index page
+2025-07-19 11:29:02,555 - werkzeug - INFO - 127.0.0.1 - - [19/Jul/2025 11:29:02] "GET / HTTP/1.1" 200 -
+2025-07-19 11:29:22,114 - api - INFO - Received chatbot request at 2025-07-19 11:29:22.114136
+2025-07-19 11:29:22,117 - api - INFO - User message: Change the CV pdf file to MoUs
+2025-07-19 11:29:22,117 - api - INFO - meri jjjjjjaaaaaaaaannnnnnnnn
+2025-07-19 11:29:22,117 - api - INFO - Processing chatbot request...
+2025-07-19 11:29:22,118 - api - INFO - Generating response from LLM...
+2025-07-19 11:29:22,118 - llm - INFO - Processing question: Change the CV pdf file to MoUs
+2025-07-19 11:29:22,118 - llm - INFO - Generating SQL query using LLM...
+2025-07-19 11:29:29,348 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-07-19 11:29:32,878 - llm - INFO - Generated SQL query: ERROR: Please specify which table and column to change (e.g., "file_uploads".filename).
+2025-07-19 11:29:32,879 - api - INFO - Generated response: ERROR: Please specify which table and column to change (e.g., "file_uploads".filename).
+2025-07-19 11:29:32,879 - api - WARNING - LLM returned a controlled error: ERROR: Please specify which table and column to change (e.g., "file_uploads".filename).
+2025-07-19 11:29:32,879 - werkzeug - INFO - 127.0.0.1 - - [19/Jul/2025 11:29:32] "POST /get HTTP/1.1" 200 -
+2025-07-19 11:30:53,801 - werkzeug - INFO -  * Detected change in '/Users/mrityunjay/Desktop/project/app.py', reloading
+2025-07-19 11:30:54,150 - werkzeug - INFO -  * Restarting with stat
+2025-07-19 11:30:57,164 - __main__ - INFO - Application starting up...
+2025-07-19 11:30:57,165 - __main__ - INFO - DB_HOST: 127.0.0.1
+2025-07-19 11:30:57,165 - __main__ - INFO - DB_PORT: 5432
+2025-07-19 11:30:57,165 - __main__ - INFO - DB_USER: postgres
+2025-07-19 11:30:57,165 - __main__ - INFO - DB_NAME: documents_management
+2025-07-19 11:30:57,165 - __main__ - INFO - HeaderMapper initialized with mappings
+2025-07-19 11:30:57,165 - llm - INFO - Initializing Ollama LLM...
+2025-07-19 11:30:57,181 - llm - INFO - Ollama LLM initialized successfully
+2025-07-19 11:30:57,181 - __main__ - INFO - Starting Flask application...
+2025-07-19 11:30:57,181 - __main__ - INFO - Application running on http://localhost:5050
+2025-07-19 11:30:57,218 - werkzeug - WARNING -  * Debugger is active!
+2025-07-19 11:30:57,228 - werkzeug - INFO -  * Debugger PIN: 115-695-789
+2025-07-19 11:30:58,250 - werkzeug - INFO -  * Detected change in '/Users/mrityunjay/Desktop/project/app.py', reloading
+2025-07-19 11:30:58,566 - werkzeug - INFO -  * Restarting with stat
+2025-07-19 11:31:00,858 - __main__ - INFO - Application starting up...
+2025-07-19 11:31:00,858 - __main__ - INFO - DB_HOST: 127.0.0.1
+2025-07-19 11:31:00,858 - __main__ - INFO - DB_PORT: 5432
+2025-07-19 11:31:00,859 - __main__ - INFO - DB_USER: postgres
+2025-07-19 11:31:00,859 - __main__ - INFO - DB_NAME: documents_management
+2025-07-19 11:31:00,859 - __main__ - INFO - HeaderMapper initialized with mappings
+2025-07-19 11:31:00,859 - llm - INFO - Initializing Ollama LLM...
+2025-07-19 11:31:00,873 - llm - INFO - Ollama LLM initialized successfully
+2025-07-19 11:31:00,873 - __main__ - INFO - Starting Flask application...
+2025-07-19 11:31:00,874 - __main__ - INFO - Application running on http://localhost:5050
+2025-07-19 11:31:00,906 - werkzeug - WARNING -  * Debugger is active!
+2025-07-19 11:31:00,913 - werkzeug - INFO -  * Debugger PIN: 115-695-789
+2025-07-19 11:31:03,029 - api - INFO - Received chatbot request at 2025-07-19 11:31:03.029095
+2025-07-19 11:31:03,031 - api - INFO - User message: Hello
+2025-07-19 11:31:03,031 - api - INFO - meri jjjjjjaaaaaaaaannnnnnnnn
+2025-07-19 11:31:03,031 - api - INFO - Processing chatbot request...
+2025-07-19 11:31:03,031 - api - INFO - Generating response from LLM...
+2025-07-19 11:31:03,031 - llm - INFO - Processing question: Hello
+2025-07-19 11:31:03,031 - llm - INFO - Generating SQL query using LLM...
+2025-07-19 11:31:04,749 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-07-19 11:31:05,422 - llm - INFO - Generated SQL query: GREETING
+2025-07-19 11:31:05,422 - api - INFO - Generated response: GREETING
+2025-07-19 11:31:05,422 - api - INFO - Identified as a greeting. Sending friendly response.
+2025-07-19 11:31:05,423 - werkzeug - INFO - 127.0.0.1 - - [19/Jul/2025 11:31:05] "POST /get HTTP/1.1" 200 -
+2025-07-19 11:31:44,705 - api - INFO - Received chatbot request at 2025-07-19 11:31:44.705151
+2025-07-19 11:31:44,706 - api - INFO - User message: Change the Agreements file to MoUs
+2025-07-19 11:31:44,707 - api - INFO - meri jjjjjjaaaaaaaaannnnnnnnn
+2025-07-19 11:31:44,707 - api - INFO - Processing chatbot request...
+2025-07-19 11:31:44,707 - api - INFO - Generating response from LLM...
+2025-07-19 11:31:44,707 - llm - INFO - Processing question: Change the Agreements file to MoUs
+2025-07-19 11:31:44,707 - llm - INFO - Generating SQL query using LLM...
+2025-07-19 11:31:45,438 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-07-19 11:31:49,520 - llm - INFO - Generated SQL query: ERROR: Please specify which field to change (e.g., title, type, description) in "file_uploads" table.
+2025-07-19 11:31:49,520 - api - INFO - Generated response: ERROR: Please specify which field to change (e.g., title, type, description) in "file_uploads" table.
+2025-07-19 11:31:49,520 - api - WARNING - LLM returned a controlled error: ERROR: Please specify which field to change (e.g., title, type, description) in "file_uploads" table.
+2025-07-19 11:31:49,520 - werkzeug - INFO - 127.0.0.1 - - [19/Jul/2025 11:31:49] "POST /get HTTP/1.1" 200 -
+2025-07-19 11:32:23,925 - api - INFO - Received chatbot request at 2025-07-19 11:32:23.925318
+2025-07-19 11:32:23,926 - api - INFO - User message: Drop the Agreements file
+2025-07-19 11:32:23,926 - api - INFO - meri jjjjjjaaaaaaaaannnnnnnnn
+2025-07-19 11:32:23,926 - api - INFO - Processing chatbot request...
+2025-07-19 11:32:23,926 - api - INFO - Generating response from LLM...
+2025-07-19 11:32:23,927 - llm - INFO - Processing question: Drop the Agreements file
+2025-07-19 11:32:23,927 - llm - INFO - Generating SQL query using LLM...
+2025-07-19 11:32:24,502 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-07-19 11:32:30,156 - llm - INFO - Generated SQL query: ERROR: The user did not provide required information to generate a valid DROP command (specifically, the 'file_uploads.id' of the document named 'Agreements').
+2025-07-19 11:32:30,156 - api - INFO - Generated response: ERROR: The user did not provide required information to generate a valid DROP command (specifically, the 'file_uploads.id' of the document named 'Agreements').
+2025-07-19 11:32:30,156 - api - WARNING - LLM returned a controlled error: ERROR: The user did not provide required information to generate a valid DROP command (specifically, the 'file_uploads.id' of the document named 'Agreements').
+2025-07-19 11:32:30,156 - werkzeug - INFO - 127.0.0.1 - - [19/Jul/2025 11:32:30] "POST /get HTTP/1.1" 200 -
+2025-07-19 11:59:54,389 - api - INFO - Received chatbot request at 2025-07-19 11:59:54.389239
+2025-07-19 11:59:54,390 - api - INFO - User message: Set the type for 'Payment status.pdf' to 'Agreements
+2025-07-19 11:59:54,390 - api - INFO - meri jjjjjjaaaaaaaaannnnnnnnn
+2025-07-19 11:59:54,391 - api - INFO - Processing chatbot request...
+2025-07-19 11:59:54,391 - api - INFO - Generating response from LLM...
+2025-07-19 11:59:54,391 - llm - INFO - Processing question: Set the type for 'Payment status.pdf' to 'Agreements
+2025-07-19 11:59:54,391 - llm - INFO - Generating SQL query using LLM...
+2025-07-19 12:00:16,461 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-07-19 12:00:20,494 - llm - INFO - Generated SQL query: UPDATE "file_uploads" SET "type" = 'Agreements' WHERE filename = 'Payment status.pdf';
+2025-07-19 12:00:20,494 - api - INFO - Generated response: UPDATE "file_uploads" SET "type" = 'Agreements' WHERE filename = 'Payment status.pdf';
+2025-07-19 12:00:20,494 - api - INFO - Executing database query...
+2025-07-19 12:00:20,494 - database - INFO - Executing database query: UPDATE "file_uploads" SET "type" = 'Agreements' WHERE filename = 'Payment status.pdf';
+2025-07-19 12:00:20,494 - database - INFO - Establishing database connection...
+2025-07-19 12:00:20,624 - database - INFO - Database connection established successfully
+2025-07-19 12:00:20,624 - database - INFO - Executing UPDATE operation
+2025-07-19 12:00:20,624 - database - INFO - Executing UPDATE query...
+2025-07-19 12:00:20,627 - database - ERROR - Database error: column "type" of relation "file_uploads" does not exist
+LINE 1: UPDATE "file_uploads" SET "type" = 'Agreements' WHERE filena...
+                                  ^
+
+2025-07-19 12:00:20,627 - api - INFO - Query result type: error
+2025-07-19 12:00:20,627 - api - WARNING - Processing error or empty results...
+2025-07-19 12:00:20,627 - api - INFO - Request processed successfully in 26.24 seconds
+2025-07-19 12:00:20,628 - werkzeug - INFO - 127.0.0.1 - - [19/Jul/2025 12:00:20] "POST /get HTTP/1.1" 200 -
+2025-07-19 12:04:59,489 - werkzeug - INFO -  * Detected change in '/Users/mrityunjay/Desktop/project/app.py', reloading
+2025-07-19 12:04:59,829 - werkzeug - INFO -  * Restarting with stat
+2025-07-19 12:05:02,902 - __main__ - INFO - Application starting up...
+2025-07-19 12:05:02,902 - __main__ - INFO - DB_HOST: 127.0.0.1
+2025-07-19 12:05:02,902 - __main__ - INFO - DB_PORT: 5432
+2025-07-19 12:05:02,902 - __main__ - INFO - DB_USER: postgres
+2025-07-19 12:05:02,902 - __main__ - INFO - DB_NAME: documents_management
+2025-07-19 12:05:02,903 - __main__ - INFO - HeaderMapper initialized with mappings
+2025-07-19 12:05:02,903 - llm - INFO - Initializing Ollama LLM...
+2025-07-19 12:05:02,918 - llm - INFO - Ollama LLM initialized successfully
+2025-07-19 12:05:02,919 - __main__ - INFO - Starting Flask application...
+2025-07-19 12:05:02,919 - __main__ - INFO - Application running on http://localhost:5050
+2025-07-19 12:05:02,955 - werkzeug - WARNING -  * Debugger is active!
+2025-07-19 12:05:02,969 - werkzeug - INFO -  * Debugger PIN: 115-695-789
+2025-07-19 12:05:27,249 - werkzeug - INFO -  * Detected change in '/Users/mrityunjay/Desktop/project/app.py', reloading
+2025-07-19 12:05:27,568 - werkzeug - INFO -  * Restarting with stat
+2025-07-19 12:05:43,890 - __main__ - INFO - Application starting up...
+2025-07-19 12:05:43,891 - __main__ - INFO - DB_HOST: 127.0.0.1
+2025-07-19 12:05:43,891 - __main__ - INFO - DB_PORT: 5432
+2025-07-19 12:05:43,891 - __main__ - INFO - DB_USER: postgres
+2025-07-19 12:05:43,891 - __main__ - INFO - DB_NAME: documents_management
+2025-07-19 12:05:43,891 - __main__ - INFO - HeaderMapper initialized with mappings
+2025-07-19 12:05:43,892 - llm - INFO - Initializing Ollama LLM...
+2025-07-19 12:05:43,906 - llm - INFO - Ollama LLM initialized successfully
+2025-07-19 12:05:43,907 - __main__ - INFO - Starting Flask application...
+2025-07-19 12:05:43,907 - __main__ - INFO - Application running on http://localhost:5050
+2025-07-19 12:05:43,945 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5050
+2025-07-19 12:05:43,945 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-07-19 12:05:43,946 - werkzeug - INFO -  * Restarting with stat
+2025-07-19 12:05:46,304 - __main__ - INFO - Application starting up...
+2025-07-19 12:05:46,304 - __main__ - INFO - DB_HOST: 127.0.0.1
+2025-07-19 12:05:46,304 - __main__ - INFO - DB_PORT: 5432
+2025-07-19 12:05:46,305 - __main__ - INFO - DB_USER: postgres
+2025-07-19 12:05:46,305 - __main__ - INFO - DB_NAME: documents_management
+2025-07-19 12:05:46,305 - __main__ - INFO - HeaderMapper initialized with mappings
+2025-07-19 12:05:46,305 - llm - INFO - Initializing Ollama LLM...
+2025-07-19 12:05:46,320 - llm - INFO - Ollama LLM initialized successfully
+2025-07-19 12:05:46,321 - __main__ - INFO - Starting Flask application...
+2025-07-19 12:05:46,321 - __main__ - INFO - Application running on http://localhost:5050
+2025-07-19 12:05:46,355 - werkzeug - WARNING -  * Debugger is active!
+2025-07-19 12:05:46,364 - werkzeug - INFO -  * Debugger PIN: 115-695-789
+2025-07-19 12:05:54,281 - api - INFO - Serving index page
+2025-07-19 12:05:54,289 - werkzeug - INFO - 127.0.0.1 - - [19/Jul/2025 12:05:54] "GET / HTTP/1.1" 200 -
+2025-07-19 12:06:03,963 - api - INFO - Received chatbot request at 2025-07-19 12:06:03.963723
+2025-07-19 12:06:03,967 - api - INFO - User message: Set the type for 'Payment status.pdf' to 'Agreements'
+2025-07-19 12:06:03,967 - api - INFO - meri jjjjjjaaaaaaaaannnnnnnnn
+2025-07-19 12:06:03,968 - api - INFO - Processing chatbot request...
+2025-07-19 12:06:03,968 - api - INFO - Generating response from LLM...
+2025-07-19 12:06:03,968 - llm - INFO - Processing question: Set the type for 'Payment status.pdf' to 'Agreements'
+2025-07-19 12:06:03,968 - llm - INFO - Generating SQL query using LLM...
+2025-07-19 12:06:23,753 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-07-19 12:06:27,851 - llm - INFO - Generated SQL query: UPDATE "file_uploads" SET "folder" = 'Agreements' WHERE filename = 'Payment status.pdf';
+2025-07-19 12:06:27,851 - api - INFO - Generated response: UPDATE "file_uploads" SET "folder" = 'Agreements' WHERE filename = 'Payment status.pdf';
+2025-07-19 12:06:27,851 - api - INFO - Executing database query...
+2025-07-19 12:06:27,851 - database - INFO - Executing database query: UPDATE "file_uploads" SET "folder" = 'Agreements' WHERE filename = 'Payment status.pdf';
+2025-07-19 12:06:27,852 - database - INFO - Establishing database connection...
+2025-07-19 12:06:27,932 - database - INFO - Database connection established successfully
+2025-07-19 12:06:27,932 - database - INFO - Executing UPDATE operation
+2025-07-19 12:06:27,932 - database - INFO - Executing UPDATE query...
+2025-07-19 12:06:27,938 - database - INFO - UPDATE query affected 0 rows
+2025-07-19 12:06:27,938 - database - INFO - Database connection closed
+2025-07-19 12:06:27,938 - api - INFO - Query result type: non_select
+2025-07-19 12:06:27,938 - api - INFO - Processing non-SELECT query results...
+2025-07-19 12:06:27,938 - api - INFO - Request processed successfully in 23.97 seconds
+2025-07-19 12:06:27,940 - werkzeug - INFO - 127.0.0.1 - - [19/Jul/2025 12:06:27] "POST /get HTTP/1.1" 200 -
+2025-07-19 12:08:57,618 - api - INFO - Received chatbot request at 2025-07-19 12:08:57.618159
+2025-07-19 12:08:57,619 - api - INFO - User message: Delete the file with the name 'Payment Status.pdf'
+2025-07-19 12:08:57,619 - api - INFO - meri jjjjjjaaaaaaaaannnnnnnnn
+2025-07-19 12:08:57,619 - api - INFO - Processing chatbot request...
+2025-07-19 12:08:57,619 - api - INFO - Generating response from LLM...
+2025-07-19 12:08:57,619 - llm - INFO - Processing question: Delete the file with the name 'Payment Status.pdf'
+2025-07-19 12:08:57,619 - llm - INFO - Generating SQL query using LLM...
+2025-07-19 12:08:58,822 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-07-19 12:09:01,332 - llm - INFO - Generated SQL query: DELETE FROM "file_uploads" WHERE filename = 'Payment Status.pdf';
+2025-07-19 12:09:01,333 - api - INFO - Generated response: DELETE FROM "file_uploads" WHERE filename = 'Payment Status.pdf';
+2025-07-19 12:09:01,333 - api - INFO - Executing database query...
+2025-07-19 12:09:01,333 - database - INFO - Executing database query: DELETE FROM "file_uploads" WHERE filename = 'Payment Status.pdf';
+2025-07-19 12:09:01,333 - database - INFO - Establishing database connection...
+2025-07-19 12:09:01,350 - database - INFO - Database connection established successfully
+2025-07-19 12:09:01,350 - database - INFO - Executing DELETE operation
+2025-07-19 12:09:01,350 - database - INFO - Executing DELETE query...
+2025-07-19 12:09:01,356 - database - ERROR - Database error: update or delete on table "file_uploads" violates foreign key constraint "revision_history_document_id_fkey" on table "revision_history"
+DETAIL:  Key (id)=(06672822-462c-474a-9e1b-df66f10c991f) is still referenced from table "revision_history".
+
+2025-07-19 12:09:01,356 - api - INFO - Query result type: error
+2025-07-19 12:09:01,356 - api - WARNING - Processing error or empty results...
+2025-07-19 12:09:01,356 - api - INFO - Request processed successfully in 3.74 seconds
+2025-07-19 12:09:01,357 - werkzeug - INFO - 127.0.0.1 - - [19/Jul/2025 12:09:01] "POST /get HTTP/1.1" 200 -
+2025-07-19 12:09:27,365 - api - INFO - Serving index page
+2025-07-19 12:09:27,366 - werkzeug - INFO - 127.0.0.1 - - [19/Jul/2025 12:09:27] "GET / HTTP/1.1" 200 -
+2025-07-19 12:14:07,911 - api - INFO - Received chatbot request at 2025-07-19 12:14:07.910987
+2025-07-19 12:14:07,912 - api - INFO - User message: Show me files that expire after 2026
+2025-07-19 12:14:07,913 - api - INFO - meri jjjjjjaaaaaaaaannnnnnnnn
+2025-07-19 12:14:07,913 - api - INFO - Processing chatbot request...
+2025-07-19 12:14:07,913 - api - INFO - Generating response from LLM...
+2025-07-19 12:14:07,913 - llm - INFO - Processing question: Show me files that expire after 2026
+2025-07-19 12:14:07,913 - llm - INFO - Generating SQL query using LLM...
+2025-07-19 12:14:28,051 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-07-19 12:14:32,772 - llm - INFO - Generated SQL query: SELECT filename, expiration_date FROM "file_uploads" WHERE expiration_date > '2026-01-01';
+2025-07-19 12:14:32,773 - api - INFO - Generated response: SELECT filename, expiration_date FROM "file_uploads" WHERE expiration_date > '2026-01-01';
+2025-07-19 12:14:32,773 - api - INFO - Executing database query...
+2025-07-19 12:14:32,773 - database - INFO - Executing database query: SELECT filename, expiration_date FROM "file_uploads" WHERE expiration_date > '2026-01-01';
+2025-07-19 12:14:32,773 - database - INFO - Establishing database connection...
+2025-07-19 12:14:32,801 - database - INFO - Database connection established successfully
+2025-07-19 12:14:32,801 - database - INFO - Executing SELECT operation
+2025-07-19 12:14:32,801 - database - INFO - Executing SELECT query...
+2025-07-19 12:14:32,804 - database - INFO - Query returned 2 rows with columns: ['filename', 'expiration_date']
+2025-07-19 12:14:32,805 - __main__ - INFO - Transforming 2 rows of data
+2025-07-19 12:14:32,805 - __main__ - INFO - Successfully transformed 2 rows
+2025-07-19 12:14:32,805 - database - INFO - SELECT query executed successfully
+2025-07-19 12:14:32,805 - database - INFO - Database connection closed
+2025-07-19 12:14:32,805 - api - INFO - Query result type: select
+2025-07-19 12:14:32,805 - api - INFO - Processing SELECT query results...
+2025-07-19 12:14:32,810 - api - INFO - Created DataFrame with shape: (2, 2)
+2025-07-19 12:14:32,810 - __main__ - INFO - Generating basic data summary...
+2025-07-19 12:14:32,814 - __main__ - INFO - Basic data summary generated successfully
+2025-07-19 12:14:32,814 - api - INFO - Basic summary generated
+2025-07-19 12:14:32,814 - api - INFO - Request processed successfully in 24.90 seconds
+2025-07-19 12:14:32,815 - werkzeug - INFO - 127.0.0.1 - - [19/Jul/2025 12:14:32] "POST /get HTTP/1.1" 200 -
+2025-07-19 12:18:28,154 - api - INFO - Received chatbot request at 2025-07-19 12:18:28.154503
+2025-07-19 12:18:28,156 - api - INFO - User message: Add a reminder for document ID "180d285f-a006-41f7-9c4b-0421c49682aa" to be sent next Monday.
+2025-07-19 12:18:28,156 - api - INFO - meri jjjjjjaaaaaaaaannnnnnnnn
+2025-07-19 12:18:28,156 - api - INFO - Processing chatbot request...
+2025-07-19 12:18:28,156 - api - INFO - Generating response from LLM...
+2025-07-19 12:18:28,156 - llm - INFO - Processing question: Add a reminder for document ID "180d285f-a006-41f7-9c4b-0421c49682aa" to be sent next Monday.
+2025-07-19 12:18:28,156 - llm - INFO - Generating SQL query using LLM...
+2025-07-19 12:18:30,104 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-07-19 12:18:39,923 - llm - INFO - Generated SQL query: UPDATE "Reminder" SET "reminderDate" = NOW() + INTERVAL '7 days' WHERE "documentId" = '180d285f-a006-41f7-9c4b-0421c49682aa';
+2025-07-19 12:18:39,923 - api - INFO - Generated response: UPDATE "Reminder" SET "reminderDate" = NOW() + INTERVAL '7 days' WHERE "documentId" = '180d285f-a006-41f7-9c4b-0421c49682aa';
+2025-07-19 12:18:39,923 - api - INFO - Executing database query...
+2025-07-19 12:18:39,923 - database - INFO - Executing database query: UPDATE "Reminder" SET "reminderDate" = NOW() + INTERVAL '7 days' WHERE "documentId" = '180d285f-a006-41f7-9c4b-0421c49682aa';
+2025-07-19 12:18:39,923 - database - INFO - Establishing database connection...
+2025-07-19 12:18:39,950 - database - INFO - Database connection established successfully
+2025-07-19 12:18:39,950 - database - INFO - Executing UPDATE operation
+2025-07-19 12:18:39,950 - database - INFO - Executing UPDATE query...
+2025-07-19 12:18:39,969 - database - INFO - UPDATE query affected 7 rows
+2025-07-19 12:18:39,969 - database - INFO - Database connection closed
+2025-07-19 12:18:39,969 - api - INFO - Query result type: non_select
+2025-07-19 12:18:39,969 - api - INFO - Processing non-SELECT query results...
+2025-07-19 12:18:39,970 - api - INFO - Request processed successfully in 11.82 seconds
+2025-07-19 12:18:39,971 - werkzeug - INFO - 127.0.0.1 - - [19/Jul/2025 12:18:39] "POST /get HTTP/1.1" 200 -
+2025-07-19 12:22:06,298 - api - INFO - Serving index page
+2025-07-19 12:22:06,299 - werkzeug - INFO - 127.0.0.1 - - [19/Jul/2025 12:22:06] "GET / HTTP/1.1" 200 -
+2025-07-19 12:23:25,978 - api - INFO - Received chatbot request at 2025-07-19 12:23:25.978599
+2025-07-19 12:23:25,980 - api - INFO - User message: Hello
+2025-07-19 12:23:25,980 - api - INFO - meri jjjjjjaaaaaaaaannnnnnnnn
+2025-07-19 12:23:25,981 - api - INFO - Processing chatbot request...
+2025-07-19 12:23:25,981 - api - INFO - Generating response from LLM...
+2025-07-19 12:23:25,981 - llm - INFO - Processing question: Hello
+2025-07-19 12:23:25,981 - llm - INFO - Generating SQL query using LLM...
+2025-07-19 12:23:27,807 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-07-19 12:23:28,162 - llm - INFO - Generated SQL query: GREETING
+2025-07-19 12:23:28,162 - api - INFO - Generated response: GREETING
+2025-07-19 12:23:28,162 - api - INFO - Identified as a greeting. Sending friendly response.
+2025-07-19 12:23:28,162 - werkzeug - INFO - 127.0.0.1 - - [19/Jul/2025 12:23:28] "POST /get HTTP/1.1" 200 -
+2025-07-19 12:23:42,899 - api - INFO - Received chatbot request at 2025-07-19 12:23:42.899480
+2025-07-19 12:23:42,901 - api - INFO - User message: Good morning
+2025-07-19 12:23:42,901 - api - INFO - meri jjjjjjaaaaaaaaannnnnnnnn
+2025-07-19 12:23:42,901 - api - INFO - Processing chatbot request...
+2025-07-19 12:23:42,902 - api - INFO - Generating response from LLM...
+2025-07-19 12:23:42,902 - llm - INFO - Processing question: Good morning
+2025-07-19 12:23:42,902 - llm - INFO - Generating SQL query using LLM...
+2025-07-19 12:23:43,763 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-07-19 12:23:44,546 - llm - INFO - Generated SQL query: GREETING
+2025-07-19 12:23:44,547 - api - INFO - Generated response: GREETING
+2025-07-19 12:23:44,547 - api - INFO - Identified as a greeting. Sending friendly response.
+2025-07-19 12:23:44,547 - werkzeug - INFO - 127.0.0.1 - - [19/Jul/2025 12:23:44] "POST /get HTTP/1.1" 200 -
+2025-07-19 12:23:54,153 - api - INFO - Received chatbot request at 2025-07-19 12:23:54.153510
+2025-07-19 12:23:54,157 - api - INFO - User message: Count the number of files owned by each person
+2025-07-19 12:23:54,158 - api - INFO - meri jjjjjjaaaaaaaaannnnnnnnn
+2025-07-19 12:23:54,158 - api - INFO - Processing chatbot request...
+2025-07-19 12:23:54,158 - api - INFO - Generating response from LLM...
+2025-07-19 12:23:54,159 - llm - INFO - Processing question: Count the number of files owned by each person
+2025-07-19 12:23:54,159 - llm - INFO - Generating SQL query using LLM...
+2025-07-19 12:23:54,662 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-07-19 12:24:01,780 - llm - INFO - Generated SQL query: SELECT owned_by_email, COUNT(id) FROM "file_uploads" GROUP BY owned_by_email;
+2025-07-19 12:24:01,780 - api - INFO - Generated response: SELECT owned_by_email, COUNT(id) FROM "file_uploads" GROUP BY owned_by_email;
+2025-07-19 12:24:01,780 - api - INFO - Executing database query...
+2025-07-19 12:24:01,780 - database - INFO - Executing database query: SELECT owned_by_email, COUNT(id) FROM "file_uploads" GROUP BY owned_by_email;
+2025-07-19 12:24:01,780 - database - INFO - Establishing database connection...
+2025-07-19 12:24:01,796 - database - INFO - Database connection established successfully
+2025-07-19 12:24:01,796 - database - INFO - Executing SELECT operation
+2025-07-19 12:24:01,796 - database - INFO - Executing SELECT query...
+2025-07-19 12:24:01,801 - database - INFO - Query returned 1 rows with columns: ['owned_by_email', 'count']
+2025-07-19 12:24:01,801 - __main__ - INFO - Transforming 1 rows of data
+2025-07-19 12:24:01,801 - __main__ - INFO - Successfully transformed 1 rows
+2025-07-19 12:24:01,802 - database - INFO - SELECT query executed successfully
+2025-07-19 12:24:01,802 - database - INFO - Database connection closed
+2025-07-19 12:24:01,802 - api - INFO - Query result type: select
+2025-07-19 12:24:01,802 - api - INFO - Processing SELECT query results...
+2025-07-19 12:24:01,810 - api - INFO - Created DataFrame with shape: (1, 2)
+2025-07-19 12:24:01,810 - __main__ - INFO - Generating basic data summary...
+2025-07-19 12:24:01,824 - __main__ - INFO - Basic data summary generated successfully
+2025-07-19 12:24:01,825 - api - INFO - Basic summary generated
+2025-07-19 12:24:01,825 - api - INFO - Request processed successfully in 7.67 seconds
+2025-07-19 12:24:01,825 - werkzeug - INFO - 127.0.0.1 - - [19/Jul/2025 12:24:01] "POST /get HTTP/1.1" 200 -
+2025-07-19 12:24:20,852 - api - INFO - Received chatbot request at 2025-07-19 12:24:20.852662
+2025-07-19 12:24:20,854 - api - INFO - User message: Show me files that expire after 2026
+2025-07-19 12:24:20,854 - api - INFO - meri jjjjjjaaaaaaaaannnnnnnnn
+2025-07-19 12:24:20,854 - api - INFO - Processing chatbot request...
+2025-07-19 12:24:20,854 - api - INFO - Generating response from LLM...
+2025-07-19 12:24:20,854 - llm - INFO - Processing question: Show me files that expire after 2026
+2025-07-19 12:24:20,854 - llm - INFO - Generating SQL query using LLM...
+2025-07-19 12:24:21,407 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-07-19 12:24:29,330 - llm - INFO - Generated SQL query: SELECT filename, expiration_date FROM "file_uploads" WHERE expiration_date > '2026-01-01';
+2025-07-19 12:24:29,331 - api - INFO - Generated response: SELECT filename, expiration_date FROM "file_uploads" WHERE expiration_date > '2026-01-01';
+2025-07-19 12:24:29,331 - api - INFO - Executing database query...
+2025-07-19 12:24:29,331 - database - INFO - Executing database query: SELECT filename, expiration_date FROM "file_uploads" WHERE expiration_date > '2026-01-01';
+2025-07-19 12:24:29,331 - database - INFO - Establishing database connection...
+2025-07-19 12:24:29,342 - database - INFO - Database connection established successfully
+2025-07-19 12:24:29,343 - database - INFO - Executing SELECT operation
+2025-07-19 12:24:29,343 - database - INFO - Executing SELECT query...
+2025-07-19 12:24:29,344 - database - INFO - Query returned 2 rows with columns: ['filename', 'expiration_date']
+2025-07-19 12:24:29,344 - __main__ - INFO - Transforming 2 rows of data
+2025-07-19 12:24:29,344 - __main__ - INFO - Successfully transformed 2 rows
+2025-07-19 12:24:29,344 - database - INFO - SELECT query executed successfully
+2025-07-19 12:24:29,344 - database - INFO - Database connection closed
+2025-07-19 12:24:29,345 - api - INFO - Query result type: select
+2025-07-19 12:24:29,345 - api - INFO - Processing SELECT query results...
+2025-07-19 12:24:29,345 - api - INFO - Created DataFrame with shape: (2, 2)
+2025-07-19 12:24:29,345 - __main__ - INFO - Generating basic data summary...
+2025-07-19 12:24:29,346 - __main__ - INFO - Basic data summary generated successfully
+2025-07-19 12:24:29,346 - api - INFO - Basic summary generated
+2025-07-19 12:24:29,346 - api - INFO - Request processed successfully in 8.49 seconds
+2025-07-19 12:24:29,347 - werkzeug - INFO - 127.0.0.1 - - [19/Jul/2025 12:24:29] "POST /get HTTP/1.1" 200 -
+2025-07-19 12:25:13,409 - api - INFO - Received chatbot request at 2025-07-19 12:25:13.409642
+2025-07-19 12:25:13,411 - api - INFO - User message: Update the expiration date of "180d285f-a006-41f7-9c4b-0421c49682aa" to 2027-10-05
+2025-07-19 12:25:13,411 - api - INFO - meri jjjjjjaaaaaaaaannnnnnnnn
+2025-07-19 12:25:13,412 - api - INFO - Processing chatbot request...
+2025-07-19 12:25:13,412 - api - INFO - Generating response from LLM...
+2025-07-19 12:25:13,412 - llm - INFO - Processing question: Update the expiration date of "180d285f-a006-41f7-9c4b-0421c49682aa" to 2027-10-05
+2025-07-19 12:25:13,412 - llm - INFO - Generating SQL query using LLM...
+2025-07-19 12:25:14,644 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-07-19 12:25:30,278 - llm - INFO - Generated SQL query: UPDATE "file_uploads" SET "expiration_date" = '2027-10-05' WHERE "id" = '180d285f-a006-41f7-9c4b-0421c49682aa';
+2025-07-19 12:25:30,278 - api - INFO - Generated response: UPDATE "file_uploads" SET "expiration_date" = '2027-10-05' WHERE "id" = '180d285f-a006-41f7-9c4b-0421c49682aa';
+2025-07-19 12:25:30,278 - api - INFO - Executing database query...
+2025-07-19 12:25:30,278 - database - INFO - Executing database query: UPDATE "file_uploads" SET "expiration_date" = '2027-10-05' WHERE "id" = '180d285f-a006-41f7-9c4b-0421c49682aa';
+2025-07-19 12:25:30,278 - database - INFO - Establishing database connection...
+2025-07-19 12:25:30,291 - database - INFO - Database connection established successfully
+2025-07-19 12:25:30,291 - database - INFO - Executing UPDATE operation
+2025-07-19 12:25:30,291 - database - INFO - Executing UPDATE query...
+2025-07-19 12:25:30,298 - database - INFO - UPDATE query affected 1 rows
+2025-07-19 12:25:30,298 - database - INFO - Database connection closed
+2025-07-19 12:25:30,298 - api - INFO - Query result type: non_select
+2025-07-19 12:25:30,298 - api - INFO - Processing non-SELECT query results...
+2025-07-19 12:25:30,298 - api - INFO - Request processed successfully in 16.89 seconds
+2025-07-19 12:25:30,299 - werkzeug - INFO - 127.0.0.1 - - [19/Jul/2025 12:25:30] "POST /get HTTP/1.1" 200 -
+2025-07-19 12:25:59,606 - api - INFO - Received chatbot request at 2025-07-19 12:25:59.606923
+2025-07-19 12:25:59,609 - api - INFO - User message: Add a reminder for document ID "06672822-462c-474a-9e1b-df66f10c991f" to be sent next Monday.
+2025-07-19 12:25:59,609 - api - INFO - meri jjjjjjaaaaaaaaannnnnnnnn
+2025-07-19 12:25:59,609 - api - INFO - Processing chatbot request...
+2025-07-19 12:25:59,609 - api - INFO - Generating response from LLM...
+2025-07-19 12:25:59,609 - llm - INFO - Processing question: Add a reminder for document ID "06672822-462c-474a-9e1b-df66f10c991f" to be sent next Monday.
+2025-07-19 12:25:59,609 - llm - INFO - Generating SQL query using LLM...
+2025-07-19 12:26:01,011 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-07-19 12:26:22,244 - llm - INFO - Generated SQL query: INSERT INTO "Reminder" ("documentId", "reminderDate", sent, "createdAt", "updatedAt") VALUES ('06672822-462c-474a-9e1b-df66f10c991f', NOW() + INTERVAL '7 days' - INTERVAL '1 day', false, NOW(), NOW());
+2025-07-19 12:26:22,245 - api - INFO - Generated response: INSERT INTO "Reminder" ("documentId", "reminderDate", sent, "createdAt", "updatedAt") VALUES ('06672822-462c-474a-9e1b-df66f10c991f', NOW() + INTERVAL '7 days' - INTERVAL '1 day', false, NOW(), NOW());
+2025-07-19 12:26:22,245 - api - INFO - Executing database query...
+2025-07-19 12:26:22,245 - database - INFO - Executing database query: INSERT INTO "Reminder" ("documentId", "reminderDate", sent, "createdAt", "updatedAt") VALUES ('06672822-462c-474a-9e1b-df66f10c991f', NOW() + INTERVAL '7 days' - INTERVAL '1 day', false, NOW(), NOW());
+2025-07-19 12:26:22,245 - database - INFO - Establishing database connection...
+2025-07-19 12:26:22,257 - database - INFO - Database connection established successfully
+2025-07-19 12:26:22,257 - database - INFO - Executing INSERT operation
+2025-07-19 12:26:22,257 - database - INFO - Executing INSERT query...
+2025-07-19 12:26:22,260 - database - ERROR - Database error: null value in column "id" of relation "Reminder" violates not-null constraint
+DETAIL:  Failing row contains (null, 06672822-462c-474a-9e1b-df66f10c991f, 2025-07-25 12:26:22.258, f, 2025-07-19 12:26:22.258, 2025-07-19 12:26:22.258).
+
+2025-07-19 12:26:22,260 - api - INFO - Query result type: error
+2025-07-19 12:26:22,260 - api - WARNING - Processing error or empty results...
+2025-07-19 12:26:22,260 - api - INFO - Request processed successfully in 22.65 seconds
+2025-07-19 12:26:22,260 - werkzeug - INFO - 127.0.0.1 - - [19/Jul/2025 12:26:22] "POST /get HTTP/1.1" 200 -
+2025-07-19 12:27:29,470 - api - INFO - Serving index page
+2025-07-19 12:27:29,472 - werkzeug - INFO - 127.0.0.1 - - [19/Jul/2025 12:27:29] "GET / HTTP/1.1" 200 -
+2025-07-19 12:27:40,957 - api - INFO - Received chatbot request at 2025-07-19 12:27:40.957257
+2025-07-19 12:27:40,957 - api - INFO - User message: Hello
+2025-07-19 12:27:40,958 - api - INFO - meri jjjjjjaaaaaaaaannnnnnnnn
+2025-07-19 12:27:40,958 - api - INFO - Processing chatbot request...
+2025-07-19 12:27:40,958 - api - INFO - Generating response from LLM...
+2025-07-19 12:27:40,958 - llm - INFO - Processing question: Hello
+2025-07-19 12:27:40,958 - llm - INFO - Generating SQL query using LLM...
+2025-07-19 12:27:42,374 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-07-19 12:27:43,168 - llm - INFO - Generated SQL query: GREETING
+2025-07-19 12:27:43,168 - api - INFO - Generated response: GREETING
+2025-07-19 12:27:43,168 - api - INFO - Identified as a greeting. Sending friendly response.
+2025-07-19 12:27:43,169 - werkzeug - INFO - 127.0.0.1 - - [19/Jul/2025 12:27:43] "POST /get HTTP/1.1" 200 -
+2025-07-19 12:27:50,161 - api - INFO - Received chatbot request at 2025-07-19 12:27:50.161471
+2025-07-19 12:27:50,162 - api - INFO - User message: Update the folder name to Agreements of 06672822-462c-474a-9e1b-df66f10c991f
+2025-07-19 12:27:50,163 - api - INFO - meri jjjjjjaaaaaaaaannnnnnnnn
+2025-07-19 12:27:50,163 - api - INFO - Processing chatbot request...
+2025-07-19 12:27:50,163 - api - INFO - Generating response from LLM...
+2025-07-19 12:27:50,163 - llm - INFO - Processing question: Update the folder name to Agreements of 06672822-462c-474a-9e1b-df66f10c991f
+2025-07-19 12:27:50,163 - llm - INFO - Generating SQL query using LLM...
+2025-07-19 12:27:51,153 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-07-19 12:28:03,226 - llm - INFO - Generated SQL query: UPDATE "file_uploads" SET "folder" = 'Agreements' WHERE "id" = '06672822-462c-474a-9e1b-df66f10c991f';
+2025-07-19 12:28:03,227 - api - INFO - Generated response: UPDATE "file_uploads" SET "folder" = 'Agreements' WHERE "id" = '06672822-462c-474a-9e1b-df66f10c991f';
+2025-07-19 12:28:03,227 - api - INFO - Executing database query...
+2025-07-19 12:28:03,227 - database - INFO - Executing database query: UPDATE "file_uploads" SET "folder" = 'Agreements' WHERE "id" = '06672822-462c-474a-9e1b-df66f10c991f';
+2025-07-19 12:28:03,227 - database - INFO - Establishing database connection...
+2025-07-19 12:28:03,237 - database - INFO - Database connection established successfully
+2025-07-19 12:28:03,237 - database - INFO - Executing UPDATE operation
+2025-07-19 12:28:03,237 - database - INFO - Executing UPDATE query...
+2025-07-19 12:28:03,241 - database - INFO - UPDATE query affected 1 rows
+2025-07-19 12:28:03,241 - database - INFO - Database connection closed
+2025-07-19 12:28:03,241 - api - INFO - Query result type: non_select
+2025-07-19 12:28:03,241 - api - INFO - Processing non-SELECT query results...
+2025-07-19 12:28:03,241 - api - INFO - Request processed successfully in 13.08 seconds
+2025-07-19 12:28:03,242 - werkzeug - INFO - 127.0.0.1 - - [19/Jul/2025 12:28:03] "POST /get HTTP/1.1" 200 -
